@@ -39,6 +39,22 @@ body::before {
   transition: transform 0.2s ease-out;
 }
 
+/* Burger */
+#burger{
+  --line-w:22px;
+  --line-h:2px;
+  --gap:6px;
+  display:none;flex-direction:column;justify-content:center;align-items:center;
+  width:44px;height:44px;margin-right:auto;background:none;border:none;cursor:pointer
+}
+#burger span{
+  width:var(--line-w);height:var(--line-h);background:var(--c-text);transition:.3s;
+}
+#burger[aria-expanded="true"] span:nth-child(1){transform:translateY(var(--gap)) rotate(45deg)}
+#burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+#burger[aria-expanded="true"] span:nth-child(3){transform:translateY(calc(-1*var(--gap))) rotate(-45deg)}
+
+
 /* NAV (Desktop only) => Sticky on top */
 #desktop-nav {
   position: sticky;
@@ -74,6 +90,12 @@ section {
   padding: clamp(1rem, 3vw, 10rem) 0;
   min-height: fit-content;
 }
+
+.carousel:hover .marquee-content {
+  animation-play-state: paused;
+}
+.carousel{cursor:grab}
+.carousel.pause .marquee-content{animation-play-state:paused}
 
 /* FADING ANIMATIONS (IntersectionObserver toggles .visible) */
 .fade-section {
@@ -303,7 +325,7 @@ a,
 .marquee-content {
   display: flex;
   width: max-content;
-  animation: marquee 50s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 @keyframes marquee {
   0% {
@@ -317,6 +339,8 @@ a,
   flex: 0 0 auto;
   text-align: center;
   margin-right: clamp(1rem, 2vw, 3rem);
+  width:clamp(220px,22vw,260px);
+  align-items: center; 
 }
 .color-container {
   border-color: rgb(163, 163, 163);
@@ -374,14 +398,14 @@ a,
 }
 /* FREE TIME ACTIVITIES => from left to right. No extra padding => images fill container */
 .l2r-marquee {
-  animation: marquee-l2r 100s linear infinite;
+  animation: marquee-l2r 20s linear infinite;
 }
 @keyframes marquee-l2r {
   0% {
-    transform: translateX(0);
+    transform: translateX(-30%);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(0%);
   }
 }
 .fun-marquee {
@@ -452,3 +476,4 @@ footer p {
   text-align: center;
   font-size: clamp(0.8rem, 1.5vw, 1rem);
 }
+
