@@ -4,13 +4,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bryan's Portfolio</title>
+    <title>Bryan&nbsp;• Portfolio</title>
     <!-- Main CSS -->
     <link rel="stylesheet" href="style.css" />
     <!-- Media Queries (optional) -->
     <link rel="stylesheet" href="mediaqueries.css" />
   </head>
   <body>
+    <button id="burger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span>
+    </button>
     <!-- NAVIGATION -->
     <nav id="desktop-nav">
       <ul class="nav-links">
@@ -123,7 +126,7 @@
       <p class="section__text__p1" style="text-align:center;">Notable</p>
       <h1 class="title" style="text-align:center;">PROJECTS</h1>
       <!-- Marquee wrapper that duplicates items for infinite loop -->
-      <div class="marquee-wrapper">
+      <div class="marquee-wrapper carousel">
         <div class="marquee-content glow-project">
           <div class="details-container color-container project-slide">
             <a href="https://github.com/SBryanK/LoMo-Case-Study" target="_blank">
@@ -205,7 +208,7 @@
             <h2>Food Waste Analysis</h2>
           </div>
 
-                    <div class="details-container color-container project-slide">
+          <div class="details-container color-container project-slide">
             <a href="https://github.com/SBryanK/LoMo-Case-Study" target="_blank">
               <img
                 src="./assets/lomo.jpeg"
@@ -284,6 +287,7 @@
             </a>
             <h2>Food Waste Analysis</h2>
           </div>
+          
         </div>
       </div>
     </section>
@@ -458,7 +462,7 @@
       <h1 class="title fade-right" style="text-align:center;">
         BOOKS
       </h1>
-      <div class="marquee-wrapper fade-bottom fun-marquee glow-cert" style="padding: 0;">
+      <div class="marquee-wrapper fade-bottom fun-marquee glow-cert carousel">
         <div class="marquee-content l2r-marquee glow-cert">
           <div class="fun-img-container">
             <a href="https://aliabdaal.com/feel-good-productivity/">
@@ -626,10 +630,8 @@
 
     <!-- CONTACT SECTION -->
     <section id="contact" class="fade-section">
-      <p class="section__text__p1 fade-left" style="text-align:center;">
-        Get in Touch
-      </p>
-      <h1 class="title fade-right" style="text-align:center;">Contact Info</h1>
+
+      <h1 class="title fade-right" style="text-align:center;">Let's Connect</h1>
       <div class="contact-info-upper-container splitted-contact fade-bottom">
         <div class="contact-line">
           <img
