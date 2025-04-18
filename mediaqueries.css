@@ -76,7 +76,39 @@
 }
 
 /* 600px */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
+  #desktop-nav {
+    display: none; /* Sembunyikan desktop nav secara default di layar kecil */
+    /* Tambahkan styling untuk mobile menu saat aktif */
+    position: fixed; /* Atau absolute */
+    top: 0; /* Dimulai dari atas */
+    left: 0; /* Dimulai dari kiri */
+    width: 100%; /* Lebar penuh */
+    height: 100%; /* Tinggi penuh */
+    background-color: rgba(255, 255, 255, 0.95); /* Background dengan sedikit transparansi */
+    z-index: 900; /* Di bawah burger, tapi di atas konten lain */
+    flex-direction: column; /* Item menu vertikal */
+    justify-content: center; /* Pusatkan konten */
+    align-items: center; /* Pusatkan konten */
+    /* Tambahkan transition jika ingin animasi muncul */
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%); /* Contoh: sembunyikan ke kanan */
+  }
+
+  /* Aturan untuk menampilkan menu saat kelas 'active' ditambahkan oleh JS */
+  #desktop-nav.active {
+    display: flex; /* Atau block, tergantung kebutuhan layout dalamnya */
+    transform: translateX(0); 
+  }
+
+  /* Styling untuk link navigasi di dalam menu mobile */
+  #desktop-nav .nav-links {
+    flex-direction: column;
+    gap: 1.5rem; /* Jarak antar link */
+    text-align: center;
+    padding: 2rem 0;
+    list-style: none;
+  }
   .about-containers,
   .contact-info-upper-container,
   .btn-container {
