@@ -64,3 +64,32 @@ window.addEventListener("scroll", () => {
   );
   // If needed, place a <div id="bg-layer"> behind content and manipulate that for full compatibility
 });
+
+// Dapatkan referensi elemen
+const burgerButton = document.getElementById('burger');
+const desktopNav = document.getElementById('desktop-nav'); // Atau elemen menu mobile Anda jika terpisah
+
+// Tambahkan event listener untuk klik
+burgerButton.addEventListener('click', function() {
+
+  desktopNav.classList.toggle('active'); // Contoh: toggle kelas 'active' pada #desktop-nav
+
+  // Opsional: Toggle atribut aria-expanded untuk aksesibilitas
+  const isExpanded = burgerButton.getAttribute('aria-expanded') === 'true';
+  burgerButton.setAttribute('aria-expanded', !isExpanded);
+
+  // Opsional: Jika Anda menggunakan kelas pada body/html untuk mengunci scroll
+  document.body.classList.toggle('menu-open');
+});
+
+const navLinks = document.querySelectorAll('#desktop-nav .nav-links li a'); // Atau selector yang tepat untuk link di menu mobile Anda
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    desktopNav.classList.remove('active'); // Tutup menu
+    burgerButton.setAttribute('aria-expanded', 'false'); // Reset aria-expanded
+    document.body.classList.remove('menu-open'); // Jika menggunakan kelas pada body
+  });
+});
+
+carousel.addEventListener("touchstart",()=>carousel.classList.add("pause"));
+carousel.addEventListener("touchend",  ()=>carousel.classList.remove("pause"));
