@@ -1,693 +1,474 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bryan&nbsp;• Portfolio</title>
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="style.css" />
-    <!-- Media Queries (optional) -->
-    <link rel="stylesheet" href="mediaqueries.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santasila Bryan Kusno - Data Scientist Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   </head>
   <body>
-    <button id="burger" aria-label="Toggle navigation" aria-expanded="false">
-      <span></span>
-    </button>
-    <!-- NAVIGATION -->
-    <nav id="desktop-nav">
-      <ul class="nav-links">
-        <li><a href="#profile">Profile</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#certifications">Certifications</a></li>
-        <li><a href="#contact">Contact</a></li>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home">SBK</a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#experience" class="nav-link">Experience</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#projects" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#certifications" class="nav-link">Certifications</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
       </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
     </nav>
 
-    <!-- PROFILE SECTION -->
-    <section id="profile" class="fade-section">
-      <div class="section__pic-container fade-left">
-        <img src="./assets/S.Photo 4.jpg" alt="Profile pic" />
-      </div>
-
-      <div class="section__text">
-        <p class="section__text__p1 fade-left" style="text-align:center;">
-          Hello, I'm
-        </p>
-        <h1 class="title fade-right" style="text-align:center;">
-          Santasila Bryan Kusno
-        </h1>
-        <p class="section__text__p2 fade-bottom" style="text-align:center;">
-          Data Scientist
-        </p>
-
-        <div class="btn-container fade-bottom">
-          <button
-            class="btn btn-color-2"
-            onclick="window.open('./assets/Santasila Bryan Kusno.pdf')"
-          >
-            Resume
-          </button>
-          <button class="btn btn-color-1" onclick="location.href='#contact'">
-            Contact Me!
-          </button>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        Hi, I'm <span class="highlight">Santasila Bryan Kusno</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        AWS Certified Machine Learning Specialist & Tableau Certified Data Analyst
+                    </p>
+                    <p class="hero-description">
+                        Passionate about developing AI for a sustainable future and transforming data into actionable insights.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="./assets/Santasila Bryan Kusno.pdf" target="_blank" class="btn btn-primary">Download Resume</a>
+                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                    </div>
+                    <div class="hero-social">
+                        <a href="https://www.linkedin.com/in/santasilabryankusno/" target="_blank" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/SBryanK" target="_blank" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:santasila.bryan@gmail.com" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://www.instagram.com/santasila_bryan/" target="_blank" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="./assets/S.Photo 4.jpg" alt="Santasila Bryan Kusno" />
+                        </div>
+                        <div class="profile-info">
+                            <h3>Santasila Bryan Kusno</h3>
+                            <p>Data Scientist & ML Specialist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div id="socials-container" class="fade-bottom">
-          <img
-            src="./assets/linkedin.png"
-            alt="LinkedIn"
-            class="icon"
-            onclick="location.href='https://linkedin.com/'"
-          />
-          <img
-            src="./assets/github.png"
-            alt="Github"
-            class="icon"
-            onclick="location.href='https://github.com/'"
-          />
-          <img
-            src="./assets/email.png"
-            alt="Email icon"
-            class="icon"
-            onclick="location.href='mailto:santasila.bryan@gmail.com'"
-          />
-          <img
-            src="./assets/ins.png"
-            alt="instagram icon"
-            class="icon"
-            onclick="location.href='https://instagram.com/'"
-          />
-        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
       </div>
     </section>
 
-    <!-- ABOUT SECTION -->
-    <section id="about" class="fade-section">
-      <p class="section__text__p1 fade-left" style="text-align:center;"></p>
-      <h1 class="title fade-right" style="text-align:center;">Hi There!</h1>
-      <div class="about-containers fade-bottom">
-        <div class="about-container">
-          <p style="text-align:center;" class="intro-text">
-            I'm Bryan, an AWS Certified Machine Learning Specialist and
-            Tableau Certified Data Analyst. As an undergraduate in data science
-            and business analytics at the University of London, my interest in
-            data analytics and my passion for developing AI for a sustainable
-            future have ignited my enthusiasm for the future of technology.
-          </p>
-        </div>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Get to know me better</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        I'm Bryan, an AWS Certified Machine Learning Specialist and Tableau Certified Data Analyst. 
+                        As an undergraduate in data science and business analytics at the University of London, 
+                        my interest in data analytics and my passion for developing AI for a sustainable future 
+                        have ignited my enthusiasm for the future of technology.
+                    </p>
+                    <p>
+                        With a strong foundation in machine learning, data analysis, and cloud technologies, 
+                        I bring a unique perspective to solving complex business problems through data-driven insights.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <h3>4+</h3>
+                            <p>AWS Certifications</p>
+                        </div>
+                        <div class="stat">
+                            <h3>10+</h3>
+                            <p>Projects Completed</p>
+                        </div>
+                        <div class="stat">
+                            <h3>3+</h3>
+                            <p>Years Experience</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+            </div>
       </div>
     </section>
 
-    <!-- EXPERIENCE SECTION -->
-    <section id="experience" class="fade-section">
-      <p class="section__text__p1 fade-left" style="text-align:center;">Work</p>
-      <h1 class="title fade-right" style="text-align:center;">Experience</h1>
-      <!-- Only placeholders for images; container adjusts if more images are added -->
-      <div class="experience-details-container fade-bottom ">
-        <div class="about-containers flex-images ">
-          <div class="exp-image-container ">
-            <a href="https://simian.com" target="_blank">
-              <img src="./assets/SIMIAN.jpeg" alt="Experience" class="exp-img" />
-            </a>
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Experience</h2>
+                <p class="section-subtitle">My professional journey</p>
+            </div>
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <div class="exp-logo">
+                        <img src="./assets/SIMIAN.jpeg" alt="SIMIAN" />
+                    </div>
+                    <div class="exp-content">
+                        <h3>SIMIAN</h3>
+                        <p>Data Science & Analytics</p>
+                        <span class="exp-period">2023 - Present</span>
+                    </div>
+                </div>
+                <div class="experience-card">
+                    <div class="exp-logo">
+                        <img src="./assets/pikkat.png" alt="Pikkat" />
+                    </div>
+                    <div class="exp-content">
+                        <h3>Pikkat</h3>
+                        <p>Machine Learning & AI</p>
+                        <span class="exp-period">2022 - 2023</span>
           </div>
-          <div class="exp-image-container">
-            <a href="https://pikkat.com" target="_blank">
-              <img src="./assets/pikkat.png" alt="Experience" class="exp-img" />
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION: PROJECTS (Infinite Auto-Roll) -->
-    <section id="projects" class="fade-section">
-      <p class="section__text__p1" style="text-align:center;">Notable</p>
-      <h1 class="title" style="text-align:center;">PROJECTS</h1>
-      <!-- Marquee wrapper that duplicates items for infinite loop -->
-      <div class="marquee-wrapper carousel">
-        <div class="marquee-content glow-project">
-          <div class="details-container color-container project-slide">
-            <a href="https://github.com/SBryanK/LoMo-Case-Study" target="_blank">
-              <img
-                src="./assets/lomo.jpeg"
-                alt="Project 1"
-                class="rounded-img"
-              />
-            </a>
-            <h2>
-              LoMo E-Commerce Case Study</h2>
-          </div>
-          <div class="details-container color-container project-slide">
-            <a href="https://devpost.com/software/apt-amazon-powered-tetris" target="_blank">
-              <img
-                src="./assets/apt.webp"
-                alt="Project 2"
-                class="rounded-img"
-              />
-            </a>
-            <h2>Amazon Powered Tetris</h2>
-          </div>
-
-          <div class="details-container color-container project-slide">
-            <a href="https://github.com/SBryanK/Diabetes-Prediction-BRFSS" target="_blank">
-              <img
-                src="./assets/dp.jpeg"
-                alt="Project 1"
-                class="rounded-img"
-              />
-            </a>
-            <h2>Diabetes Prediction</h2>
-          </div>
-
-          
-          <div class="details-container color-container project-slide">
-            <a href="https://rpubs.com/SBK_26/MLP2" target="_blank">
-              <img
-                src="./assets/walmart.jpg"
-                alt="Project 1"
-                class="rounded-img"
-              />
-            </a>
-            <h2>Walmart Sales Analysis</h2>
-          </div>
-
-          
-          <div class="details-container color-container project-slide">
-            <a href="https://www.linkedin.com/in/santasilabryankusno/details/projects/1740669464380/single-media-viewer/?profileId=ACoAADdgBlgBRHsN_T3FY3EfckefOY9Mx67Kq4w" target="_blank">
-              <img
-                src="./assets/marriott.jpg"
-                alt="Project 1"
-                class="rounded-img"
-              />
-            </a>
-            <h2>Marriott Market Research</h2>
-          </div>
-
-          <div class="details-container color-container project-slide">
-            <a href="https://public.tableau.com/app/profile/santasila.bryan/viz/SalesForecastingProject2024/Story1" target="_blank">
-              <img
-                src="./assets/bar.jpg"
-                alt="Project 1"
-                class="rounded-img"
-              />
-            </a>
-            <h2>Data Analysis Report</h2>
-          </div>
-
-          
-          <div class="details-container color-container project-slide">
-            <a href="https://necessary-dessert-2e0.notion.site/Tackling-Food-Waste-in-Singapore-FinTech-Festival-2023-c8b18ec3ccff4175ba26daf166f76fb1" target="_blank">
-              <img
-                src="./assets/sff.webp"
-                alt="Project 1"
-                class="rounded-img"
-              />
-            </a>
-            <h2>Food Waste Analysis</h2>
-          </div>
-
-          <div class="details-container color-container project-slide">
-            <a href="https://github.com/SBryanK/LoMo-Case-Study" target="_blank">
-              <img
-                src="./assets/lomo.jpeg"
-                alt="Project 1"
-                class="rounded-img"
-              />
-            </a>
-            <h2>
-              LoMo E-Commerce Case Study</h2>
-          </div>
-          <div class="details-container color-container project-slide">
-            <a href="https://devpost.com/software/apt-amazon-powered-tetris" target="_blank">
-              <img
-                src="./assets/apt.webp"
-                alt="Project 2"
-                class="rounded-img"
-              />
-            </a>
-            <h2>Amazon Powered Tetris</h2>
-          </div>
-
-          <div class="details-container color-container project-slide">
-            <a href="https://github.com/SBryanK/Diabetes-Prediction-BRFSS" target="_blank">
-              <img
-                src="./assets/dp.jpeg"
-                alt="Project 1"
-                class="rounded-img"
-              />
-            </a>
-            <h2>Diabetes Prediction</h2>
-          </div>
-
-          
-          <div class="details-container color-container project-slide">
-            <a href="https://rpubs.com/SBK_26/MLP2" target="_blank">
-              <img
-                src="./assets/walmart.jpg"
-                alt="Project 1"
-                class="rounded-img"
-              />
-            </a>
-            <h2>Walmart Sales Analysis</h2>
-          </div>
-
-          
-          <div class="details-container color-container project-slide">
-            <a href="https://www.linkedin.com/in/santasilabryankusno/details/projects/1740669464380/single-media-viewer/?profileId=ACoAADdgBlgBRHsN_T3FY3EfckefOY9Mx67Kq4w" target="_blank">
-              <img
-                src="./assets/marriott.jpg"
-                alt="Project 1"
-                class="rounded-img"
-              />
-            </a>
-            <h2>Marriott Market Research</h2>
-          </div>
-
-          <div class="details-container color-container project-slide">
-            <a href="https://public.tableau.com/app/profile/santasila.bryan/viz/SalesForecastingProject2024/Story1" target="_blank">
-              <img
-                src="./assets/bar.jpg"
-                alt="Project 1"
-                class="rounded-img"
-              />
-            </a>
-            <h2>Data Analysis Report</h2>
-          </div>
-
-          
-          <div class="details-container color-container project-slide">
-            <a href="https://necessary-dessert-2e0.notion.site/Tackling-Food-Waste-in-Singapore-FinTech-Festival-2023-c8b18ec3ccff4175ba26daf166f76fb1" target="_blank">
-              <img
-                src="./assets/sff.webp"
-                alt="Project 1"
-                class="rounded-img"
-              />
-            </a>
-            <h2>Food Waste Analysis</h2>
-          </div>
-          
-        </div>
-      </div>
-    </section>
-
-    <!-- CERTIFICATIONS SECTION -->
-    <section id="certifications" class="fade-section">
-      <p class="section__text__p1 fade-left" style="text-align:center;">
-  Professional 
-      </p>
-      <h1 class="title fade-right" style="text-align:center;">CERTIFICATES</h1>
-      <!-- Horizontal scroll; images & text centered -->
-      <div class="horizontal-scroll fade-bottom">
-        <div class="h-scroll-content centered-items">
-          <div class="details-container cert-container project-slide glow-cert">
-            <a
-              href="https://www.credly.com/earner/earned/badge/46dd17f9-1b18-4aad-ab1e-ed83af654ba8"
-            >
-              <img
-                src="./assets/tableau-da.png"
-                alt="Certificate 1"
-                class="rounded-img cert-size"
-              />
-            </a>
-          </div>
-          <div class="details-container cert-container project-slide glow-cert">
-            <a
-              href="https://www.credly.com/earner/earned/badge/77d77501-7e22-45f4-9eb9-6e45092cc0d5"
-            >
-              <img
-                src="./assets/aws-mls.png"
-                alt="Certificate 2"
-                class="rounded-img cert-size"
-              />
-            </a>
-          </div>
-          <div class="details-container cert-container project-slide glow-cert">
-            <a
-              href="https://www.credly.com/earner/earned/badge/c7a6aa5a-f036-49d7-ab13-e6eaecf71ec1"
-            >
-              <img
-                src="./assets/aws-mla.png"
-                alt="Certificate 3"
-                class="rounded-img cert-size"
-              />
-            </a>
-          </div>
-          <div class="details-container cert-container project-slide glow-cert">
-            <a
-              href="https://www.credly.com/earner/earned/badge/c31330d6-46cf-4b64-b015-c410043ced25"
-            >
-              <img
-                src="./assets/aws-saa.png"
-                alt="Certificate 4"
-                class="rounded-img cert-size"
-              />
-            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- EDUCATION SECTION -->
-    <section id="education" class="fade-section">
-      <h1 class="title fade-right" style="text-align:center;">EDUCATION</h1>
-      <div class="education-container fade-bottom glow-edu">
-        <!-- Each "edu-card" is more visually distinct and centered -->
-        <div class="edu-card">
-          <a href="https://bpkpenabur.or.id/" target="_blank">
-            <img
-              src="./assets/penabur.png"
-              alt="School Icon"
-              class="edu-round-img"
-            />
-          </a>
-          <h2 class="edu-sub-title">BPK PENABUR JAKARTA</h2>
-          <p class="edu-year">2010 - 2019</p>
-        </div>
-        
-        <div class="edu-card">
-          <a href="https://www.ui.ac.id/" target="_blank">
-            <img
-              src="./assets/ui.jpg"
-              alt="University Icon"
-              class="edu-round-img"
-            />
-          </a>
-          <h2 class="edu-sub-title">University of Indonesia</h2>
-          <p class="edu-year">2022 - 2022</p>
-        </div>
-        
-        <div class="edu-card">
-          <a href="https://london.ac.uk/" target="_blank">
-            <img
-              src="./assets/uol.jpg"
-              alt="University Icon"
-              class="edu-round-img"
-            />
-          </a>
-          <h2 class="edu-sub-title">University of London</h2>
-          <p class="edu-year">2022 - 2025</p>
-        </div>
-        
-      </div>
-    </section>
-
-    <!-- LEADERSHIPS SECTION -->
-    <section id="leaderships" class="fade-section">
-      <p class="section__text__p1 fade-left" style="text-align:center;"></p>
-      <h1 class="title fade-right" style="text-align:center;">ACTIVITIES</h1>
-      <div class="horizontal-scroll fade-bottom">
-        <div class="h-scroll-content centered-items">
-          <div
-            class="details-container cert-container project-slide zoomable-edu glow-cert"
-          >
-            <a
-              href="https://www.tzuchi.org.sg/en/about-us/tzu-chi-foundation-singapore/"
-            >
-              <img
-                src="./assets/tzsgp.png"
-                alt="Leadership 1"
-                class="rounded-img cert-size"
-              />
-            </a>
-            <p class="h3 fade-left">2022 - Present</p>
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">Some of my recent work</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/lomo.jpeg" alt="LoMo E-Commerce Case Study" />
+                    </div>
+                    <div class="project-content">
+                        <h3>LoMo E-Commerce Case Study</h3>
+                        <p>Comprehensive analysis of e-commerce data with machine learning insights and business recommendations.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Machine Learning</span>
+                            <span class="tech-tag">Data Analysis</span>
+                        </div>
+                        <a href="https://github.com/SBryanK/LoMo-Case-Study" target="_blank" class="project-link">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/apt.webp" alt="Amazon Powered Tetris" />
+                    </div>
+                    <div class="project-content">
+                        <h3>Amazon Powered Tetris</h3>
+                        <p>Innovative gaming solution leveraging AWS services for enhanced user experience and performance.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">Cloud Computing</span>
+                            <span class="tech-tag">Game Development</span>
           </div>
-          <div
-            class="details-container cert-container project-slide zoomable-edu glow-cert"
-          >
-            <a href="https://www.tzuchi.or.id/eng/">
-              <img
-                src="./assets/tzidn.png"
-                alt="Leadership 2"
-                class="rounded-img cert-size"
-              />
-            </a>
-            <p class="h3 fade-left">2019 - Present</p>
+                        <a href="https://devpost.com/software/apt-amazon-powered-tetris" target="_blank" class="project-link">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/dp.jpeg" alt="Diabetes Prediction" />
+                    </div>
+                    <div class="project-content">
+                        <h3>Diabetes Prediction Model</h3>
+                        <p>Machine learning model for early diabetes detection using BRFSS dataset with high accuracy.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Machine Learning</span>
+                            <span class="tech-tag">Healthcare</span>
+                            <span class="tech-tag">Python</span>
           </div>
-          <div
-            class="details-container cert-container project-slide zoomable-edu glow-cert"
-          >
-            <a
-              href="https://www.sim.edu.sg/degrees-diplomas/life-at-sim/student-ambassadors/chat"
-            >
-              <img
-                src="./assets/simsa.png"
-                alt="Leadership 3"
-                class="rounded-img cert-size"
-              />
-            </a>
-            <p class="h3 fade-right">2023 - Present</p>
+                        <a href="https://github.com/SBryanK/Diabetes-Prediction-BRFSS" target="_blank" class="project-link">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/walmart.jpg" alt="Walmart Sales Analysis" />
+                    </div>
+                    <div class="project-content">
+                        <h3>Walmart Sales Analysis</h3>
+                        <p>Comprehensive retail analytics project analyzing sales patterns and forecasting future trends.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Data Analysis</span>
+                            <span class="tech-tag">Forecasting</span>
+                            <span class="tech-tag">R</span>
           </div>
-          <div
-            class="details-container cert-container project-slide zoomable-edu glow-cert"
-          >
-            <a href="https://project1095.simge.edu.sg/student-care/peer-support/">
-              <img
-                src="./assets/simpm.png"
-                alt="Leadership 4"
-                class="rounded-img cert-size"
-              />
-            </a>
-            <p class="h3 fade-right">2023 - 2024</p>
+                        <a href="https://rpubs.com/SBK_26/MLP2" target="_blank" class="project-link">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FREE TIME ACTIVITIES -->
-    <section id="fun" class="fade-section glow-cert">
-      <p class="section__text__p1 fade-left" style="text-align:center;">Recommended
-      </p>
-      <h1 class="title fade-right" style="text-align:center;">
-        BOOKS
-      </h1>
-      <div class="marquee-wrapper fade-bottom fun-marquee glow-cert carousel">
-        <div class="marquee-content l2r-marquee glow-cert">
-          <div class="fun-img-container">
-            <a href="https://aliabdaal.com/feel-good-productivity/">
-              <img
-                src="./assets/fgp.jpg"
-                alt="Fun item 1"
-                class="taller-fun-img"
-              />
-            </a>
           </div>
-          <div class="fun-img-container">
-            <a href="https://aliabdaal.com/feel-good-productivity/">
-              <img
-                src="./assets/tpom.jpg"
-                alt="Fun item 2"
-                class="taller-fun-img"
-              />
-            </a>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/marriott.jpg" alt="Marriott Market Research" />
           </div>
-          <div class="fun-img-container">
-            <a
-              href="https://www.hubspot.com/sales/how-to-win-friends-and-influence-people-summary"
-            >
-              <img
-                src="./assets/htwfaip.jpg"
-                alt="Fun item 3"
-                class="taller-fun-img"
-              />
-            </a>
+                    <div class="project-content">
+                        <h3>Marriott Market Research</h3>
+                        <p>Strategic market analysis for hospitality industry with actionable business insights.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Market Research</span>
+                            <span class="tech-tag">Business Analytics</span>
+                            <span class="tech-tag">Strategy</span>
           </div>
-          <div class="fun-img-container">
-            <a
-              href="https://www.hustleescape.com/book-summary-the-5am-club-by-robin-sharma/"
-            >
-              <img
-                src="./assets/tfc.jpg"
-                alt="Fun item 4"
-                class="taller-fun-img"
-              />
-            </a>
+                        <a href="https://www.linkedin.com/in/santasilabryankusno/details/projects/1740669464380/single-media-viewer/?profileId=ACoAADdgBlgBRHsN_T3FY3EfckefOY9Mx67Kq4w" target="_blank" class="project-link">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
           </div>
-          <div class="fun-img-container">
-            <a
-              href="https://auresnotes.com/summary-the-changing-world-order-ray-dalio/"
-            >
-              <img
-                src="./assets/tcwo.jpg"
-                alt="Fun item 5"
-                class="taller-fun-img"
-              />
-            </a>
           </div>
-          <div class="fun-img-container">
-            <a
-              href="https://aliabdaal.com/book-notes/atomic-habits-summary/"
-            >
-              <img
-                src="./assets/ah.jpg"
-                alt="Fun item 6"
-                class="taller-fun-img"
-              />
-            </a>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/bar.jpg" alt="Data Analysis Report" />
           </div>
-          <div class="fun-img-container">
-            <a href="https://www.example.com/book7">
-              <img
-                src="./assets/fgp.jpg"
-                alt="Fun item 7"
-                class="taller-fun-img"
-              />
-            </a>
+                    <div class="project-content">
+                        <h3>Sales Forecasting Dashboard</h3>
+                        <p>Interactive Tableau dashboard for sales forecasting with advanced analytics and visualization.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Tableau</span>
+                            <span class="tech-tag">Data Visualization</span>
+                            <span class="tech-tag">Dashboard</span>
           </div>
-          <div class="fun-img-container">
-            <a href="https://www.example.com/book8">
-              <img
-                src="./assets/tpom.jpg"
-                alt="Fun item 8"
-                class="taller-fun-img"
-              />
-            </a>
+                        <a href="https://public.tableau.com/app/profile/santasila.bryan/viz/SalesForecastingProject2024/Story1" target="_blank" class="project-link">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
           </div>
-          <div class="fun-img-container">
-            <a href="https://aliabdaal.com/feel-good-productivity/">
-              <img
-                src="./assets/fgp.jpg"
-                alt="Fun item 1"
-                class="taller-fun-img"
-              />
-            </a>
-          </div>
-          <div class="fun-img-container">
-            <a href="https://aliabdaal.com/feel-good-productivity/">
-              <img
-                src="./assets/tpom.jpg"
-                alt="Fun item 2"
-                class="taller-fun-img"
-              />
-            </a>
-          </div>
-          <div class="fun-img-container">
-            <a
-              href="https://www.hubspot.com/sales/how-to-win-friends-and-influence-people-summary"
-            >
-              <img
-                src="./assets/htwfaip.jpg"
-                alt="Fun item 3"
-                class="taller-fun-img"
-              />
-            </a>
-          </div>
-          <div class="fun-img-container">
-            <a
-              href="https://www.hustleescape.com/book-summary-the-5am-club-by-robin-sharma/"
-            >
-              <img
-                src="./assets/tfc.jpg"
-                alt="Fun item 4"
-                class="taller-fun-img"
-              />
-            </a>
-          </div>
-          <div class="fun-img-container">
-            <a
-              href="https://auresnotes.com/summary-the-changing-world-order-ray-dalio/"
-            >
-              <img
-                src="./assets/tcwo.jpg"
-                alt="Fun item 5"
-                class="taller-fun-img"
-              />
-            </a>
-          </div>
-          <div class="fun-img-container">
-            <a
-              href="https://aliabdaal.com/book-notes/atomic-habits-summary/"
-            >
-              <img
-                src="./assets/ah.jpg"
-                alt="Fun item 6"
-                class="taller-fun-img"
-              />
-            </a>
-          </div>
-          <div class="fun-img-container">
-            <a href="https://www.example.com/book7">
-              <img
-                src="./assets/fgp.jpg"
-                alt="Fun item 7"
-                class="taller-fun-img"
-              />
-            </a>
-          </div>
-          <div class="fun-img-container">
-            <a href="https://www.example.com/book8">
-              <img
-                src="./assets/tpom.jpg"
-                alt="Fun item 8"
-                class="taller-fun-img"
-              />
-            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="fade-section">
-
-      <h1 class="title fade-right" style="text-align:center;">Let's Connect</h1>
-      <div class="contact-info-upper-container splitted-contact fade-bottom">
-        <div class="contact-line">
-          <img
-            src="./assets/email.png"
-            alt="Email icon"
-            class="icon contact-icon"
-          />
-          <a href="mailto:santasila.bryan@gmail.com">santasila.bryan@gmail.com</a>
-        </div>
-
-        <span>|</span>
-
-        <div class="contact-line">
-          <img
-            src="./assets/linkedin.png"
-            alt="LinkedIn icon"
-            class="icon contact-icon"
-          />
-          <a href="https://www.linkedin.com/in/santasilabryankusno/" target="_blank"
-            >santasilabryankusno</a
-          >
-        </div>
-
-        <span>|</span>
-
-        <div class="contact-line" onclick="copyToClipboard('+65 8589 2627')">
-          <img
-            src="./assets/phone.png"
-            alt="Phone icon"
-            class="icon contact-icon"
-          />
-          <p style="cursor:pointer;">+65 8589 2627</p>
-        </div>
-
-        <span>|</span>
-
-        <div class="contact-line">
-          <img
-            src="./assets/ins.png"
-            alt="Instagram icon"
-            class="icon contact-icon"
-          />
-          <a href="https://www.instagram.com/santasila_bryan/">santasila_bryan</a>
+    <!-- Certifications Section -->
+    <section id="certifications" class="certifications">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Certifications</h2>
+                <p class="section-subtitle">Professional achievements</p>
+            </div>
+            <div class="certifications-grid">
+                <div class="cert-card">
+                    <div class="cert-image">
+                        <img src="./assets/tableau-da.png" alt="Tableau Data Analyst" />
+                    </div>
+                    <div class="cert-content">
+                        <h3>Tableau Data Analyst</h3>
+                        <p>Certified in advanced data visualization and analytics</p>
+                        <a href="https://www.credly.com/earner/earned/badge/46dd17f9-1b18-4aad-ab1e-ed83af654ba8" target="_blank" class="cert-link">
+                            View Certificate
+            </a>
+          </div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-image">
+                        <img src="./assets/aws-mls.png" alt="AWS Machine Learning Specialty" />
+                    </div>
+                    <div class="cert-content">
+                        <h3>AWS Machine Learning Specialty</h3>
+                        <p>Expertise in ML algorithms and AWS ML services</p>
+                        <a href="https://www.credly.com/earner/earned/badge/77d77501-7e22-45f4-9eb9-6e45092cc0d5" target="_blank" class="cert-link">
+                            View Certificate
+            </a>
+          </div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-image">
+                        <img src="./assets/aws-mla.png" alt="AWS Machine Learning Associate" />
+                    </div>
+                    <div class="cert-content">
+                        <h3>AWS Machine Learning Associate</h3>
+                        <p>Foundation in machine learning on AWS platform</p>
+                        <a href="https://www.credly.com/earner/earned/badge/c7a6aa5a-f036-49d7-ab13-e6eaecf71ec1" target="_blank" class="cert-link">
+                            View Certificate
+            </a>
+          </div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-image">
+                        <img src="./assets/aws-saa.png" alt="AWS Solutions Architect Associate" />
+                    </div>
+                    <div class="cert-content">
+                        <h3>AWS Solutions Architect Associate</h3>
+                        <p>Cloud architecture and design expertise</p>
+                        <a href="https://www.credly.com/earner/earned/badge/c31330d6-46cf-4b64-b015-c410043ced25" target="_blank" class="cert-link">
+                            View Certificate
+                        </a>
+                    </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer>
-      <p style="text-align:center;">
-        Copyright &#169; 2025 Santasila
-        Bryan Kusno. All Rights Reserved.
-      </p>
+    <!-- Education Section -->
+    <section id="education" class="education">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Education</h2>
+                <p class="section-subtitle">Academic background</p>
+            </div>
+            <div class="education-timeline">
+                <div class="edu-item">
+                    <div class="edu-logo">
+                        <img src="./assets/uol.jpg" alt="University of London" />
+                    </div>
+                    <div class="edu-content">
+                        <h3>University of London</h3>
+                        <p>BSc Data Science & Business Analytics</p>
+                        <span class="edu-period">2022 - 2025</span>
+        </div>
+        </div>
+                <div class="edu-item">
+                    <div class="edu-logo">
+                        <img src="./assets/ui.jpg" alt="University of Indonesia" />
+        </div>
+                    <div class="edu-content">
+                        <h3>University of Indonesia</h3>
+                        <p>Exchange Program</p>
+                        <span class="edu-period">2022</span>
+      </div>
+          </div>
+                <div class="edu-item">
+                    <div class="edu-logo">
+                        <img src="./assets/penabur.png" alt="BPK Penabur Jakarta" />
+          </div>
+                    <div class="edu-content">
+                        <h3>BPK Penabur Jakarta</h3>
+                        <p>High School Diploma</p>
+                        <span class="edu-period">2010 - 2019</span>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Let's work together</p>
+          </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>santasila.bryan@gmail.com</p>
+          </div>
+          </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <div>
+                            <h4>LinkedIn</h4>
+                            <p>linkedin.com/in/santasilabryankusno</p>
+          </div>
+          </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+65 8589 2627</p>
+          </div>
+          </div>
+                    <div class="contact-item">
+                        <i class="fab fa-instagram"></i>
+                        <div>
+                            <h4>Instagram</h4>
+                            <p>@santasila_bryan</p>
+          </div>
+          </div>
+          </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+          </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+          </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Subject" required>
+          </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" rows="5" required></textarea>
+          </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>&copy; 2025 Santasila Bryan Kusno. All rights reserved.</p>
+        </div>
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/in/santasilabryankusno/" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/SBryanK" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:santasila.bryan@gmail.com">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://www.instagram.com/santasila_bryan/" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+        </div>
+        </div>
+        </div>
     </footer>
 
-    <!-- SCRIPT -->
     <script src="script.js"></script>
   </body>
 </html>
