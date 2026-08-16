@@ -1,474 +1,576 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Santasila Bryan Kusno - Data Scientist Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  </head>
-  <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="#home">SBK</a>
-            </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#experience" class="nav-link">Experience</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#projects" class="nav-link">Projects</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#certifications" class="nav-link">Certifications</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
-                </li>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Santasila Bryan Kusno — Cloud Architect · Data Analyst · Fintech</title>
+
+<meta name="description" content="MSc Smart Industries and Digital Transformation at NUS Singapore. Ex-Cloud Solution Architect at Tencent Cloud, EdgeOne. AWS Solutions Architect Professional, Machine Learning Specialty, Tableau Certified Data Analyst.">
+<meta name="author" content="Santasila Bryan Kusno">
+<meta name="theme-color" content="#C9962C">
+<link rel="canonical" href="https://main.d3ludbi4nxj7ab.amplifyapp.com/">
+
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Santasila Bryan Kusno — Cloud Architect · Data Analyst · Fintech">
+<meta property="og:description" content="MSc at NUS Singapore. Ex-Cloud Solution Architect at Tencent Cloud, EdgeOne.">
+<meta property="og:url" content="https://main.d3ludbi4nxj7ab.amplifyapp.com/">
+<meta property="og:image" content="https://main.d3ludbi4nxj7ab.amplifyapp.com/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Santasila Bryan Kusno","jobTitle":"Cloud Solution Architect","email":"mailto:santasila.bryan@gmail.com","url":"https://main.d3ludbi4nxj7ab.amplifyapp.com/","address":{"@type":"PostalAddress","addressLocality":"Singapore"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"National University of Singapore"},{"@type":"CollegeOrUniversity","name":"University of London"}],"sameAs":["https://www.linkedin.com/in/santasilabryankusno/","https://github.com/SBryanK","https://www.credly.com/users/santasila-bryan-kusno","https://devpost.com/9santasilabryan9","https://medium.com/@9santasilabryan9"]}
+</script>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" id="progress" aria-hidden="true"><i></i></div>
+
+<!-- ══ NAV ══ -->
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="wordmark" href="#home">Santasila&nbsp;Bryan<span aria-hidden="true"></span></a>
+    <nav aria-label="Sections">
+      <ul class="nav__menu" id="navmenu">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#community">Community</a></li>
       </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
     </nav>
+    <div class="nav__end">
+      <a class="btn btn--gold btn--sm nav__cta" href="#contact">Get in touch</a>
+      <button class="nav__burger" id="burger" aria-expanded="false" aria-controls="navmenu" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="hero-title">
-                        Hi, I'm <span class="highlight">Santasila Bryan Kusno</span>
-                    </h1>
-                    <p class="hero-subtitle">
-                        AWS Certified Machine Learning Specialist & Tableau Certified Data Analyst
-                    </p>
-                    <p class="hero-description">
-                        Passionate about developing AI for a sustainable future and transforming data into actionable insights.
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="./assets/Santasila Bryan Kusno.pdf" target="_blank" class="btn btn-primary">Download Resume</a>
-                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-                    </div>
-                    <div class="hero-social">
-                        <a href="https://www.linkedin.com/in/santasilabryankusno/" target="_blank" class="social-link">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://github.com/SBryanK" target="_blank" class="social-link">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="mailto:santasila.bryan@gmail.com" class="social-link">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="https://www.instagram.com/santasila_bryan/" target="_blank" class="social-link">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <div class="profile-card">
-                        <div class="profile-image">
-                            <img src="./assets/S.Photo 4.jpg" alt="Santasila Bryan Kusno" />
-                        </div>
-                        <div class="profile-info">
-                            <h3>Santasila Bryan Kusno</h3>
-                            <p>Data Scientist & ML Specialist</p>
-                        </div>
-                    </div>
-                </div>
+<main id="main">
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="home">
+  <div class="hero__wash" aria-hidden="true"></div>
+  <div class="hero__arc" aria-hidden="true"></div>
+
+  <div class="container hero__grid">
+    <div class="hero__text">
+      <h1 class="hero__title">
+        <span class="line" style="--d:0"><span>Santasila</span></span>
+        <span class="line" style="--d:1"><span class="foil">Bryan Kusno</span></span>
+      </h1>
+
+      <div class="hero__roles load" style="--d:2">
+        <p class="hero__r1">NUS MSc Smart Industries and Digital Transformation</p>
+        <p class="hero__r2">ex-Cloud Solution Architect at Tencent</p>
+      </div>
+
+      <p class="hero__desc load" style="--d:3">
+        I architect cloud and edge infrastructure — CDN, WAF, Anti-DDoS — for
+        Indonesia's largest banks and enterprises, and build machine learning
+        systems that turn messy data into decisions people act on.
+      </p>
+
+      <div class="hero__btns load" style="--d:4">
+        <a class="btn btn--gold" href="assets/resume.pdf" target="_blank" rel="noopener">
+          Download Resume
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11.2l4.1-4.1 1.4 1.4L11 18l-6.5-6.5 1.4-1.4L10 14.2V3h2zM4 19h16v2H4z"/></svg>
+        </a>
+        <a class="btn btn--red" href="#projects">View my work</a>
+      </div>
+
+      <ul class="hero__social load" style="--d:5">
+        <li><a href="https://www.linkedin.com/in/santasilabryankusno/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 11-.01 5.01A2.5 2.5 0 014.98 3.5zM3 8.98h4v12H3v-12zM9.5 8.98h3.83v1.64h.06c.53-1 1.84-2.06 3.78-2.06 4.04 0 4.79 2.66 4.79 6.12v6.3h-4v-5.59c0-1.33-.02-3.05-1.86-3.05-1.86 0-2.15 1.45-2.15 2.95v5.69h-4v-12z"/></svg></a></li>
+        <li><a href="https://github.com/SBryanK" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.5v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 015 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .28.18.6.69.5A10.03 10.03 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg></a></li>
+        <li><a href="https://www.credly.com/users/santasila-bryan-kusno" target="_blank" rel="noopener" aria-label="Credly"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l7 3.2v5.5c0 4.4-2.9 8.5-7 9.8-4.1-1.3-7-5.4-7-9.8V5.2L12 2zm-1 12.6l5-5-1.4-1.4L11 11.8 9.4 10.2 8 11.6l3 3z"/></svg></a></li>
+        <li><a href="mailto:santasila.bryan@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V6a1 1 0 011-1zm9 8.2L4.2 7.6 3.6 8.4 12 14.7l8.4-6.3-.6-.8L12 13.2z"/></svg></a></li>
+      </ul>
+    </div>
+
+    <div class="medal load" style="--d:2">
+      <svg class="medal__ring" viewBox="0 0 300 300" aria-hidden="true">
+        <defs>
+          <linearGradient id="au" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#F3DE9E"/><stop offset=".34" stop-color="#C9962C"/>
+            <stop offset=".6" stop-color="#8F6A16"/><stop offset=".82" stop-color="#EBCD78"/>
+            <stop offset="1" stop-color="#A87F1F"/>
+          </linearGradient>
+          <linearGradient id="rd" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0" stop-color="#D9455C"/><stop offset="1" stop-color="#8E1B2E"/>
+          </linearGradient>
+        </defs>
+        <circle class="medal__dash" cx="150" cy="150" r="145" fill="none" stroke="url(#au)"
+                stroke-width="2" stroke-linecap="round" stroke-dasharray="2 11"/>
+        <circle class="medal__sweep" cx="150" cy="150" r="136" fill="none" stroke="url(#rd)"
+                stroke-width="2.5" stroke-linecap="round" stroke-dasharray="120 735"/>
+        <circle cx="150" cy="150" r="128" fill="none" stroke="url(#au)" stroke-width="1" opacity=".5"/>
+      </svg>
+      <div class="medal__photo">
+        <img src="assets/profile.jpg" alt="Santasila Bryan Kusno" width="420" height="420">
+      </div>
+      <span class="medal__chip">Cloud Architect · Data Analyst · Fintech</span>
+    </div>
+  </div>
+
+  <div class="rail" aria-hidden="true">
+    <div class="rail__track">
+      <span>AWS</span><i>◆</i><span>Tencent Cloud</span><i>◆</i><span>Google Cloud</span><i>◆</i><span>Terraform</span><i>◆</i><span>Docker</span><i>◆</i><span>Python</span><i>◆</i><span>SQL</span><i>◆</i><span>React</span><i>◆</i><span>Tableau</span><i>◆</i><span>Power BI</span><i>◆</i><span>Grafana</span><i>◆</i><span>OpenCV</span><i>◆</i>
+      <span>AWS</span><i>◆</i><span>Tencent Cloud</span><i>◆</i><span>Google Cloud</span><i>◆</i><span>Terraform</span><i>◆</i><span>Docker</span><i>◆</i><span>Python</span><i>◆</i><span>SQL</span><i>◆</i><span>React</span><i>◆</i><span>Tableau</span><i>◆</i><span>Power BI</span><i>◆</i><span>Grafana</span><i>◆</i><span>OpenCV</span><i>◆</i>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section class="sec" id="about">
+  <div class="container">
+    <header class="head"><h2>About</h2></header>
+
+    <div class="about">
+      <div class="about__text">
+        <p class="lede">
+          I work where cloud infrastructure meets a real business problem — as a
+          founding member of Indonesia's first EdgeOne solutions architect team at
+          Tencent Cloud.
+        </p>
+        <p>
+          The job is half engineering and half persuasion: designing CDN, WAF and
+          Anti-DDoS architectures that hold under a national bank's traffic, then
+          explaining the tradeoffs to a room of executives who care about outcomes,
+          not packets. Before Tencent I shipped ML models and ETL pipelines for
+          financial institutions and retailers across Indonesia.
+        </p>
+        <p>
+          I'm now reading an MSc in Smart Industries and Digital Transformation at
+          NUS, and looking for 2026/27 internships in cloud, platform or applied ML.
+        </p>
+
+        <ul class="chips">
+          <li>Request for Proposal (RFP)</li>
+          <li>Computer Vision</li>
+          <li>Predictive Analytics</li>
+          <li>Edge Computing</li>
+          <li>Cloud Security</li>
+        </ul>
+      </div>
+
+      <aside class="toolbox">
+        <h3>What I work with</h3>
+        <dl>
+          <div><dt>Languages</dt><dd>Python · R · SQL · JavaScript · HTML/CSS · Excel VBA</dd></div>
+          <div><dt>Cloud &amp; infra</dt><dd>AWS · Google Cloud · Tencent Cloud · Terraform · Docker · Git</dd></div>
+          <div><dt>Frameworks</dt><dd>React · Flask · Tkinter · OpenCV</dd></div>
+          <div><dt>Data &amp; BI</dt><dd>Tableau · Power BI · Grafana · Talend · Figma</dd></div>
+          <div><dt>Spoken</dt><dd>Indonesian (native) · English (full professional) · Chinese (elementary)</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPERIENCE ══ -->
+<section class="sec sec--tint" id="experience">
+  <div class="container">
+    <header class="head"><h2>Experience</h2></header>
+
+    <ol class="tl" id="tl">
+      <div class="tl__spine" aria-hidden="true"><i id="spine"></i></div>
+
+      <li class="tl__item">
+        <span class="tl__node" aria-hidden="true"></span>
+        <div class="tl__card">
+          <div class="tl__head">
+            <div class="tl__logo tl__logo--mono" data-mark="T"></div>
+            <div class="tl__id">
+              <h3>Cloud Solution Architect</h3>
+              <p>Tencent Cloud</p>
+              <span class="tl__when">Jun 2025 — Jul 2026</span>
             </div>
+          </div>
+          <ul class="tl__pts">
+            <li>Founding member of <strong>Indonesia's first EdgeOne solutions architect team</strong>, driving large-scale CDN, security and edge computing adoption for global enterprises across APAC.</li>
+            <li>Architected end-to-end solutions spanning CDN, WAF, Anti-DDoS and Bot Protection, from initial design through production deployment.</li>
+            <li>Won strategic RFPs alongside Business Development, led PoC deployments for enterprise clients, and served as <strong>Product SME</strong> for EdgeOne's advanced capabilities.</li>
+            <li>Helped lead a <strong>million-dollar engagement with two of Indonesia's largest national banks</strong>, and <strong>doubled market penetration</strong> through tailored technical analyses delivered to C-suite stakeholders.</li>
+            <li>Built a <strong>pentesting automation platform</strong> for WAF rule validation and an AI-powered remote authentication solution on Edge Functions, cutting internal workload three-fold.</li>
+            <li>Led technical workshops and enablement sessions to accelerate partner adoption across Southeast Asia.</li>
+          </ul>
+          <p class="tags"><span>CDN</span><span>WAF</span><span>Anti-DDoS</span><span>Edge Functions</span><span>Terraform</span><span>RFP</span></p>
         </div>
-        <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
-      </div>
-    </section>
+      </li>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">About Me</h2>
-                <p class="section-subtitle">Get to know me better</p>
+      <li class="tl__item">
+        <span class="tl__node" aria-hidden="true"></span>
+        <div class="tl__card">
+          <div class="tl__head">
+            <div class="tl__logo"><img src="assets/pikkat.png" alt="Pikkat QTa Retail Servisindo" width="46" height="46" loading="lazy"></div>
+            <div class="tl__id">
+              <h3>Data Analyst Intern</h3>
+              <p>Pikkat QTa Retail Servisindo</p>
+              <span class="tl__when">Jun 2024 — Aug 2024 · Jakarta</span>
             </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        I'm Bryan, an AWS Certified Machine Learning Specialist and Tableau Certified Data Analyst. 
-                        As an undergraduate in data science and business analytics at the University of London, 
-                        my interest in data analytics and my passion for developing AI for a sustainable future 
-                        have ignited my enthusiasm for the future of technology.
-                    </p>
-                    <p>
-                        With a strong foundation in machine learning, data analysis, and cloud technologies, 
-                        I bring a unique perspective to solving complex business problems through data-driven insights.
-                    </p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <h3>4+</h3>
-                            <p>AWS Certifications</p>
-                        </div>
-                        <div class="stat">
-                            <h3>10+</h3>
-                            <p>Projects Completed</p>
-                        </div>
-                        <div class="stat">
-                            <h3>3+</h3>
-                            <p>Years Experience</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <div class="image-placeholder">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                </div>
+          </div>
+          <ul class="tl__pts">
+            <li>Pioneered implementation of ML models for junior and senior executives, <strong>doubling data processing rate</strong> and daily operational efficiency.</li>
+            <li>Ran data wrangling on multidimensional sales data collected by a custom web crawler, reducing operational overhead <strong>five-fold</strong>.</li>
+            <li>Developed analytics dashboards for inventory management and revenue analysis, <strong>tripling sales team productivity</strong>.</li>
+          </ul>
+          <p class="tags"><span>Python</span><span>Machine Learning</span><span>Web Crawling</span><span>Dashboards</span></p>
+        </div>
+      </li>
+
+      <li class="tl__item">
+        <span class="tl__node" aria-hidden="true"></span>
+        <div class="tl__card">
+          <div class="tl__head">
+            <div class="tl__logo tl__logo--red" data-mark="A"></div>
+            <div class="tl__id">
+              <h3>Business Development Associate</h3>
+              <p>AIESEC in Singapore</p>
+              <span class="tl__when">Jan 2023 — Feb 2024 · Singapore</span>
             </div>
-      </div>
-    </section>
+          </div>
+          <ul class="tl__pts">
+            <li>Built and maintained relationships with companies across multiple industries, creating placement opportunities for international interns in Singapore.</li>
+            <li>Ran profiling through to reception for shortlisted talent across four startups, working in a team of five.</li>
+            <li>As Delegate Service Associate for <strong>SWITCH 2023</strong>, coordinated with nine committees for a national event of 100+ delegates from SIM, SMU, NTU and NUS, reaching a <strong>90%+ satisfaction rate</strong>.</li>
+          </ul>
+          <p class="tags"><span>Business Development</span><span>Stakeholder Management</span><span>Events</span></p>
+        </div>
+      </li>
 
-    <!-- Experience Section -->
-    <section id="experience" class="experience">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Experience</h2>
-                <p class="section-subtitle">My professional journey</p>
+      <li class="tl__item">
+        <span class="tl__node" aria-hidden="true"></span>
+        <div class="tl__card">
+          <div class="tl__head">
+            <div class="tl__logo"><img src="assets/SIMIAN.jpeg" alt="SIMIAN Group" width="46" height="46" loading="lazy"></div>
+            <div class="tl__id">
+              <h3>Data Management Intern</h3>
+              <p>SIMIAN Group</p>
+              <span class="tl__when">Jun 2023 — Aug 2023 · Jakarta</span>
             </div>
-            <div class="experience-grid">
-                <div class="experience-card">
-                    <div class="exp-logo">
-                        <img src="./assets/SIMIAN.jpeg" alt="SIMIAN" />
-                    </div>
-                    <div class="exp-content">
-                        <h3>SIMIAN</h3>
-                        <p>Data Science & Analytics</p>
-                        <span class="exp-period">2023 - Present</span>
-                    </div>
-                </div>
-                <div class="experience-card">
-                    <div class="exp-logo">
-                        <img src="./assets/pikkat.png" alt="Pikkat" />
-                    </div>
-                    <div class="exp-content">
-                        <h3>Pikkat</h3>
-                        <p>Machine Learning & AI</p>
-                        <span class="exp-period">2022 - 2023</span>
           </div>
-          </div>
+          <ul class="tl__pts">
+            <li>Optimised the core product's time-series models in Python and SQL, lifting annual yield forecast and <strong>fraud detection accuracy by 50%</strong>.</li>
+            <li>Redesigned the UI/UX of a major Indonesian financial institution's web app, contributing to active customer growth past <strong>1 million</strong>.</li>
+            <li>Built ETL pipelines in Talend Open Studio to support credit-scoring models.</li>
+          </ul>
+          <p class="tags"><span>Python</span><span>SQL</span><span>Talend</span><span>Time Series</span><span>UI/UX</span></p>
         </div>
-      </div>
-    </section>
+      </li>
+    </ol>
+  </div>
+</section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Featured Projects</h2>
-                <p class="section-subtitle">Some of my recent work</p>
+<!-- ══ PROJECTS ══ -->
+<section class="sec" id="projects">
+  <div class="container">
+    <header class="head head--row">
+      <h2>Projects</h2>
+      <div class="carnav">
+        <button class="carnav__b" data-car="proj" data-dir="-1" aria-label="Previous projects"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.4 4.5L7.9 12l7.5 7.5 1.4-1.4-6.1-6.1 6.1-6.1z"/></svg></button>
+        <div class="carnav__dots" id="proj-dots"></div>
+        <button class="carnav__b" data-car="proj" data-dir="1" aria-label="Next projects"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.6 4.5L16.1 12l-7.5 7.5-1.4-1.4 6.1-6.1-6.1-6.1z"/></svg></button>
+      </div>
+    </header>
+
+    <div class="car" id="proj" data-car-track>
+      <div class="car__page">
+        <article class="pcard pcard--star">
+          <div class="pcard__img"><img src="assets/cover-signlang.jpg" alt="" width="800" height="450" loading="lazy"><span class="ribbon">Hackathon winner</span></div>
+          <div class="pcard__body">
+            <h3>Sign Language Hand Detection</h3>
+            <p>A low-latency sign language learning game built by a team of four, reading hand shapes in real time. Won NUS Hack&amp;Roll 2024 against a field of 800+.</p>
+            <p class="tags"><span>OpenCV</span><span>Python</span><span>Tkinter</span></p>
+            <a class="pcard__link" href="https://devpost.com/9santasilabryan9" target="_blank" rel="noopener">View project<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h12.2l-5.1-5.1L12.5 4.5 20 12l-7.5 7.5-1.4-1.4 5.1-5.1H4z"/></svg></a>
+          </div>
+        </article>
+        <article class="pcard">
+          <div class="pcard__img"><img src="assets/apt.webp" alt="" width="800" height="500" loading="lazy"></div>
+          <div class="pcard__body">
+            <h3>Amazon Powered Tetris</h3>
+            <p>Cross-platform Tetris controlled entirely by hand gestures, containerised on AWS ECS with Fargate, CloudFormation and RDS.</p>
+            <p class="tags"><span>React</span><span>Flask</span><span>AWS ECS</span></p>
+            <a class="pcard__link" href="https://devpost.com/software/apt-amazon-powered-tetris" target="_blank" rel="noopener">View project<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h12.2l-5.1-5.1L12.5 4.5 20 12l-7.5 7.5-1.4-1.4 5.1-5.1H4z"/></svg></a>
+          </div>
+        </article>
+        <article class="pcard">
+          <div class="pcard__img"><img src="assets/cover-waf.jpg" alt="" width="800" height="500" loading="lazy"></div>
+          <div class="pcard__body">
+            <h3>WAF Pentesting Automation</h3>
+            <p>An internal platform at Tencent that automates penetration testing to validate WAF rule sets, cutting manual review workload three-fold.</p>
+            <p class="tags"><span>Security</span><span>Automation</span><span>WAF</span></p>
+            <a class="pcard__link" href="https://www.linkedin.com/in/santasilabryankusno/" target="_blank" rel="noopener">View details<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h12.2l-5.1-5.1L12.5 4.5 20 12l-7.5 7.5-1.4-1.4 5.1-5.1H4z"/></svg></a>
+          </div>
+        </article>
+        <article class="pcard">
+          <div class="pcard__img"><img src="assets/dp.jpeg" alt="" width="800" height="500" loading="lazy"></div>
+          <div class="pcard__body">
+            <h3>Diabetes Prediction Model</h3>
+            <p>Early-detection classifier on BRFSS survey data, tuned around the false-negative cost that actually matters in screening.</p>
+            <p class="tags"><span>Python</span><span>scikit-learn</span><span>Healthcare</span></p>
+            <a class="pcard__link" href="https://github.com/SBryanK/Diabetes-Prediction-BRFSS" target="_blank" rel="noopener">View project<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h12.2l-5.1-5.1L12.5 4.5 20 12l-7.5 7.5-1.4-1.4 5.1-5.1H4z"/></svg></a>
+          </div>
+        </article>
+      </div>
+
+      <div class="car__page">
+        <article class="pcard">
+          <div class="pcard__img"><img src="assets/lomo.jpeg" alt="" width="800" height="500" loading="lazy"></div>
+          <div class="pcard__body">
+            <h3>LoMo E-Commerce Case Study</h3>
+            <p>End-to-end analysis of an e-commerce dataset — cohorting, retention and conversion — written as recommendations for an operator.</p>
+            <p class="tags"><span>Python</span><span>Segmentation</span></p>
+            <a class="pcard__link" href="https://github.com/SBryanK/LoMo-Case-Study" target="_blank" rel="noopener">View project<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h12.2l-5.1-5.1L12.5 4.5 20 12l-7.5 7.5-1.4-1.4 5.1-5.1H4z"/></svg></a>
+          </div>
+        </article>
+        <article class="pcard">
+          <div class="pcard__img"><img src="assets/bar.jpg" alt="" width="800" height="500" loading="lazy"></div>
+          <div class="pcard__body">
+            <h3>Sales Forecasting Dashboard</h3>
+            <p>An interactive Tableau story that walks a non-technical reader from raw retail sales to a forecast they can interrogate.</p>
+            <p class="tags"><span>Tableau</span><span>Forecasting</span></p>
+            <a class="pcard__link" href="https://public.tableau.com/app/profile/santasila.bryan/viz/SalesForecastingProject2024/Story1" target="_blank" rel="noopener">View dashboard<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h12.2l-5.1-5.1L12.5 4.5 20 12l-7.5 7.5-1.4-1.4 5.1-5.1H4z"/></svg></a>
+          </div>
+        </article>
+        <article class="pcard">
+          <div class="pcard__img"><img src="assets/walmart.jpg" alt="" width="800" height="500" loading="lazy"></div>
+          <div class="pcard__body">
+            <h3>Walmart Sales Analysis</h3>
+            <p>Retail analytics on multi-store sales history — seasonality decomposition, holiday effects and a forward forecast, written in R.</p>
+            <p class="tags"><span>R</span><span>Time Series</span></p>
+            <a class="pcard__link" href="https://rpubs.com/SBK_26/MLP2" target="_blank" rel="noopener">View analysis<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h12.2l-5.1-5.1L12.5 4.5 20 12l-7.5 7.5-1.4-1.4 5.1-5.1H4z"/></svg></a>
+          </div>
+        </article>
+        <article class="pcard">
+          <div class="pcard__img"><img src="assets/marriott.jpg" alt="" width="800" height="500" loading="lazy"></div>
+          <div class="pcard__body">
+            <h3>Marriott Market Research</h3>
+            <p>Strategic market analysis for the hospitality industry, ending in a set of positioning recommendations rather than a chart pack.</p>
+            <p class="tags"><span>Market Research</span><span>Strategy</span></p>
+            <a class="pcard__link" href="https://www.linkedin.com/in/santasilabryankusno/details/projects/" target="_blank" rel="noopener">View project<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h12.2l-5.1-5.1L12.5 4.5 20 12l-7.5 7.5-1.4-1.4 5.1-5.1H4z"/></svg></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CERTIFICATIONS ══ -->
+<section class="sec sec--tint" id="certifications">
+  <div class="container">
+    <header class="head head--row">
+      <h2>Certifications</h2>
+      <div class="carnav">
+        <button class="carnav__b" data-car="cert" data-dir="-1" aria-label="Previous certifications"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.4 4.5L7.9 12l7.5 7.5 1.4-1.4-6.1-6.1 6.1-6.1z"/></svg></button>
+        <div class="carnav__dots" id="cert-dots"></div>
+        <button class="carnav__b" data-car="cert" data-dir="1" aria-label="Next certifications"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.6 4.5L16.1 12l-7.5 7.5-1.4-1.4 6.1-6.1-6.1-6.1z"/></svg></button>
+      </div>
+    </header>
+
+    <div class="car" id="cert" data-car-track>
+      <div class="car__page car__page--3">
+        <article class="cert"><div class="cert__badge cert__badge--mono" data-mark="A"></div><h3>AWS Solutions Architect</h3><p>Professional</p><a href="https://www.credly.com/users/santasila-bryan-kusno" target="_blank" rel="noopener">Verify</a></article>
+        <article class="cert"><div class="cert__badge"><img src="assets/aws-mls.png" alt="" width="64" height="64" loading="lazy"></div><h3>AWS Machine Learning</h3><p>Specialty</p><a href="https://www.credly.com/earner/earned/badge/77d77501-7e22-45f4-9eb9-6e45092cc0d5" target="_blank" rel="noopener">Verify</a></article>
+        <article class="cert"><div class="cert__badge"><img src="assets/aws-saa.png" alt="" width="64" height="64" loading="lazy"></div><h3>AWS Solutions Architect</h3><p>Associate</p><a href="https://www.credly.com/earner/earned/badge/c31330d6-46cf-4b64-b015-c410043ced25" target="_blank" rel="noopener">Verify</a></article>
+        <article class="cert"><div class="cert__badge"><img src="assets/aws-mla.png" alt="" width="64" height="64" loading="lazy"></div><h3>AWS Machine Learning</h3><p>Associate</p><a href="https://www.credly.com/earner/earned/badge/c7a6aa5a-f036-49d7-ab13-e6eaecf71ec1" target="_blank" rel="noopener">Verify</a></article>
+        <article class="cert"><div class="cert__badge"><img src="assets/aws-aip.png" alt="" width="64" height="64" loading="lazy"></div><h3>AWS AI Practitioner</h3><p>Foundational</p><a href="https://www.credly.com/users/santasila-bryan-kusno" target="_blank" rel="noopener">Verify</a></article>
+        <article class="cert"><div class="cert__badge"><img src="assets/tableau-da.png" alt="" width="64" height="64" loading="lazy"></div><h3>Tableau Certified Data Analyst</h3><p>Tableau</p><a href="https://www.credly.com/earner/earned/badge/46dd17f9-1b18-4aad-ab1e-ed83af654ba8" target="_blank" rel="noopener">Verify</a></article>
+      </div>
+
+      <div class="car__page car__page--3">
+        <article class="cert"><div class="cert__badge cert__badge--mono" data-mark="T"></div><h3>Tencent Cloud</h3><p>Professional Engineer</p><a href="https://www.linkedin.com/in/santasilabryankusno/details/certifications/" target="_blank" rel="noopener">Verify</a></article>
+        <article class="cert"><div class="cert__badge cert__badge--red" data-mark="M"></div><h3>Data Science &amp; Machine Learning</h3><p>MIT</p><a href="https://www.linkedin.com/in/santasilabryankusno/details/certifications/" target="_blank" rel="noopener">Verify</a></article>
+        <article class="cert"><div class="cert__badge cert__badge--mono" data-mark="B"></div><h3>Bloomberg Market Concepts</h3><p>Bloomberg</p><a href="https://www.linkedin.com/in/santasilabryankusno/details/certifications/" target="_blank" rel="noopener">Verify</a></article>
+        <article class="cert"><div class="cert__badge cert__badge--mono" data-mark="B"></div><h3>Bloomberg Finance Fundamentals</h3><p>Bloomberg</p><a href="https://www.linkedin.com/in/santasilabryankusno/details/certifications/" target="_blank" rel="noopener">Verify</a></article>
+        <article class="cert"><div class="cert__badge cert__badge--red" data-mark="K"></div><h3>Options 101</h3><p>Akuna Capital</p><a href="https://www.linkedin.com/in/santasilabryankusno/details/certifications/" target="_blank" rel="noopener">Verify</a></article>
+        <article class="cert"><div class="cert__badge cert__badge--red" data-mark="H"></div><h3>Problem Solving</h3><p>HackerRank · Intermediate</p><a href="https://www.linkedin.com/in/santasilabryankusno/details/certifications/" target="_blank" rel="noopener">Verify</a></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EDUCATION + AWARDS ══ -->
+<section class="sec" id="education">
+  <div class="container">
+    <header class="head"><h2>Education &amp; Awards</h2></header>
+
+    <div class="split">
+      <div>
+        <ol class="edu">
+          <li>
+            <div class="edu__logo edu__logo--mono" data-mark="N"></div>
+            <div class="edu__body">
+              <h3>National University of Singapore</h3>
+              <p>MSc Smart Industries and Digital Transformation</p>
+              <span>Aug 2026 — Aug 2027 · Singapore</span>
             </div>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="./assets/lomo.jpeg" alt="LoMo E-Commerce Case Study" />
-                    </div>
-                    <div class="project-content">
-                        <h3>LoMo E-Commerce Case Study</h3>
-                        <p>Comprehensive analysis of e-commerce data with machine learning insights and business recommendations.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Machine Learning</span>
-                            <span class="tech-tag">Data Analysis</span>
-                        </div>
-                        <a href="https://github.com/SBryanK/LoMo-Case-Study" target="_blank" class="project-link">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="./assets/apt.webp" alt="Amazon Powered Tetris" />
-                    </div>
-                    <div class="project-content">
-                        <h3>Amazon Powered Tetris</h3>
-                        <p>Innovative gaming solution leveraging AWS services for enhanced user experience and performance.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">AWS</span>
-                            <span class="tech-tag">Cloud Computing</span>
-                            <span class="tech-tag">Game Development</span>
-          </div>
-                        <a href="https://devpost.com/software/apt-amazon-powered-tetris" target="_blank" class="project-link">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="./assets/dp.jpeg" alt="Diabetes Prediction" />
-                    </div>
-                    <div class="project-content">
-                        <h3>Diabetes Prediction Model</h3>
-                        <p>Machine learning model for early diabetes detection using BRFSS dataset with high accuracy.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Machine Learning</span>
-                            <span class="tech-tag">Healthcare</span>
-                            <span class="tech-tag">Python</span>
-          </div>
-                        <a href="https://github.com/SBryanK/Diabetes-Prediction-BRFSS" target="_blank" class="project-link">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="./assets/walmart.jpg" alt="Walmart Sales Analysis" />
-                    </div>
-                    <div class="project-content">
-                        <h3>Walmart Sales Analysis</h3>
-                        <p>Comprehensive retail analytics project analyzing sales patterns and forecasting future trends.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Data Analysis</span>
-                            <span class="tech-tag">Forecasting</span>
-                            <span class="tech-tag">R</span>
-          </div>
-                        <a href="https://rpubs.com/SBK_26/MLP2" target="_blank" class="project-link">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-          </div>
-          </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="./assets/marriott.jpg" alt="Marriott Market Research" />
-          </div>
-                    <div class="project-content">
-                        <h3>Marriott Market Research</h3>
-                        <p>Strategic market analysis for hospitality industry with actionable business insights.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Market Research</span>
-                            <span class="tech-tag">Business Analytics</span>
-                            <span class="tech-tag">Strategy</span>
-          </div>
-                        <a href="https://www.linkedin.com/in/santasilabryankusno/details/projects/1740669464380/single-media-viewer/?profileId=ACoAADdgBlgBRHsN_T3FY3EfckefOY9Mx67Kq4w" target="_blank" class="project-link">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-          </div>
-          </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="./assets/bar.jpg" alt="Data Analysis Report" />
-          </div>
-                    <div class="project-content">
-                        <h3>Sales Forecasting Dashboard</h3>
-                        <p>Interactive Tableau dashboard for sales forecasting with advanced analytics and visualization.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Tableau</span>
-                            <span class="tech-tag">Data Visualization</span>
-                            <span class="tech-tag">Dashboard</span>
-          </div>
-                        <a href="https://public.tableau.com/app/profile/santasila.bryan/viz/SalesForecastingProject2024/Story1" target="_blank" class="project-link">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-          </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Certifications Section -->
-    <section id="certifications" class="certifications">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Certifications</h2>
-                <p class="section-subtitle">Professional achievements</p>
+          </li>
+          <li>
+            <div class="edu__logo"><img src="assets/uol.jpg" alt="" width="46" height="46" loading="lazy"></div>
+            <div class="edu__body">
+              <h3>University of London</h3>
+              <p>BSc (Hons) Data Science and Business Analytics<br><em>Academic direction by the London School of Economics · via SIM</em></p>
+              <span>Sep 2022 — Aug 2025 · Singapore</span>
             </div>
-            <div class="certifications-grid">
-                <div class="cert-card">
-                    <div class="cert-image">
-                        <img src="./assets/tableau-da.png" alt="Tableau Data Analyst" />
-                    </div>
-                    <div class="cert-content">
-                        <h3>Tableau Data Analyst</h3>
-                        <p>Certified in advanced data visualization and analytics</p>
-                        <a href="https://www.credly.com/earner/earned/badge/46dd17f9-1b18-4aad-ab1e-ed83af654ba8" target="_blank" class="cert-link">
-                            View Certificate
-            </a>
-          </div>
-                </div>
-                <div class="cert-card">
-                    <div class="cert-image">
-                        <img src="./assets/aws-mls.png" alt="AWS Machine Learning Specialty" />
-                    </div>
-                    <div class="cert-content">
-                        <h3>AWS Machine Learning Specialty</h3>
-                        <p>Expertise in ML algorithms and AWS ML services</p>
-                        <a href="https://www.credly.com/earner/earned/badge/77d77501-7e22-45f4-9eb9-6e45092cc0d5" target="_blank" class="cert-link">
-                            View Certificate
-            </a>
-          </div>
-                </div>
-                <div class="cert-card">
-                    <div class="cert-image">
-                        <img src="./assets/aws-mla.png" alt="AWS Machine Learning Associate" />
-                    </div>
-                    <div class="cert-content">
-                        <h3>AWS Machine Learning Associate</h3>
-                        <p>Foundation in machine learning on AWS platform</p>
-                        <a href="https://www.credly.com/earner/earned/badge/c7a6aa5a-f036-49d7-ab13-e6eaecf71ec1" target="_blank" class="cert-link">
-                            View Certificate
-            </a>
-          </div>
-                </div>
-                <div class="cert-card">
-                    <div class="cert-image">
-                        <img src="./assets/aws-saa.png" alt="AWS Solutions Architect Associate" />
-                    </div>
-                    <div class="cert-content">
-                        <h3>AWS Solutions Architect Associate</h3>
-                        <p>Cloud architecture and design expertise</p>
-                        <a href="https://www.credly.com/earner/earned/badge/c31330d6-46cf-4b64-b015-c410043ced25" target="_blank" class="cert-link">
-                            View Certificate
-                        </a>
-                    </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Education Section -->
-    <section id="education" class="education">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Education</h2>
-                <p class="section-subtitle">Academic background</p>
+          </li>
+          <li>
+            <div class="edu__logo edu__logo--red" data-mark="UI"></div>
+            <div class="edu__body">
+              <h3>University of Indonesia</h3>
+              <p>BEng Electrical and Electronics Engineering</p>
+              <span>Aug 2022 — Sep 2022 · Depok</span>
             </div>
-            <div class="education-timeline">
-                <div class="edu-item">
-                    <div class="edu-logo">
-                        <img src="./assets/uol.jpg" alt="University of London" />
-                    </div>
-                    <div class="edu-content">
-                        <h3>University of London</h3>
-                        <p>BSc Data Science & Business Analytics</p>
-                        <span class="edu-period">2022 - 2025</span>
-        </div>
-        </div>
-                <div class="edu-item">
-                    <div class="edu-logo">
-                        <img src="./assets/ui.jpg" alt="University of Indonesia" />
-        </div>
-                    <div class="edu-content">
-                        <h3>University of Indonesia</h3>
-                        <p>Exchange Program</p>
-                        <span class="edu-period">2022</span>
+          </li>
+          <li>
+            <div class="edu__logo"><img src="assets/penabur.png" alt="" width="46" height="46" loading="lazy"></div>
+            <div class="edu__body">
+              <h3>SMAK PENABUR Harapan Indah</h3>
+              <p>Natural Sciences</p>
+              <span>Jul 2019 — Jun 2022 · Bekasi</span>
+            </div>
+          </li>
+        </ol>
       </div>
-          </div>
-                <div class="edu-item">
-                    <div class="edu-logo">
-                        <img src="./assets/penabur.png" alt="BPK Penabur Jakarta" />
-          </div>
-                    <div class="edu-content">
-                        <h3>BPK Penabur Jakarta</h3>
-                        <p>High School Diploma</p>
-                        <span class="edu-period">2010 - 2019</span>
-          </div>
-          </div>
-        </div>
+
+      <aside class="awards">
+        <h3>Awards</h3>
+        <ul class="awards__list">
+          <li><b>Winner</b> — NUS Hack&amp;Roll 2024 <em>field of 800+</em></li>
+          <li><b>Top 10</b> — MIT IDSS Data Science Hackathon 2024</li>
+          <li><b>Finalist</b> — NUS Health Hack 2024</li>
+          <li><b>Bronze</b> — POSI Indonesian Mathematics Olympiad</li>
+          <li><b>Bronze</b> — Duke of Edinburgh International Award</li>
+          <li><b>Highest score</b> — National Exam, West Java 2019</li>
+          <li><b>Master of Abacus</b></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COMMUNITY ══ -->
+<section class="sec sec--tint" id="community">
+  <div class="container">
+    <header class="head"><h2>Community</h2></header>
+
+    <div class="comm">
+      <article class="ccard">
+        <div class="ccard__logo"><img src="assets/tzsgp.png" alt="" width="52" height="52" loading="lazy"></div>
+        <h3>Student Ambassador</h3>
+        <p class="ccard__org">Tzu Chi Foundation Singapore</p>
+        <p>Represented the foundation on campus — outreach, recruitment and running volunteer sessions for the student body.</p>
+      </article>
+
+      <article class="ccard">
+        <div class="ccard__logo"><img src="assets/tzidn.png" alt="" width="52" height="52" loading="lazy"></div>
+        <h3>Volunteer &amp; Coordinator</h3>
+        <p class="ccard__org">Tzu Chi Foundation Indonesia</p>
+        <p>Coordinated 30+ cross-campus initiatives with hundreds of volunteers, tripling the cohort size.</p>
+      </article>
+
+      <article class="ccard ccard--star">
+        <div class="ccard__logo ccard__logo--red" data-mark="b"></div>
+        <h3>Volunteer Developer</h3>
+        <p class="ccard__org">better.sg</p>
+        <p>Selected by the CEO after winning Hack&amp;Roll 2024. Spent over a year building with Singapore's largest tech-for-good community.</p>
+      </article>
+
+      <article class="ccard">
+        <div class="ccard__logo"><img src="assets/simsa.png" alt="" width="52" height="52" loading="lazy"></div>
+        <h3>University Ambassador</h3>
+        <p class="ccard__org">Singapore Institute of Management</p>
+        <p>Led 10+ campus tours and campus-wide events, reaching 50+ students and 300+ public participants.</p>
+      </article>
+
+      <article class="ccard">
+        <div class="ccard__logo ccard__logo--mono" data-mark="A"></div>
+        <h3>Delegate Service Associate</h3>
+        <p class="ccard__org">AIESEC SWITCH 2023</p>
+        <p>Coordinated with nine committees for a national event of 100+ delegates from SIM, SMU, NTU and NUS, reaching a 90%+ satisfaction rate.</p>
+      </article>
+
+      <article class="ccard">
+        <div class="ccard__logo"><img src="assets/penabur.png" alt="" width="52" height="52" loading="lazy"></div>
+        <h3>Student Council</h3>
+        <p class="ccard__org">SMAK PENABUR Harapan Indah</p>
+        <p>Organised student-body events and represented the cohort to school leadership.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section class="sec sec--gold" id="contact">
+  <div class="container">
+    <header class="head"><h2>Get in touch</h2></header>
+
+    <div class="contact">
+      <div class="contact__info">
+        <p class="contact__lead">
+          I'm looking for 2026/27 internships in cloud, platform or applied ML —
+          Singapore or remote. If you're building something that has to stay up
+          under real traffic, I'd like to hear about it.
+        </p>
+        <ul>
+          <li>
+            <span class="ci"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V6a1 1 0 011-1zm9 8.2L4.2 7.6 3.6 8.4 12 14.7l8.4-6.3-.6-.8L12 13.2z"/></svg></span>
+            <div><h4>Email</h4><a href="mailto:santasila.bryan@gmail.com">santasila.bryan@gmail.com</a></div>
+          </li>
+          <li>
+            <span class="ci ci--red"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 11-.01 5.01A2.5 2.5 0 014.98 3.5zM3 8.98h4v12H3v-12zM9.5 8.98h3.83v1.64h.06c.53-1 1.84-2.06 3.78-2.06 4.04 0 4.79 2.66 4.79 6.12v6.3h-4v-5.59c0-1.33-.02-3.05-1.86-3.05-1.86 0-2.15 1.45-2.15 2.95v5.69h-4v-12z"/></svg></span>
+            <div><h4>LinkedIn</h4><a href="https://www.linkedin.com/in/santasilabryankusno/" target="_blank" rel="noopener">/in/santasilabryankusno</a></div>
+          </li>
+          <li>
+            <span class="ci"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.5v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 015 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .28.18.6.69.5A10.03 10.03 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg></span>
+            <div><h4>GitHub</h4><a href="https://github.com/SBryanK" target="_blank" rel="noopener">@SBryanK</a></div>
+          </li>
+          <li>
+            <span class="ci ci--red"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg></span>
+            <div><h4>Location</h4><span class="ci__static">Singapore · SGT (UTC+8)</span></div>
+          </li>
+        </ul>
       </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Get In Touch</h2>
-                <p class="section-subtitle">Let's work together</p>
-          </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>Email</h4>
-                            <p>santasila.bryan@gmail.com</p>
-          </div>
-          </div>
-                    <div class="contact-item">
-                        <i class="fab fa-linkedin"></i>
-                        <div>
-                            <h4>LinkedIn</h4>
-                            <p>linkedin.com/in/santasilabryankusno</p>
-          </div>
-          </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h4>Phone</h4>
-                            <p>+65 8589 2627</p>
-          </div>
-          </div>
-                    <div class="contact-item">
-                        <i class="fab fa-instagram"></i>
-                        <div>
-                            <h4>Instagram</h4>
-                            <p>@santasila_bryan</p>
-          </div>
-          </div>
-          </div>
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" placeholder="Your Name" required>
-          </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Your Email" required>
-          </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="Subject" required>
-          </div>
-                        <div class="form-group">
-                            <textarea placeholder="Your Message" rows="5" required></textarea>
-          </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
-          </div>
+      <form class="form" id="form" novalidate>
+        <div class="f-row">
+          <div class="f"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+          <div class="f"><label for="f-email">Your email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
         </div>
-      </div>
-    </section>
+        <div class="f"><label for="f-subject">Subject</label><input id="f-subject" name="subject" type="text"></div>
+        <div class="f"><label for="f-msg">Message</label><textarea id="f-msg" name="message" rows="5" required></textarea></div>
+        <p class="f-err" id="f-err" role="alert" hidden></p>
+        <button class="btn btn--gold btn--full" type="submit" id="f-send">Send message</button>
+        <p class="f-note">Opens your mail app with the message ready to send.</p>
+      </form>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-text">
-                    <p>&copy; 2025 Santasila Bryan Kusno. All rights reserved.</p>
-        </div>
-                <div class="footer-social">
-                    <a href="https://www.linkedin.com/in/santasilabryankusno/" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://github.com/SBryanK" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="mailto:santasila.bryan@gmail.com">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                    <a href="https://www.instagram.com/santasila_bryan/" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-        </div>
-        </div>
-        </div>
-    </footer>
+</main>
 
-    <script src="script.js"></script>
-  </body>
+<footer class="foot">
+  <div class="container foot__in">
+    <p>© <span id="yr">2026</span> Santasila Bryan Kusno</p>
+    <ul>
+      <li><a href="https://www.linkedin.com/in/santasilabryankusno/" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://github.com/SBryanK" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="https://www.credly.com/users/santasila-bryan-kusno" target="_blank" rel="noopener">Credly</a></li>
+      <li><a href="mailto:santasila.bryan@gmail.com">Email</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
 </html>

@@ -1,310 +1,262 @@
-// Mobile Navigation Toggle
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
+/* Portfolio behaviour — one rAF-batched scroll listener, no fake anything. */
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
+// Set to a Formspree / Web3Forms endpoint to receive messages in your inbox.
+// Left empty, the form opens the visitor's mail app with the message ready.
+const FORM_ENDPOINT = '';
+const EMAIL = 'santasila.bryan@gmail.com';
+
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+
+/* ── mobile nav ── */
+const burger = $('#burger');
+const menu   = $('#navmenu');
+
+burger?.addEventListener('click', () => {
+  const open = burger.getAttribute('aria-expanded') === 'true';
+  burger.setAttribute('aria-expanded', String(!open));
+  burger.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+  menu.classList.toggle('is-open', !open);
 });
 
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    navMenu.classList.remove('active');
-}));
-
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// Navbar background change on scroll
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-    } else {
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-        navbar.style.boxShadow = 'none';
-    }
-});
-
-// Intersection Observer for animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+const closeNav = () => {
+  burger?.setAttribute('aria-expanded', 'false');
+  burger?.setAttribute('aria-label', 'Open menu');
+  menu?.classList.remove('is-open');
 };
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, observerOptions);
+$$('#navmenu a').forEach(a => a.addEventListener('click', closeNav));
+document.addEventListener('keydown', e => e.key === 'Escape' && closeNav());
 
-// Add animation classes to elements
-document.addEventListener('DOMContentLoaded', () => {
-    // Add fade-in animation to sections
-    const sections = document.querySelectorAll('section');
-    sections.forEach(section => {
-        section.classList.add('fade-in');
-        observer.observe(section);
-    });
+/* ── scroll: progress bar, sticky nav, section spy, timeline spine ── */
+const nav      = $('#nav');
+const bar      = $('#progress i');
+const spine    = $('#spine');
+const tl       = $('#tl');
+const links    = $$('#navmenu a');
+const sections = links.map(a => $(a.getAttribute('href'))).filter(Boolean);
+let ticking = false;
 
-    // Add slide-in animations to project cards
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach((card, index) => {
-        card.classList.add('slide-in-left');
-        observer.observe(card);
-    });
+const onScroll = () => {
+  const y = window.scrollY;
+  const vh = window.innerHeight;
 
-    // Add slide-in animations to certification cards
-    const certCards = document.querySelectorAll('.cert-card');
-    certCards.forEach((card, index) => {
-        if (index % 2 === 0) {
-            card.classList.add('slide-in-left');
-        } else {
-            card.classList.add('slide-in-right');
-        }
-        observer.observe(card);
-    });
+  nav?.classList.toggle('is-stuck', y > 10);
 
-    // Add slide-in animations to education items
-    const eduItems = document.querySelectorAll('.edu-item');
-    eduItems.forEach((item, index) => {
-        item.classList.add('slide-in-left');
-        observer.observe(item);
+  if (bar) {
+    const max = document.documentElement.scrollHeight - vh;
+    bar.style.width = `${max > 0 ? clamp((y / max) * 100, 0, 100) : 0}%`;
+  }
+
+  // the timeline spine fills as you read down the section
+  if (spine && tl) {
+    const r = tl.getBoundingClientRect();
+    const p = (vh * 0.72 - r.top) / r.height;
+    spine.style.height = `${clamp(p, 0, 1) * 100}%`;
+  }
+
+  const line = y + vh * 0.3;
+  let active = '';
+  for (const s of sections) if (s.offsetTop <= line) active = s.id;
+  links.forEach(a => a.classList.toggle('is-on', a.hash === `#${active}`));
+
+  ticking = false;
+};
+
+const queueScroll = () => {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(onScroll);
+};
+
+window.addEventListener('scroll', queueScroll, { passive: true });
+window.addEventListener('resize', queueScroll, { passive: true });
+onScroll();
+
+/* ── reveal on enter ── */
+const io = new IntersectionObserver(
+  entries => entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('is-in');
+    io.unobserve(e.target);
+  }),
+  { threshold: 0.1, rootMargin: '0px 0px -6% 0px' }
+);
+
+$$('.head, .tl__item, .car, .edu li, .ccard, .chips, .awards, .toolbox, .contact__info, .form, .medal')
+  .forEach(el => {
+    const own = ['car', 'tl__item', 'medal'].some(c => el.classList.contains(c));
+    if (!own) el.classList.add('reveal');
+    io.observe(el);
   });
-});
 
-// Contact form handling
-const contactForm = document.querySelector('.contact-form form');
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // Get form data
-        const name = contactForm.querySelector('input[type="text"]').value;
-        const email = contactForm.querySelector('input[type="email"]').value;
-        const subject = contactForm.querySelectorAll('input[type="text"]')[1].value;
-        const message = contactForm.querySelector('textarea').value;
+/* ── carousels: pages of 2×2 (projects) and 3×2 (certifications) ── */
+$$('[data-car-track]').forEach(track => {
+  const pages = $$('.car__page', track);
+  const dots  = $(`#${track.id}-dots`);
+  const btns  = $$(`.carnav__b[data-car="${track.id}"]`);
+  if (pages.length < 2) return;
 
-        // Simple validation
-        if (!name || !email || !subject || !message) {
-            alert('Please fill in all fields.');
-            return;
-        }
-
-        // Email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            alert('Please enter a valid email address.');
-            return;
-        }
-
-        // Simulate form submission
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Sending...';
-        submitBtn.disabled = true;
-
-        setTimeout(() => {
-            alert('Thank you for your message! I\'ll get back to you soon.');
-            contactForm.reset();
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        }, 2000);
+  const base   = pages[0].offsetLeft;
+  const paged  = () => track.scrollWidth > track.clientWidth + 4;   // false once stacked on mobile
+  const nearest = () => {
+    let best = 0, min = Infinity;
+    pages.forEach((p, i) => {
+      const d = Math.abs(p.offsetLeft - base - track.scrollLeft);
+      if (d < min) { min = d; best = i; }
     });
-}
+    return best;
+  };
 
-// Typing effect for hero title
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    
-    type();
-}
-
-// Initialize typing effect when page loads
-window.addEventListener('load', () => {
-    const heroTitle = document.querySelector('.hero-title');
-    if (heroTitle) {
-        const originalText = heroTitle.textContent;
-        typeWriter(heroTitle, originalText, 50);
-    }
-});
-
-// Parallax effect for hero section
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        const rate = scrolled * -0.5;
-        hero.style.transform = `translateY(${rate}px)`;
-    }
-});
-
-// Add active class to navigation links based on scroll position
-window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (window.pageYOffset >= (sectionTop - 200)) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-});
-
-// Add hover effects to project cards
-document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-10px) scale(1.02)';
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(0) scale(1)';
-    });
-});
-
-// Add click effects to buttons
-document.querySelectorAll('.btn').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-        // Create ripple effect
-        const ripple = document.createElement('span');
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-        
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
-        ripple.classList.add('ripple');
-        
-        this.appendChild(ripple);
-        
-        setTimeout(() => {
-            ripple.remove();
-        }, 600);
+  const marks = pages.map((_, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', `Go to page ${i + 1} of ${pages.length}`);
+    b.addEventListener('click', () => go(i));
+    dots?.append(b);
+    return b;
   });
-});
 
-// Add CSS for ripple effect
-const style = document.createElement('style');
-style.textContent = `
-    .btn {
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.6);
-        transform: scale(0);
-        animation: ripple-animation 0.6s linear;
-        pointer-events: none;
-    }
-    
-    @keyframes ripple-animation {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
+  const go = i => {
+    const t = clamp(i, 0, pages.length - 1);
+    track.scrollTo({ left: pages[t].offsetLeft - base, behavior: 'smooth' });
+  };
 
-// Performance optimization: Debounce scroll events
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Apply debouncing to scroll events
-const debouncedScrollHandler = debounce(() => {
-    // Navbar background change
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-    } else {
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-        navbar.style.boxShadow = 'none';
-    }
-}, 10);
-
-window.addEventListener('scroll', debouncedScrollHandler);
-
-// Copy phone number to clipboard
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        // Show temporary notification
-        const notification = document.createElement('div');
-        notification.textContent = 'Phone number copied to clipboard!';
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #10b981;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            z-index: 10000;
-            font-weight: 500;
-        `;
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.remove();
-        }, 3000);
+  const sync = () => {
+    const i = nearest();
+    marks.forEach((m, k) => {
+      m.classList.toggle('is-on', k === i);
+      m.setAttribute('aria-current', k === i ? 'true' : 'false');
     });
+    btns.forEach(b => {
+      const dir = Number(b.dataset.dir);
+      b.disabled = !paged() || (dir < 0 ? i === 0 : i === pages.length - 1);
+    });
+  };
+
+  btns.forEach(b =>
+    b.addEventListener('click', () => go(nearest() + Number(b.dataset.dir)))
+  );
+
+  let raf = false;
+  track.addEventListener('scroll', () => {
+    if (raf) return;
+    raf = true;
+    requestAnimationFrame(() => { sync(); raf = false; });
+  }, { passive: true });
+
+  window.addEventListener('resize', sync, { passive: true });
+  sync();
+});
+
+/* ── pointer flourishes: spotlight, magnetic buttons, medallion tilt ──
+   All of it is opt-in: fine pointers only, and disabled outright when the
+   visitor asks for reduced motion. Touch devices never pay for any of it. */
+const FINE = matchMedia('(hover: hover) and (pointer: fine)').matches;
+const CALM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (FINE && !CALM) {
+
+  // gold light that follows the cursor across a card
+  $$('.pcard, .cert, .tl__card, .edu li, .ccard, .toolbox, .awards').forEach(card => {
+    card.classList.add('spot');
+    card.addEventListener('pointermove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      card.style.setProperty('--my', `${e.clientY - r.top}px`);
+    }, { passive: true });
+  });
+
+  // buttons lean very slightly toward the cursor
+  $$('.btn, .carnav__b').forEach(el => {
+    const pull = 6;
+    el.addEventListener('pointermove', e => {
+      const r = el.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width - .5) * 2;
+      const y = ((e.clientY - r.top) / r.height - .5) * 2;
+      el.style.translate = `${x * pull}px ${y * pull * .5}px`;
+    }, { passive: true });
+    el.addEventListener('pointerleave', () => { el.style.translate = '0 0'; });
+  });
+
+  // medallion tilts in 3D toward the cursor
+  const medal = $('.medal');
+  if (medal) {
+    const MAX = 7;
+    let idle;
+    window.addEventListener('pointermove', e => {
+      const r = medal.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) return;
+      const x = clamp((e.clientX - (r.left + r.width / 2)) / (r.width / 2), -1, 1);
+      const y = clamp((e.clientY - (r.top + r.height / 2)) / (r.height / 2), -1, 1);
+      medal.style.transform =
+        `perspective(1100px) rotateY(${x * MAX}deg) rotateX(${-y * MAX}deg)`;
+      clearTimeout(idle);
+      idle = setTimeout(() => { medal.style.transform = ''; }, 2200);
+    }, { passive: true });
+  }
 }
 
-// Add click event to phone number
-document.addEventListener('DOMContentLoaded', () => {
-    const phoneElement = document.querySelector('.contact-item p');
-    if (phoneElement && phoneElement.textContent.includes('+65')) {
-        phoneElement.style.cursor = 'pointer';
-        phoneElement.addEventListener('click', () => {
-            copyToClipboard('+65 8589 2627');
-        });
-    }
+/* ── contact form ── */
+const form = $('#form');
+const err  = $('#f-err');
+const send = $('#f-send');
+const FIELDS = ['#f-name', '#f-email', '#f-msg'];
+
+const fail = (msg, sel) => {
+  err.textContent = msg;
+  err.hidden = false;
+  FIELDS.forEach(s => $(s).removeAttribute('aria-invalid'));
+  if (sel) { $(sel).setAttribute('aria-invalid', 'true'); $(sel).focus(); }
+};
+
+form?.addEventListener('submit', async e => {
+  e.preventDefault();
+  err.hidden = true;
+
+  const data = Object.fromEntries(new FormData(form));
+  const { name, email, subject, message } = data;
+
+  const missing = ['name', 'email', 'message'].find(k => !data[k]?.trim());
+  if (missing) {
+    const label = missing[0].toUpperCase() + missing.slice(1);
+    return fail(`${label} is required.`, `#f-${missing === 'message' ? 'msg' : missing}`);
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+    return fail('That email address looks incomplete.', '#f-email');
+  }
+  FIELDS.forEach(s => $(s).removeAttribute('aria-invalid'));
+
+  // No endpoint set — hand the message to the visitor's mail client.
+  if (!FORM_ENDPOINT) {
+    const subj = subject?.trim() || `Portfolio enquiry from ${name}`;
+    const body = `${message}\n\n— ${name} (${email})`;
+    window.location.href =
+      `mailto:${EMAIL}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+    return;
+  }
+
+  const label = send.textContent;
+  send.textContent = 'Sending…';
+  send.disabled = true;
+
+  try {
+    const res = await fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) throw new Error(res.status);
+    form.reset();
+    send.textContent = 'Sent — thank you';
+  } catch {
+    send.textContent = label;
+    send.disabled = false;
+    fail(`That didn't send. Please email ${EMAIL} directly.`);
+  }
 });
+
+/* ── footer year ── */
+const yr = $('#yr');
+if (yr) yr.textContent = new Date().getFullYear();
