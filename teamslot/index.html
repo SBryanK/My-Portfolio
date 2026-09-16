@@ -1,352 +1,49 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#1d4ed8" />
-  <meta name="description" content="TeamSlot — a lightweight availability poll for coordinating team meeting times in Singapore time." />
-  <title>TeamSlot · Team Availability</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2216%22 fill=%22%231d4ed8%22/><path d=%22M18 20h28v26H18z%22 fill=%22white%22/><path d=%22M18 27h28%22 stroke=%22%231d4ed8%22 stroke-width=%224%22/><path d=%22M25 15v10M39 15v10%22 stroke=%22white%22 stroke-width=%224%22 stroke-linecap=%22round%22/></svg>">
-  <style>
-    :root{
-      --bg:#f6f8fc;--surface:#ffffff;--surface-2:#f8fafc;--text:#0f172a;--muted:#64748b;
-      --line:#e2e8f0;--line-strong:#cbd5e1;--brand:#1d4ed8;--brand-2:#1e40af;--brand-soft:#eff6ff;
-      --success:#047857;--success-soft:#ecfdf5;--preferred:#5b21b6;--preferred-soft:#f5f3ff;
-      --warning:#92400e;--warning-soft:#fffbeb;--danger:#b91c1c;--shadow:0 16px 45px rgba(15,23,42,.08);
-      --radius:18px;--radius-sm:12px;--max:1240px;
-    }
-    *{box-sizing:border-box} html{scroll-behavior:smooth}
-    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased}
-    button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.55}
-    a{color:inherit}.app-shell{min-height:100vh;background:radial-gradient(circle at 50% -10%,#dbeafe 0,rgba(219,234,254,0) 34%),var(--bg)}
-    .topbar{position:sticky;top:0;z-index:20;border-bottom:1px solid rgba(226,232,240,.86);background:rgba(255,255,255,.9);backdrop-filter:blur(14px)}
-    .topbar-inner{max-width:var(--max);margin:auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:850;letter-spacing:-.02em}.brand-mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#2563eb,#1e40af);display:grid;place-items:center;color:#fff;box-shadow:0 8px 22px rgba(37,99,235,.24)}
-    .brand-mark svg{width:18px;height:18px}.top-meta{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px}.status-dot{width:8px;height:8px;border-radius:999px;background:#22c55e;box-shadow:0 0 0 4px #dcfce7}.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:750;color:#475569;white-space:nowrap}
-    .wrap{max-width:var(--max);margin:auto;padding:44px 20px 64px}.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:end;margin-bottom:26px}.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;color:var(--brand);letter-spacing:.02em}.eyebrow:before{content:"";width:24px;height:2px;background:var(--brand);border-radius:2px}
-    h1{margin:10px 0 12px;max-width:820px;font-size:clamp(34px,5vw,58px);line-height:1.03;letter-spacing:-.045em;font-weight:850}.hero p{margin:0;max-width:770px;color:var(--muted);font-size:15px;line-height:1.7}.hero-side{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
-    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 22px}.step{background:rgba(255,255,255,.78);border:1px solid var(--line);border-radius:14px;padding:13px 14px;display:flex;gap:11px;align-items:flex-start}.step-n{width:26px;height:26px;border-radius:9px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;font-size:11px;font-weight:900;flex:0 0 auto}.step b{display:block;font-size:12px;margin-bottom:2px}.step span{display:block;font-size:11px;color:var(--muted);line-height:1.45}
-    .banner{display:none;margin-bottom:18px;border:1px solid #a7f3d0;background:var(--success-soft);color:#065f46;border-radius:14px;padding:12px 13px;align-items:center;justify-content:space-between;gap:12px;font-size:12px}.banner.show{display:flex}
-    .layout{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(360px,.78fr);gap:20px;align-items:start}.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}.card-header{padding:20px 22px 14px;border-bottom:1px solid #f1f5f9;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.card-header h2{margin:0 0 4px;font-size:18px;letter-spacing:-.015em}.card-header p{margin:0;color:var(--muted);font-size:12px}.card-body{padding:18px 22px 22px}.organizer-card{position:sticky;top:74px}.label{display:block;margin:0 0 7px;font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:.08em;color:#475569}.input{width:100%;border:1px solid var(--line);background:#fff;color:var(--text);border-radius:11px;padding:11px 12px;outline:none;transition:.15s}.input::placeholder{color:#94a3b8}.input:focus{border-color:#93c5fd;box-shadow:0 0 0 4px var(--brand-soft)}textarea.input{min-height:105px;resize:vertical}.actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;border-radius:10px;border:1px solid transparent;padding:8px 12px;font-size:12px;font-weight:800;transition:.16s}.btn:hover{transform:translateY(-1px)}.btn:active{transform:translateY(0)}.btn.primary{background:var(--brand);color:#fff;box-shadow:0 8px 20px rgba(29,78,216,.18)}.btn.primary:hover{background:var(--brand-2)}.btn.secondary{background:var(--surface-2);border-color:var(--line);color:#334155}.btn.ghost{background:#fff;border-color:var(--line);color:#334155}.btn.danger{color:var(--danger);background:#fff;border-color:#fecaca}.btn:focus-visible,.slot:focus-visible,.remove:focus-visible{outline:3px solid #bfdbfe;outline-offset:2px}
-    .selection-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 14px}.metric{padding:11px 12px;background:var(--surface-2);border:1px solid var(--line);border-radius:12px}.metric .v{display:block;font-size:18px;font-weight:850;letter-spacing:-.03em}.metric .k{display:block;margin-top:2px;font-size:10px;color:var(--muted)}
-    .date-block{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:10px 0}.date-head{padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fbfdff;border-bottom:1px solid var(--line)}.date-head strong{font-size:12px}.date-head span{font-size:10px;color:var(--muted);font-weight:700}.slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:10px}.slot{min-height:58px;padding:8px 7px;border:1px solid var(--line);background:#fff;border-radius:10px;color:#334155;font-size:12px;font-weight:800;transition:.15s}.slot:hover{border-color:#bfdbfe;background:#f8fbff}.slot small{display:block;margin-top:3px;font-size:9px;line-height:1.2;text-transform:uppercase;letter-spacing:.055em;color:#94a3b8}.slot[data-state="yes"]{background:var(--success-soft);border-color:#6ee7b7;color:var(--success)}.slot[data-state="yes"] small{color:#059669}.slot[data-state="pref"]{background:var(--preferred-soft);border-color:#c4b5fd;color:var(--preferred)}.slot[data-state="pref"] small{color:#7c3aed}
-    .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin:11px 0}.legend span{display:inline-flex;align-items:center;gap:6px}.swatch{width:10px;height:10px;border-radius:3px;border:1px solid var(--line)}.privacy-note{display:flex;gap:8px;align-items:flex-start;padding:10px 11px;border-radius:11px;background:#f8fafc;border:1px solid var(--line);font-size:10px;color:var(--muted);line-height:1.5}.privacy-note svg{width:15px;height:15px;flex:0 0 auto;margin-top:1px;color:#475569}
-    .section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:18px 0 8px}.section-title .label{margin:0}.count-badge{font-size:10px;font-weight:800;color:#475569;background:#f1f5f9;border-radius:999px;padding:4px 7px}.divider{height:1px;background:var(--line);margin:17px 0}.empty{padding:22px 12px;border:1px dashed var(--line-strong);border-radius:12px;text-align:center;background:#fbfdff;color:var(--muted);font-size:11px;line-height:1.5}.member{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid #f1f5f9}.member:last-child{border-bottom:0}.avatar{width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,#dbeafe,#e0e7ff);display:grid;place-items:center;color:#1e40af;font-size:10px;font-weight:900}.member-info{min-width:0;flex:1}.member-info strong{display:block;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.member-info span{display:block;font-size:9px;color:var(--muted);margin-top:1px}.remove{width:28px;height:28px;border:1px solid var(--line);background:#fff;border-radius:8px;color:#94a3b8;font-weight:900}.remove:hover{color:var(--danger);border-color:#fecaca;background:#fff7f7}
-    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{border:1px solid var(--line);border-radius:12px;padding:11px;background:#fbfdff}.stat strong{display:block;font-size:18px;letter-spacing:-.03em}.stat span{display:block;margin-top:1px;font-size:9px;color:var(--muted)}
-    .rank-list{display:grid;gap:8px}.rank{display:grid;grid-template-columns:30px 1fr auto;align-items:center;gap:9px;border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 10px}.rank.best{border-color:#bfdbfe;background:linear-gradient(90deg,#eff6ff,#fff)}.rank-num{width:26px;height:26px;border-radius:8px;background:#f1f5f9;display:grid;place-items:center;font-size:10px;font-weight:900}.rank.best .rank-num{background:var(--brand);color:#fff}.rank-main strong{display:block;font-size:11px}.rank-main span{display:block;margin-top:2px;font-size:9px;color:var(--muted)}.rank-score{text-align:right}.rank-score strong{display:block;font-size:12px}.rank-score span{display:block;font-size:9px;color:var(--muted)}.bar-track{height:5px;background:#e2e8f0;border-radius:999px;overflow:hidden;margin-top:5px}.bar-fill{height:100%;background:linear-gradient(90deg,#60a5fa,#1d4ed8);border-radius:999px}
-    .final{display:none;margin-top:12px;padding:14px;border-radius:14px;border:1px solid #bfdbfe;background:linear-gradient(135deg,#eff6ff,#f8fafc)}.final.show{display:block}.final-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.final h3{margin:0 0 3px;font-size:13px;color:#1e3a8a}.final p{margin:0;color:#475569;font-size:10px;line-height:1.45}.final-badge{font-size:9px;font-weight:900;color:#1e40af;background:#dbeafe;border-radius:999px;padding:4px 7px;white-space:nowrap}
-    .matrix-wrap{display:none;margin-top:12px;border:1px solid var(--line);border-radius:12px;overflow:auto}.matrix-wrap.show{display:block}.matrix{border-collapse:separate;border-spacing:0;min-width:620px;width:100%;font-size:9px}.matrix th,.matrix td{padding:7px 8px;border-right:1px solid #edf2f7;border-bottom:1px solid #edf2f7;text-align:center;white-space:nowrap}.matrix th{position:sticky;top:0;background:#f8fafc;color:#475569;font-weight:850}.matrix th:first-child,.matrix td:first-child{position:sticky;left:0;text-align:left;background:#fff;z-index:2}.matrix th:first-child{background:#f8fafc;z-index:3}.matrix tr:last-child td{border-bottom:0}.matrix th:last-child,.matrix td:last-child{border-right:0}.cell{display:inline-flex;width:18px;height:18px;border-radius:6px;align-items:center;justify-content:center;font-size:8px;font-weight:900}.cell.y{background:#d1fae5;color:#047857}.cell.p{background:#ede9fe;color:#6d28d9}.cell.n{background:#f1f5f9;color:#94a3b8}
-    .toast{position:fixed;left:50%;bottom:22px;z-index:50;transform:translate(-50%,16px);opacity:0;pointer-events:none;background:#0f172a;color:#fff;border-radius:10px;padding:10px 13px;font-size:11px;font-weight:800;box-shadow:0 12px 30px rgba(15,23,42,.25);transition:.18s}.toast.show{opacity:1;transform:translate(-50%,0)}
-    footer{max-width:var(--max);margin:0 auto;padding:0 20px 30px;display:flex;justify-content:space-between;gap:12px;color:#94a3b8;font-size:10px}.footer-right{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}
-    @media(max-width:960px){.layout{grid-template-columns:1fr}.organizer-card{position:static}.hero{grid-template-columns:1fr}.hero-side{justify-content:flex-start}.steps{grid-template-columns:1fr 1fr 1fr}}
-    @media(max-width:680px){.wrap{padding:30px 14px 48px}.topbar-inner{padding:10px 14px}.top-meta .chip:first-child{display:none}.steps{grid-template-columns:1fr}.slots{grid-template-columns:repeat(2,minmax(0,1fr))}.selection-summary,.stats{grid-template-columns:repeat(3,1fr)}footer{padding:0 14px 24px;flex-direction:column}.footer-right{justify-content:flex-start}}
-    @media(max-width:430px){.slots{grid-template-columns:1fr}.card-header,.card-body{padding-left:14px;padding-right:14px}.selection-summary,.stats{grid-template-columns:1fr 1fr 1fr}.hero p{font-size:14px}}
-    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.btn:hover{transform:none}}
-  </style>
-</head>
-<body>
-<div class="app-shell">
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="15" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 3v4M16 3v4M4 10h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span>TeamSlot</span></div>
-      <div class="top-meta"><span class="chip"><span class="status-dot"></span>Static · privacy-first</span><span class="chip">Singapore · GMT+8</span></div>
-    </div>
-  </header>
-
-  <div class="wrap">
-    <section class="hero">
-      <div>
-        <div class="eyebrow">Team availability poll</div>
-        <h1>Find the best meeting time without the scheduling back-and-forth.</h1>
-        <p>Select your availability, share your response link, and let the organizer compare everyone on one clean timeline. No account, no backend, and no personal data uploaded to a server.</p>
-      </div>
-      <div class="hero-side"><span class="chip">Oct 6–14, 2026</span><span id="slotCount" class="chip"></span></div>
-    </section>
-
-    <section class="steps" aria-label="How it works">
-      <div class="step"><span class="step-n">1</span><div><b>Select availability</b><span>Mark available slots and one or more preferred times.</span></div></div>
-      <div class="step"><span class="step-n">2</span><div><b>Share your response</b><span>Send the generated response link to the organizer.</span></div></div>
-      <div class="step"><span class="step-n">3</span><div><b>Compare the team</b><span>Import responses and rank the strongest overlap instantly.</span></div></div>
-    </section>
-
-    <div id="banner" class="banner"><span id="bannerText"></span><button id="addShared" class="btn secondary">Add to board</button></div>
-
-    <main class="layout">
-      <section class="card" aria-labelledby="availabilityTitle">
-        <div class="card-header">
-          <div><h2 id="availabilityTitle">Your availability</h2><p>Tap once for available, twice for preferred, and a third time to clear.</p></div>
-          <span class="chip">Participant view</span>
-        </div>
-        <div class="card-body">
-          <label class="label" for="name">Your name</label>
-          <input id="name" class="input" placeholder="e.g. Bryan" autocomplete="name" maxlength="50" />
-
-          <div class="selection-summary" aria-live="polite">
-            <div class="metric"><span id="selectedCount" class="v">0</span><span class="k">Selected slots</span></div>
-            <div class="metric"><span id="preferredCount" class="v">0</span><span class="k">Preferred</span></div>
-            <div class="metric"><span id="coverageCount" class="v">0%</span><span class="k">Schedule coverage</span></div>
-          </div>
-
-          <div class="actions"><button id="all" class="btn secondary">Mark all available</button><button id="clear" class="btn ghost">Clear selection</button></div>
-          <div id="schedule"></div>
-
-          <div class="legend"><span><i class="swatch" style="background:#ecfdf5;border-color:#6ee7b7"></i>Available</span><span><i class="swatch" style="background:#f5f3ff;border-color:#c4b5fd"></i>Preferred</span><span><i class="swatch"></i>Not selected</span></div>
-          <div class="actions"><button id="copyResponse" class="btn primary">Copy my response link</button><button id="shareResponse" class="btn secondary">Share response</button></div>
-          <div class="privacy-note"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-2.7 8.4-7 10-4.3-1.6-7-5.5-7-10V6l7-3z" stroke="currentColor" stroke-width="2"/><path d="M9.5 12l1.7 1.7 3.6-3.8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Your selection is encoded in the share link and stored locally in your browser. TeamSlot does not send responses to a database.</span></div>
-        </div>
-      </section>
-
-      <aside class="card organizer-card" aria-labelledby="organizerTitle">
-        <div class="card-header">
-          <div><h2 id="organizerTitle">Organizer board</h2><p>Import response links to build the shared team view.</p></div>
-          <span class="chip">Organizer</span>
-        </div>
-        <div class="card-body">
-          <label class="label" for="links">Response links</label>
-          <textarea id="links" class="input" placeholder="Paste one or more TeamSlot response links here…"></textarea>
-          <div class="actions"><button id="importLinks" class="btn primary">Import responses</button><button id="copyBoard" class="btn ghost">Copy team board link</button></div>
-
-          <div class="stats" aria-live="polite">
-            <div class="stat"><strong id="memberStat">0</strong><span>Team members</span></div>
-            <div class="stat"><strong id="bestStat">—</strong><span>Best overlap</span></div>
-            <div class="stat"><strong id="unanimousStat">0</strong><span>Unanimous slots</span></div>
-          </div>
-
-          <div class="section-title"><span class="label">Team members</span><span id="memberCount" class="count-badge">0</span></div>
-          <div id="members"><div class="empty">No responses imported yet.<br>Paste response links above to start the comparison.</div></div>
-
-          <div class="section-title"><span class="label">Best overlapping slots</span><span class="count-badge">Ranked by availability</span></div>
-          <div id="rankings"><div class="empty">The ranking will appear after at least one response is imported.</div></div>
-
-          <div id="final" class="final">
-            <div class="final-top"><div><h3 id="finalTitle"></h3><p id="finalText"></p></div><span id="finalBadge" class="final-badge"></span></div>
-            <div class="actions" style="margin-bottom:0"><button id="calendar" class="btn primary">Add to Google Calendar</button><button id="summary" class="btn ghost">Copy summary</button><button id="csv" class="btn ghost">Export CSV</button></div>
-          </div>
-
-          <div class="section-title"><span class="label">Availability matrix</span><span class="count-badge">Timeline view</span></div>
-          <div id="matrix" class="matrix-wrap"></div>
-        </div>
-      </aside>
-    </main>
-  </div>
-
-  <footer><span>TeamSlot · Asia/Singapore · no login required</span><span class="footer-right"><span>Responsive</span><span>Accessible states</span><span>Link-based sharing</span></span></footer>
-</div>
-<div id="toast" class="toast" role="status" aria-live="polite"></div>
-
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#6b5524">
+<meta name="description" content="TeamSlot — shared team availability with live synchronized responses."><title>TeamSlot · Live Team Availability</title>
+<style>
+:root{--ink:#242015;--muted:#746c59;--paper:#fbf8ef;--cream:#f4eddc;--card:#fffdf7;--line:#ded3b8;--gold:#a9842f;--gold2:#6f5419;--goldsoft:#f2e6bb;--leaf:#52633f;--leafsoft:#e7eddf;--sand:#d6c59c;--danger:#9b3f32;--shadow:0 18px 52px rgba(70,55,25,.09)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:radial-gradient(circle at 12% 0,#f5e8b9 0,transparent 26%),radial-gradient(circle at 95% 15%,#e9efdf 0,transparent 23%),var(--paper);line-height:1.5}button,input{font:inherit}button{cursor:pointer}.shell{max-width:1260px;margin:auto;padding:22px 18px 60px}.nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 2px 26px}.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.03em}.logo{width:38px;height:38px;border-radius:50% 50% 46% 54%;display:grid;place-items:center;background:linear-gradient(145deg,#b99a4c,#6f5419);color:#fff;box-shadow:0 9px 24px rgba(111,84,25,.2)}.status{display:flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:rgba(255,253,247,.75);font-size:11px;color:var(--muted);font-weight:800}.pulse{width:8px;height:8px;border-radius:50%;background:#718b57;box-shadow:0 0 0 4px #e2ead8}.hero{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin:12px 0 24px}.eyebrow{text-transform:uppercase;letter-spacing:.13em;font-size:10px;font-weight:900;color:var(--gold2)}h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(38px,5vw,62px);line-height:1.02;letter-spacing:-.035em;margin:8px 0 10px;font-weight:500;max-width:850px}.hero p{margin:0;max-width:760px;color:var(--muted);font-size:14px;line-height:1.7}.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.chip{border:1px solid var(--line);background:rgba(255,253,247,.82);border-radius:999px;padding:7px 10px;font-size:10px;font-weight:850;color:#62583f}.grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(350px,.7fr);gap:20px;align-items:start}.card{background:rgba(255,253,247,.92);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden}.cardHead{padding:19px 21px 14px;border-bottom:1px solid rgba(222,211,184,.7);display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.cardHead h2{margin:0 0 3px;font-family:Georgia,serif;font-size:21px;font-weight:500}.cardHead p{margin:0;font-size:11px;color:var(--muted)}.body{padding:18px 21px 22px}.label{display:block;margin:0 0 7px;font-size:9px;text-transform:uppercase;letter-spacing:.11em;font-weight:900;color:#665d47}.input{width:100%;border:1px solid var(--line);border-radius:13px;padding:12px 13px;background:#fffdf9;color:var(--ink);outline:none}.input:focus{border-color:#b59a55;box-shadow:0 0 0 4px #f5edcf}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 15px}.metric{padding:10px 11px;border:1px solid var(--line);border-radius:14px;background:#fcf8ec}.metric b{display:block;font-family:Georgia,serif;font-size:21px;font-weight:500}.metric span{display:block;font-size:9px;color:var(--muted)}.actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 15px}.btn{border-radius:12px;padding:9px 12px;border:1px solid transparent;font-size:11px;font-weight:900;transition:.15s}.btn:hover{transform:translateY(-1px)}.btn.primary{background:linear-gradient(145deg,#a9842f,#795b1b);color:#fff;box-shadow:0 8px 20px rgba(121,91,27,.18)}.btn.secondary{background:#f4eddc;border-color:var(--line);color:#54482f}.btn.ghost{background:#fffdf8;border-color:var(--line);color:#62583f}.btn:disabled{opacity:.55;cursor:not-allowed;transform:none}.date{border:1px solid var(--line);border-radius:16px;margin:10px 0;overflow:hidden;background:#fffdf8}.dateTitle{padding:10px 12px;display:flex;justify-content:space-between;gap:12px;background:linear-gradient(90deg,#f8f1df,#fbf8ef);border-bottom:1px solid var(--line);font-size:11px}.dateTitle span{color:var(--muted);font-size:9px}.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px}.slot{min-height:58px;border:1px solid var(--line);border-radius:12px;background:#fffdf8;color:#544b38;font-weight:850;font-size:11px}.slot small{display:block;margin-top:3px;font-size:8px;text-transform:uppercase;letter-spacing:.07em;color:#998d73}.slot[data-state=yes]{background:var(--leafsoft);border-color:#a9b795;color:#435434}.slot[data-state=pref]{background:var(--goldsoft);border-color:#caae62;color:#684f17}.confirm{margin-top:15px;padding:15px;border:1px solid #ccb469;border-radius:16px;background:linear-gradient(135deg,#f8edc8,#fffaf0)}.confirm p{margin:0 0 11px;font-size:10px;color:#6f654e}.confirmRow{display:flex;align-items:center;justify-content:space-between;gap:10px}.confirmed{display:none;align-items:center;gap:7px;font-size:10px;font-weight:900;color:var(--leaf)}.confirmed.show{display:flex}.check{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--leaf);color:#fff}.side{position:sticky;top:14px}.liveHead{display:flex;align-items:center;gap:8px}.liveHead .pulse{width:7px;height:7px}.members{display:flex;flex-wrap:wrap;gap:6px;margin:7px 0 14px}.person{padding:6px 8px;border-radius:999px;background:#f4eddc;border:1px solid var(--line);font-size:9px;font-weight:850;color:#5c5139}.empty{padding:20px 12px;border:1px dashed #cdbf9e;border-radius:13px;text-align:center;color:var(--muted);font-size:10px}.rank{display:grid;grid-template-columns:27px 1fr auto;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid #eee5d2}.rank:last-child{border-bottom:0}.rn{width:25px;height:25px;border-radius:9px;background:#eee5d2;display:grid;place-items:center;font-size:9px;font-weight:900}.rank:first-child .rn{background:var(--gold);color:#fff}.rmain b{display:block;font-size:10px}.rmain span{display:block;font-size:8px;color:var(--muted);margin-top:2px}.score{text-align:right;font-size:10px;font-weight:900}.track{height:5px;background:#ebe3d0;border-radius:999px;overflow:hidden;margin-top:5px}.fill{height:100%;background:linear-gradient(90deg,#9cae83,#a9842f);border-radius:999px}.matrixWrap{margin-top:12px;border:1px solid var(--line);border-radius:13px;overflow:auto;display:none}.matrixWrap.show{display:block}.matrix{border-collapse:separate;border-spacing:0;min-width:600px;width:100%;font-size:8px}.matrix th,.matrix td{padding:7px;border-right:1px solid #eee6d5;border-bottom:1px solid #eee6d5;text-align:center;white-space:nowrap}.matrix th{background:#f6efde}.matrix th:first-child,.matrix td:first-child{position:sticky;left:0;text-align:left;background:#fffdf8;z-index:2}.cell{display:inline-grid;place-items:center;width:19px;height:19px;border-radius:6px;font-weight:900}.cell.y{background:var(--leafsoft);color:var(--leaf)}.cell.p{background:var(--goldsoft);color:var(--gold2)}.cell.n{background:#efeadd;color:#a79b80}.syncInfo{display:flex;justify-content:space-between;gap:10px;margin-top:11px;color:var(--muted);font-size:8px}.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,15px);opacity:0;z-index:50;background:#2d291d;color:#fff;padding:10px 13px;border-radius:11px;font-size:10px;font-weight:850;transition:.18s;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}.error{display:none;margin-bottom:14px;padding:11px 12px;border-radius:12px;background:#fff1ec;border:1px solid #e7b8ad;color:#803b31;font-size:10px}.error.show{display:block}footer{text-align:center;color:#9a9079;font-size:9px;margin-top:20px}@media(max-width:900px){.grid{grid-template-columns:1fr}.side{position:static}.hero{grid-template-columns:1fr}.chips{justify-content:flex-start}}@media(max-width:620px){.shell{padding:14px 11px 40px}.slots{grid-template-columns:repeat(2,1fr)}.summary{grid-template-columns:repeat(3,1fr)}}@media(max-width:420px){.slots{grid-template-columns:1fr}.body,.cardHead{padding-left:14px;padding-right:14px}.nav .status{display:none}}@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head><body><div class="shell">
+<nav class="nav"><div class="brand"><span class="logo">✦</span><span>TeamSlot</span></div><div class="status"><span class="pulse"></span><span id="syncStatus">Connecting…</span></div></nav>
+<section class="hero"><div><div class="eyebrow">Organic Gold · Live scheduling</div><h1>One shared board. Everyone confirms once.</h1><p>Choose the times that work for you and press <b>Confirm availability</b>. Your response is recorded centrally and the team view refreshes automatically for everyone.</p></div><div class="chips"><span class="chip">Asia/Singapore · GMT+8</span><span class="chip">Oct 6–14, 2026</span><span class="chip">Oct 9 excluded</span></div></section>
+<div id="error" class="error"></div>
+<main class="grid">
+<section class="card"><div class="cardHead"><div><h2>Your availability</h2><p>Available → Preferred → Clear</p></div><span class="chip" id="pollState">Open</span></div><div class="body">
+<label class="label" for="name">Your name</label><input id="name" class="input" maxlength="60" autocomplete="name" placeholder="e.g. Bryan">
+<div class="summary"><div class="metric"><b id="selected">0</b><span>Selected</span></div><div class="metric"><b id="preferred">0</b><span>Preferred</span></div><div class="metric"><b id="coverage">0%</b><span>Coverage</span></div></div>
+<div class="actions"><button id="all" class="btn secondary">Mark all available</button><button id="clear" class="btn ghost">Clear</button></div><div id="schedule"></div>
+<div class="confirm"><p>Your choices are saved to the shared board only when you confirm. You can edit and confirm again later from the same browser.</p><div class="confirmRow"><button id="confirm" class="btn primary">Confirm availability</button><div id="confirmed" class="confirmed"><span class="check">✓</span><span>Response recorded</span></div></div></div>
+</div></section>
+<aside class="card side"><div class="cardHead"><div><h2>Team availability</h2><p class="liveHead"><span class="pulse"></span>Auto-syncing shared responses</p></div><span class="chip"><span id="memberCount">0</span>&nbsp;confirmed</span></div><div class="body">
+<label class="label">Confirmed members</label><div id="members" class="members"><div class="empty" style="width:100%">Waiting for the first response.</div></div>
+<label class="label">Best overlapping times</label><div id="ranking"><div class="empty">Rankings appear as your team confirms.</div></div>
+<div class="matrixWrap" id="matrix"></div><div class="syncInfo"><span id="lastSync">Not synced yet</span><span>Refreshes every 2s</span></div>
+</div></aside></main><footer>TeamSlot · Shared Supabase backend · Organic Gold interface · Singapore time</footer></div><div id="toast" class="toast"></div>
 <script>
-(() => {
-  const DAYS = [
-    ['2026-10-06','Tue, Oct 6',[['17:45','19:15'],['19:15','20:45']]],
-    ['2026-10-07','Wed, Oct 7',[['14:00','15:30'],['15:30','17:00']]],
-    ['2026-10-08','Thu, Oct 8',[['12:30','14:00'],['14:00','15:30'],['15:30','17:00'],['17:45','19:15'],['19:15','20:45'],['20:45','22:05']]],
-    ['2026-10-11','Sun, Oct 11',[['14:00','15:30'],['15:30','17:00'],['17:00','18:30'],['19:15','20:45']]],
-    ['2026-10-12','Mon, Oct 12',[['12:30','14:00'],['14:00','15:30'],['15:30','17:00'],['17:45','19:15'],['19:15','20:45'],['20:45','22:05']]],
-    ['2026-10-13','Tue, Oct 13',[['12:30','14:00'],['14:00','15:30'],['15:30','17:00'],['17:45','19:15'],['19:15','20:45'],['20:45','22:05']]],
-    ['2026-10-14','Wed, Oct 14',[['14:00','15:30'],['15:30','17:00']]]
-  ];
-  const $ = id => document.getElementById(id);
-  const SLOT_MAP = new Map();
-  const STATE = { selection:{}, members:[], shared:null };
-  DAYS.forEach(d => d[2].forEach(([start,end]) => {
-    const key = `${d[0]}_${start}`;
-    SLOT_MAP.set(key,{date:d[0],label:d[1],start,end,key});
-  }));
-  const TOTAL_SLOTS = SLOT_MAP.size;
-  $('slotCount').textContent = `${TOTAL_SLOTS} time slots`;
-
-  const escapeHtml = value => String(value).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
-  const toast = message => { const t=$('toast'); t.textContent=message; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1800); };
-  const baseUrl = () => location.href.split('#')[0];
-  const encode = obj => btoa(unescape(encodeURIComponent(JSON.stringify(obj)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-  const decode = value => { value=value.replace(/-/g,'+').replace(/_/g,'/'); while(value.length%4)value+='='; return JSON.parse(decodeURIComponent(escape(atob(value)))); };
-  const initials = name => name.split(/\s+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase() || 'U';
-
-  function payload(){
-    const yes=[],pref=[];
-    Object.entries(STATE.selection).forEach(([key,value]) => {
-      if(!SLOT_MAP.has(key)) return;
-      value==='yes' ? yes.push(key) : value==='pref' && pref.push(key);
-    });
-    return {v:2,name:$('name').value.trim(),yes,pref,created:new Date().toISOString()};
-  }
-  const responseLink = p => `${baseUrl()}#r=${encode(p || payload())}`;
-  const boardLink = () => `${baseUrl()}#team=${encode({v:2,members:STATE.members})}`;
-
-  function save(){
-    localStorage.teamslotDraftV2=JSON.stringify({name:$('name').value,selection:STATE.selection});
-    localStorage.teamslotMembersV2=JSON.stringify(STATE.members);
-  }
-  function load(){
-    try{
-      const d=JSON.parse(localStorage.teamslotDraftV2||'null');
-      if(d){
-        $('name').value=d.name||'';
-        STATE.selection=Object.fromEntries(Object.entries(d.selection||{}).filter(([key])=>SLOT_MAP.has(key)));
-      }
-    }catch{}
-    try{STATE.members=(JSON.parse(localStorage.teamslotMembersV2||'[]')||[]).map(normalize)}catch{}
-  }
-
-  function updateSelectionMetrics(){
-    const values=Object.values(STATE.selection), selected=values.length, preferred=values.filter(v=>v==='pref').length;
-    $('selectedCount').textContent=selected;
-    $('preferredCount').textContent=preferred;
-    $('coverageCount').textContent=`${Math.round(selected/TOTAL_SLOTS*100)}%`;
-  }
-
-  function renderSchedule(){
-    let html='';
-    DAYS.forEach(day => {
-      html += `<div class="date-block"><div class="date-head"><strong>${day[1]}</strong><span>${day[2].length} slot${day[2].length>1?'s':''}</span></div><div class="slots">`;
-      day[2].forEach(([start,end]) => {
-        const key=`${day[0]}_${start}`, state=STATE.selection[key]||'';
-        html += `<button class="slot" type="button" data-key="${key}" data-state="${state}" aria-pressed="${state? 'true':'false'}" aria-label="${day[1]} ${start} to ${end}, ${state==='yes'?'available':state==='pref'?'preferred':'not selected'}">${start}–${end}<small>${state==='yes'?'Available':state==='pref'?'Preferred':'Tap to select'}</small></button>`;
-      });
-      html += '</div></div>';
-    });
-    $('schedule').innerHTML=html;
-    document.querySelectorAll('.slot').forEach(button => button.onclick=()=>{
-      const key=button.dataset.key, current=STATE.selection[key]||'';
-      STATE.selection[key]=current===''?'yes':current==='yes'?'pref':'';
-      if(!STATE.selection[key]) delete STATE.selection[key];
-      renderSchedule(); save();
-    });
-    updateSelectionMetrics();
-  }
-
-  function normalize(member){
-    return {
-      name:(member.name||'Unnamed').trim()||'Unnamed',
-      yes:(member.yes||[]).filter(k=>SLOT_MAP.has(k)),
-      pref:(member.pref||[]).filter(k=>SLOT_MAP.has(k)),
-      created:member.created||new Date().toISOString()
-    };
-  }
-  function addMember(member){
-    member=normalize(member);
-    const index=STATE.members.findIndex(x=>x.name.toLowerCase()===member.name.toLowerCase());
-    if(index>=0) STATE.members[index]=member; else STATE.members.push(member);
-    save(); renderOrganizer();
-  }
-
-  function scoreSlots(){
-    return [...SLOT_MAP.values()].map(slot=>{
-      let available=0,preferred=0;
-      STATE.members.forEach(member=>{
-        if(member.pref.includes(slot.key)){available++;preferred++;}
-        else if(member.yes.includes(slot.key)) available++;
-      });
-      return {...slot,available,preferred};
-    }).sort((a,b)=>b.available-a.available || b.preferred-a.preferred || a.date.localeCompare(b.date) || a.start.localeCompare(b.start));
-  }
-
-  function renderMatrix(scores){
-    if(!STATE.members.length){$('matrix').className='matrix-wrap';$('matrix').innerHTML='';return;}
-    const active=scores.filter(s=>s.available>0).slice(0,12);
-    if(!active.length){$('matrix').className='matrix-wrap';$('matrix').innerHTML='';return;}
-    let html='<table class="matrix" aria-label="Availability matrix"><thead><tr><th>Time slot</th>';
-    STATE.members.forEach(m=>html+=`<th>${escapeHtml(m.name)}</th>`); html+='</tr></thead><tbody>';
-    active.forEach(slot=>{
-      html+=`<tr><td><strong>${slot.label}</strong><br>${slot.start}–${slot.end}</td>`;
-      STATE.members.forEach(member=>{
-        const state=member.pref.includes(slot.key)?'p':member.yes.includes(slot.key)?'y':'n';
-        html+=`<td><span class="cell ${state}" title="${state==='p'?'Preferred':state==='y'?'Available':'Not selected'}">${state==='p'?'P':state==='y'?'✓':'—'}</span></td>`;
-      });
-      html+='</tr>';
-    });
-    html+='</tbody></table>';
-    $('matrix').innerHTML=html;$('matrix').className='matrix-wrap show';
-  }
-
-  function renderOrganizer(){
-    const count=STATE.members.length;
-    $('memberStat').textContent=count;$('memberCount').textContent=count;
-    if(!count){
-      $('members').innerHTML='<div class="empty">No responses imported yet.<br>Paste response links above to start the comparison.</div>';
-      $('rankings').innerHTML='<div class="empty">The ranking will appear after at least one response is imported.</div>';
-      $('bestStat').textContent='—';$('unanimousStat').textContent='0';$('final').className='final';renderMatrix([]);return;
-    }
-    $('members').innerHTML=STATE.members.map((m,i)=>`<div class="member"><span class="avatar">${escapeHtml(initials(m.name))}</span><div class="member-info"><strong>${escapeHtml(m.name)}</strong><span>${m.yes.length+m.pref.length} selected · ${m.pref.length} preferred</span></div><button class="remove" type="button" data-remove="${i}" aria-label="Remove ${escapeHtml(m.name)}">×</button></div>`).join('');
-    document.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{STATE.members.splice(+b.dataset.remove,1);save();renderOrganizer();});
-
-    const scores=scoreSlots(), active=scores.filter(s=>s.available>0), top=active.slice(0,6), unanimous=scores.filter(s=>s.available===count).length;
-    $('unanimousStat').textContent=unanimous;
-    $('bestStat').textContent=top.length?`${top[0].available}/${count}`:'0/'+count;
-    $('rankings').innerHTML=top.length?top.map((r,i)=>{
-      const pct=Math.round(r.available/count*100);
-      return `<div class="rank ${i===0?'best':''}"><span class="rank-num">${i+1}</span><div class="rank-main"><strong>${r.label} · ${r.start}–${r.end}</strong><span>${r.preferred} preferred · ${pct}% available</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div></div><div class="rank-score"><strong>${r.available}/${count}</strong><span>${pct}%</span></div></div>`;
-    }).join(''):'<div class="empty">No selected slots overlap yet.</div>';
-
-    if(top.length){
-      const r=top[0], pct=Math.round(r.available/count*100);
-      $('final').className='final show';$('final').dataset.key=r.key;
-      $('finalTitle').textContent=`Best current slot: ${r.label}`;
-      $('finalText').textContent=`${r.start}–${r.end} · ${r.available} of ${count} members available${r.preferred?` · ${r.preferred} prefer it`:''}.`;
-      $('finalBadge').textContent=r.available===count?'Full team':`${pct}% overlap`;
-    } else $('final').className='final';
-    renderMatrix(scores);
-  }
-
-  function parseLinks(text){
-    const result=[];
-    text.split(/\s+/).filter(Boolean).forEach(token=>{
-      try{
-        const url=new URL(token,location.href);
-        if(url.hash.startsWith('#r=')) result.push(decode(url.hash.slice(3)));
-        if(url.hash.startsWith('#team='))(decode(url.hash.slice(6)).members||[]).forEach(m=>result.push(m));
-      }catch{}
-    });
-    return result;
-  }
-
-  async function copyText(text,message='Copied.'){
-    try{await navigator.clipboard.writeText(text)}catch{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();}
-    toast(message);
-  }
-  function validatePayload(){
-    const p=payload();
-    if(!p.name){$('name').focus();toast('Add your name first.');return null;}
-    if(!(p.yes.length+p.pref.length)){toast('Select at least one slot.');return null;}
-    return p;
-  }
-  function calendarUrl(slot){
-    const fmt=(date,time)=>`${date.replaceAll('-','')}T${time.replace(':','')}00`;
-    const q=new URLSearchParams({action:'TEMPLATE',text:'Team Meeting',dates:`${fmt(slot.date,slot.start)}/${fmt(slot.date,slot.end)}`,ctz:'Asia/Singapore',details:'Selected via TeamSlot availability poll.'});
-    return `https://calendar.google.com/calendar/render?${q}`;
-  }
-  function summary(){
-    const slot=SLOT_MAP.get($('final').dataset.key); if(!slot) return '';
-    const available=STATE.members.filter(m=>m.yes.includes(slot.key)||m.pref.includes(slot.key)).map(m=>m.name);
-    const missing=STATE.members.filter(m=>!m.yes.includes(slot.key)&&!m.pref.includes(slot.key)).map(m=>m.name);
-    return `Best meeting slot: ${slot.label}, ${slot.start}–${slot.end} (Singapore Time).\nAvailable: ${available.join(', ')||'—'}\nNot selected: ${missing.join(', ')||'—'}`;
-  }
-  function exportCsv(){
-    const keys=[...SLOT_MAP.keys()], rows=[['Member',...keys.map(k=>{const s=SLOT_MAP.get(k);return `${s.label} ${s.start}-${s.end}`;})]];
-    STATE.members.forEach(m=>rows.push([m.name,...keys.map(k=>m.pref.includes(k)?'Preferred':m.yes.includes(k)?'Available':'No')]));
-    const csv=rows.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(',')).join('\n');
-    const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})); const a=document.createElement('a');a.href=url;a.download='teamslot-results.csv';a.click();URL.revokeObjectURL(url);
-  }
-
-  load(); renderSchedule(); renderOrganizer();
-  if(location.hash.startsWith('#r=')){
-    try{STATE.shared=normalize(decode(location.hash.slice(3)));$('bannerText').innerHTML=`Opened <strong>${escapeHtml(STATE.shared.name)}’s</strong> response with ${STATE.shared.yes.length+STATE.shared.pref.length} selected slots.`;$('banner').classList.add('show');}catch{}
-  } else if(location.hash.startsWith('#team=')){
-    try{STATE.members=(decode(location.hash.slice(6)).members||[]).map(normalize);save();renderOrganizer();toast(`Loaded ${STATE.members.length} team response${STATE.members.length===1?'':'s'}.`);}catch{}
-  }
-
-  $('name').oninput=save;
-  $('all').onclick=()=>{[...SLOT_MAP.keys()].forEach(k=>STATE.selection[k]='yes');renderSchedule();save();};
-  $('clear').onclick=()=>{STATE.selection={};renderSchedule();save();};
-  $('copyResponse').onclick=()=>{const p=validatePayload();if(p)copyText(responseLink(p),'Response link copied — send it to the organizer.');};
-  $('shareResponse').onclick=async()=>{const p=validatePayload();if(!p)return;const data={title:'My TeamSlot availability',text:`${p.name}'s availability`,url:responseLink(p)};if(navigator.share)await navigator.share(data).catch(()=>{});else copyText(data.url,'Response link copied.');};
-  $('addShared').onclick=()=>{if(STATE.shared){addMember(STATE.shared);$('banner').classList.remove('show');toast(`${STATE.shared.name} added to the board.`);}};
-  $('importLinks').onclick=()=>{const members=parseLinks($('links').value);if(!members.length)return toast('No valid TeamSlot links found.');members.forEach(addMember);$('links').value='';toast(`${members.length} response${members.length===1?'':'s'} imported.`);};
-  $('copyBoard').onclick=()=>STATE.members.length?copyText(boardLink(),'Team board link copied.'):toast('Import responses first.');
-  $('calendar').onclick=()=>{const slot=SLOT_MAP.get($('final').dataset.key);if(slot)window.open(calendarUrl(slot),'_blank','noopener');};
-  $('summary').onclick=()=>copyText(summary(),'Meeting summary copied.');
-  $('csv').onclick=exportCsv;
+(()=>{
+const API='https://xgpbdzbjajbluczkbktf.supabase.co';
+const KEY='sb_publishable_41PJUXdkgwDj751qK9ctaA_dU_SSdos';
+const POLL='c4afa857-ce36-4b23-a30d-c117df64290f';
+const ACCESS='ICDRmWbNc2L96icmBEifr8xyJyQwtzpX';
+const $=id=>document.getElementById(id);let poll=null,responses=[],selection={},dirty=false,busy=false,pollTimer=null;
+let clientId=localStorage.teamslot_client_id;if(!clientId){clientId=crypto.randomUUID();localStorage.teamslot_client_id=clientId}
+const headers={'apikey':KEY,'Content-Type':'application/json'};
+const toast=m=>{const t=$('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1700)};
+const showError=m=>{const e=$('error');e.textContent=m;e.classList.toggle('show',!!m)};
+async function rpc(fn,body){const r=await fetch(`${API}/rest/v1/rpc/${fn}`,{method:'POST',headers,body:JSON.stringify(body)});let d=null;try{d=await r.json()}catch{}if(!r.ok)throw new Error(d?.message||`Request failed (${r.status})`);return d}
+function own(){return responses.find(r=>r.client_id===clientId)}
+function metrics(){const vals=Object.values(selection),s=vals.length,p=vals.filter(x=>x==='pref').length;$('selected').textContent=s;$('preferred').textContent=p;$('coverage').textContent=poll?Math.round(s/poll.slots.length*100)+'%':'0%'}
+function renderSchedule(){if(!poll)return;const groups={};poll.slots.forEach(s=>(groups[s.label]??=[]).push(s));let h='';Object.entries(groups).forEach(([label,slots])=>{h+=`<div class="date"><div class="dateTitle"><b>${label}</b><span>${slots.length} slot${slots.length>1?'s':''}</span></div><div class="slots">`;slots.forEach(s=>{const v=selection[s.key]||'';h+=`<button type="button" class="slot" data-k="${s.key}" data-state="${v}">${s.start}–${s.end}<small>${v==='yes'?'Available':v==='pref'?'Preferred':'Tap to select'}</small></button>`});h+='</div></div>'});$('schedule').innerHTML=h;document.querySelectorAll('.slot').forEach(b=>b.onclick=()=>{if(poll.status!=='open')return toast('This poll is no longer open.');const k=b.dataset.k,v=selection[k]||'';selection[k]=v===''?'yes':v==='yes'?'pref':'';if(!selection[k])delete selection[k];dirty=true;$('confirmed').classList.remove('show');renderSchedule();metrics()});metrics();$('pollState').textContent=poll.status[0].toUpperCase()+poll.status.slice(1);$('confirm').disabled=poll.status!=='open'}
+function scores(){if(!poll)return[];return poll.slots.map(s=>{let a=0,p=0;responses.forEach(r=>{const v=r.availability?.[s.key];if(v==='yes'||v==='pref')a++;if(v==='pref')p++});return{...s,a,p}}).sort((x,y)=>y.a-x.a||y.p-x.p||x.date.localeCompare(y.date)||x.start.localeCompare(y.start))}
+function renderTeam(){const n=responses.length;$('memberCount').textContent=n;$('members').innerHTML=n?responses.map(r=>`<span class="person">${esc(r.display_name)}</span>`).join(''):'<div class="empty" style="width:100%">Waiting for the first response.</div>';const top=scores().filter(s=>s.a>0).slice(0,7);$('ranking').innerHTML=top.length?top.map((r,i)=>{const pct=Math.round(r.a/n*100);return`<div class="rank"><span class="rn">${i+1}</span><div class="rmain"><b>${r.label} · ${r.start}–${r.end}</b><span>${r.p} preferred · ${pct}% available</span><div class="track"><div class="fill" style="width:${pct}%"></div></div></div><div class="score">${r.a}/${n}</div></div>`}).join(''):'<div class="empty">Rankings appear as your team confirms.</div>';renderMatrix(top)}
+function renderMatrix(top){if(!responses.length||!top.length){$('matrix').className='matrixWrap';$('matrix').innerHTML='';return}let h='<table class="matrix"><thead><tr><th>Time slot</th>';responses.forEach(r=>h+=`<th>${esc(r.display_name)}</th>`);h+='</tr></thead><tbody>';top.forEach(s=>{h+=`<tr><td><b>${s.label}</b><br>${s.start}–${s.end}</td>`;responses.forEach(r=>{const v=r.availability?.[s.key],c=v==='pref'?'p':v==='yes'?'y':'n';h+=`<td><span class="cell ${c}">${c==='p'?'P':c==='y'?'✓':'—'}</span></td>`});h+='</tr>'});h+='</tbody></table>';$('matrix').innerHTML=h;$('matrix').className='matrixWrap show'}
+function esc(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+async function sync(initial=false){if(busy&&!initial)return;try{const d=await rpc('get_poll_state',{p_poll_id:POLL,p_access_key:ACCESS});poll=d.poll;responses=d.responses||[];const me=own();if(initial&&me){$('name').value=me.display_name;selection={...(me.availability||{})};$('confirmed').classList.add('show')}if(!dirty&&me)selection={...(me.availability||{})};renderSchedule();renderTeam();$('syncStatus').textContent='Live · Synced';$('lastSync').textContent='Synced '+new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'});showError('')}catch(e){$('syncStatus').textContent='Connection issue';if(initial)showError('Unable to load the shared board. Please refresh or try again shortly.');console.error(e)}}
+async function confirm(){const name=$('name').value.trim();if(!name)return $('name').focus(),toast('Enter your name first.');if(!Object.keys(selection).length)return toast('Select at least one time slot.');if(busy)return;busy=true;$('confirm').disabled=true;$('confirm').textContent='Saving…';try{const d=await rpc('submit_response',{p_poll_id:POLL,p_access_key:ACCESS,p_client_id:clientId,p_display_name:name,p_availability:selection});poll=d.poll;responses=d.responses||[];dirty=false;$('confirmed').classList.add('show');renderSchedule();renderTeam();toast('Availability confirmed and synced.')}catch(e){showError(e.message);toast('Could not save your response.')}finally{busy=false;$('confirm').textContent='Confirm availability';$('confirm').disabled=poll?.status!=='open'}}
+$('name').value=localStorage.teamslot_name||'';$('name').oninput=()=>{localStorage.teamslot_name=$('name').value;dirty=true;$('confirmed').classList.remove('show')};$('confirm').onclick=confirm;$('all').onclick=()=>{if(!poll)return;selection={};poll.slots.forEach(s=>selection[s.key]='yes');dirty=true;$('confirmed').classList.remove('show');renderSchedule()};$('clear').onclick=()=>{selection={};dirty=true;$('confirmed').classList.remove('show');renderSchedule()};
+window.addEventListener('online',()=>sync());document.addEventListener('visibilitychange',()=>{if(!document.hidden)sync()});sync(true);pollTimer=setInterval(()=>{if(!document.hidden)sync()},2000);
 })();
-</script>
-</body>
-</html>
+</script></body></html>
