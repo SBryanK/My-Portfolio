@@ -1,0 +1,36 @@
+---
+import { projects, u } from '../data/site';
+import { icon } from './icons';
+---
+<section class="sec" id="projects">
+  <div class="container">
+    <header class="head">
+      <h2 data-reveal>Projects</h2>
+      <div class="carnav">
+        <button class="icon-btn" data-scroll="-1" aria-label="Previous projects" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={icon.prev}/></svg></button>
+        <div class="dots" id="pdots" aria-hidden="true"></div>
+        <button class="icon-btn" data-scroll="1" aria-label="Next projects" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={icon.next}/></svg></button>
+      </div>
+    </header>
+    <div class="scroller" id="pscroll" tabindex="0" aria-label="Projects, scroll horizontally">
+      {projects.map(p => {
+        const href = p.priv ? u(`/private/${p.priv}/`) : p.href!.startsWith('/') ? u(p.href!) : p.href!;
+        const ext = p.external && !p.priv;
+        return (
+          <article class="pcard" data-tilt>
+            <div class="pcard__img">
+              <img src={u(`/img/${p.img}`)} alt="" width="800" height="500" loading="lazy" draggable="false" class={p.img.endsWith('.png') && p.img !== 'asl.png' ? '' : (p.img === 'asl.png' ? 'contain' : '')} />
+              {p.badge && <span class="badge">{p.badge}</span>}
+            </div>
+            <div class="pcard__body">
+              <h3>{p.title}</h3>
+              <p>{p.blurb}</p>
+              <p class="tags">{p.tags.map(t => <span>{t}</span>)}</p>
+              <a class="link" href={href} {...(ext ? { target: '_blank', rel: 'noopener' } : {})} data-track={`project_${p.title.toLowerCase().replace(/\W+/g, '_')}`}>{p.cta}<svg viewBox="0 0 24 24" aria-hidden="true"><path d={icon.arrow}/></svg></a>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>

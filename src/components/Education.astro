@@ -1,0 +1,48 @@
+---
+import { nusModules, uolModules, awards, u } from '../data/site';
+---
+<section class="sec" id="education">
+  <div class="container">
+    <header class="head"><h2 data-reveal>Education &amp; Awards</h2></header>
+    <div class="split">
+      <ol class="edu">
+        <li class="card" data-reveal>
+          <div class="edu__top">
+            <div class="logo"><img src={u('/img/nus.svg')} alt="" width="56" height="56" loading="lazy" /></div>
+            <div><h3>National University of Singapore</h3><p class="edu__sub">MSc Smart Industries and Digital Transformation</p><span class="edu__when">Aug 2026 — Aug 2028 · Singapore</span></div>
+          </div>
+          <span class="pill pill--soon">GPA · Upcoming</span>
+          <details class="fold"><summary>This semester's modules</summary>
+            <ul class="mods">{nusModules.map(([c, t]) => <li><b>{c}</b><span>{t}</span></li>)}</ul>
+          </details>
+        </li>
+        <li class="card" data-reveal>
+          <div class="edu__top">
+            <div class="logo"><img src={u('/img/uol.jpg')} alt="" width="56" height="56" loading="lazy" /></div>
+            <div><h3>University of London</h3><p class="edu__sub">BSc (Hons) Data Science and Business Analytics<br />Academic direction by the London School of Economics, taught via SIM</p><span class="edu__when">Sep 2022 — Aug 2025 · Singapore</span></div>
+          </div>
+          <span class="pill">Second Class Upper (2:1)</span>
+          <details class="fold"><summary>Modules I took</summary>
+            <ul class="mods">{uolModules.map(([g, items]) => <><h5>{g}</h5>{items.map(m => <li><span>{m}</span></li>)}</>)}</ul>
+          </details>
+        </li>
+        <li class="card" data-reveal>
+          <div class="edu__top">
+            <div class="logo logo--navy"><img src={u('/img/ui.png')} alt="" width="56" height="56" loading="lazy" /></div>
+            <div><h3>University of Indonesia</h3><p class="edu__sub">BEng Electrical and Electronics Engineering</p><span class="edu__when">Aug 2022 — Sep 2022 · Depok</span></div>
+          </div>
+        </li>
+        <li class="card" data-reveal>
+          <div class="edu__top">
+            <div class="logo"><img src={u('/img/penabur.png')} alt="" width="56" height="56" loading="lazy" /></div>
+            <div><h3>SMAK PENABUR Harapan Indah</h3><p class="edu__sub">Natural Sciences</p><span class="edu__when">Jul 2019 — Jun 2022 · Bekasi</span></div>
+          </div>
+        </li>
+      </ol>
+      <aside class="awards" data-reveal>
+        <h3>Awards</h3>
+        <ul>{awards.map(([a, b, c]) => <li><b>{a}</b> · {b}{c && <em>{c}</em>}</li>)}</ul>
+      </aside>
+    </div>
+  </div>
+</section>

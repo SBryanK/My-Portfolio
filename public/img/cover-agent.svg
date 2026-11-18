@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Browser window with a queue of job applications">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b1f16"/><stop offset="1" stop-color="#4a3216"/></linearGradient>
+<linearGradient id="au" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3DE9E"/><stop offset=".5" stop-color="#C9962C"/><stop offset="1" stop-color="#A87F1F"/></linearGradient></defs>
+<rect width="800" height="500" fill="url(#g)"/>
+<g opacity=".14" stroke="#F3DE9E"><path d="M0 100h800M0 200h800M0 300h800M0 400h800M100 0v500M200 0v500M300 0v500M400 0v500M500 0v500M600 0v500M700 0v500"/></g>
+<rect x="110" y="70" width="580" height="360" rx="18" fill="#fffaf0"/>
+<rect x="110" y="70" width="580" height="44" rx="18" fill="#efe3c6"/><rect x="110" y="96" width="580" height="18" fill="#efe3c6"/>
+<circle cx="138" cy="92" r="6" fill="#C0263F"/><circle cx="158" cy="92" r="6" fill="#C9962C"/><circle cx="178" cy="92" r="6" fill="#b9a77a"/>
+<rect x="210" y="82" width="330" height="20" rx="10" fill="#fffaf0"/>
+<g font-family="Helvetica,Arial,sans-serif" font-size="15" fill="#231B16">
+<rect x="140" y="140" width="520" height="52" rx="12" fill="#fff" stroke="#e6d9b8"/><circle cx="168" cy="166" r="12" fill="url(#au)"/><rect x="194" y="154" width="210" height="9" rx="4" fill="#231B16" opacity=".75"/><rect x="194" y="171" width="130" height="8" rx="4" fill="#231B16" opacity=".3"/><rect x="560" y="153" width="76" height="26" rx="13" fill="#2f8f5b"/><text x="598" y="171" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">APPLIED</text>
+<rect x="140" y="206" width="520" height="52" rx="12" fill="#fff" stroke="#e6d9b8"/><circle cx="168" cy="232" r="12" fill="url(#au)"/><rect x="194" y="220" width="250" height="9" rx="4" fill="#231B16" opacity=".75"/><rect x="194" y="237" width="150" height="8" rx="4" fill="#231B16" opacity=".3"/><rect x="560" y="219" width="76" height="26" rx="13" fill="#2f8f5b"/><text x="598" y="237" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">APPLIED</text>
+<rect x="140" y="272" width="520" height="52" rx="12" fill="#fff" stroke="#C9962C" stroke-width="2"/><circle cx="168" cy="298" r="12" fill="url(#au)"/><rect x="194" y="286" width="190" height="9" rx="4" fill="#231B16" opacity=".75"/><rect x="194" y="303" width="110" height="8" rx="4" fill="#231B16" opacity=".3"/><rect x="546" y="285" width="90" height="26" rx="13" fill="#C9962C"/><text x="591" y="303" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">FILLING…</text>
+<rect x="140" y="338" width="520" height="52" rx="12" fill="#fff" stroke="#e6d9b8"/><circle cx="168" cy="364" r="12" fill="#d9ccaa"/><rect x="194" y="352" width="230" height="9" rx="4" fill="#231B16" opacity=".35"/><rect x="194" y="369" width="140" height="8" rx="4" fill="#231B16" opacity=".18"/><rect x="560" y="351" width="76" height="26" rx="13" fill="#d9ccaa"/><text x="598" y="369" text-anchor="middle" fill="#6b5a35" font-size="12" font-weight="700">QUEUED</text>
+</g></svg>

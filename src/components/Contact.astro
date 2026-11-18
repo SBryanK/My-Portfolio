@@ -1,0 +1,46 @@
+---
+import { site } from '../data/site';
+import { icon } from './icons';
+const rows = [
+  ['Email', site.email, `mailto:${site.email}`, icon.mail],
+  ['LinkedIn', '/in/santasilabryankusno', site.links.linkedin, icon.linkedin],
+  ['GitHub', '@SBryanK', site.links.github, icon.github],
+  ['Location', 'Singapore · SGT (UTC+8)', '', icon.pin],
+];
+---
+<section class="sec sec--gold" id="contact">
+  <div class="container">
+    <header class="head"><h2 data-reveal>Get in touch</h2></header>
+    <div class="contact">
+      <div data-reveal>
+        <p class="contact__lead">I'm looking for 2026/27 internships in cloud, platform or applied ML, in Singapore or remote. If you're building something that has to stay up under real traffic, or want to know more about a private project, I'd like to hear from you.</p>
+        <ul>{rows.map(([h, t, href, p]) => (
+          <li><span class="ci"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={p}/></svg></span>
+          <div><h4>{h}</h4>{href ? <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noopener" data-track="contact_click">{t}</a> : <span>{t}</span>}</div></li>
+        ))}</ul>
+      </div>
+      <form class="form" id="form" novalidate data-reveal>
+        <div class="f-row">
+          <div class="f"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required /></div>
+          <div class="f"><label for="f-email">Your email</label><input id="f-email" name="email" type="email" autocomplete="email" required /></div>
+        </div>
+        <div class="f"><label for="f-subject">Subject</label><input id="f-subject" name="subject" /></div>
+        <div class="f"><label for="f-msg">Message</label><textarea id="f-msg" name="message" rows="5" required></textarea></div>
+        <p class="f-err" id="f-err" role="alert" hidden></p>
+        <button class="btn btn--gold btn--full" type="submit" data-magnet>Send message</button>
+        <p class="f-note">Opens your mail app with the message ready to send.</p>
+      </form>
+    </div>
+  </div>
+</section>
+<footer class="foot">
+  <div class="container foot__in">
+    <p>© {new Date().getFullYear()} {site.name}</p>
+    <ul>
+      <li><a href={site.links.linkedin} target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href={site.links.github} target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href={site.links.credly} target="_blank" rel="noopener">Credly</a></li>
+      <li><a href={`mailto:${site.email}`}>Email</a></li>
+    </ul>
+  </div>
+</footer>

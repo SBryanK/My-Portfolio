@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Experience from '../components/Experience.astro';
+import Projects from '../components/Projects.astro';
+import Certs from '../components/Certs.astro';
+import Education from '../components/Education.astro';
+import Community from '../components/Community.astro';
+import Contact from '../components/Contact.astro';
+---
+<Base>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <Nav home />
+  <main id="main">
+    <Hero /><About /><Experience /><Projects /><Certs /><Education /><Community /><Contact />
+  </main>
+</Base>

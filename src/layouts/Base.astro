@@ -1,0 +1,46 @@
+---
+import '../styles/global.css';
+import Analytics from '../components/Analytics.astro';
+import { site, u } from '../data/site';
+interface Props { title?: string; description?: string; noindex?: boolean; }
+const { title = `${site.name} — Cloud Architect · Data Analyst · Fintech`, description = 'MSc Smart Industries and Digital Transformation at NUS. Ex-Cloud Solution Architect at Tencent Cloud EdgeOne. Cloud, security, data and applied ML.', noindex = false } = Astro.props;
+const ld = {
+  '@context': 'https://schema.org', '@type': 'Person', name: site.name, jobTitle: 'Cloud Solutions Architect',
+  email: `mailto:${site.email}`, url: site.url, address: { '@type': 'PostalAddress', addressLocality: 'Singapore' },
+  alumniOf: [{ '@type': 'CollegeOrUniversity', name: 'National University of Singapore' }, { '@type': 'CollegeOrUniversity', name: 'University of London' }],
+  sameAs: Object.values(site.links),
+};
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="author" content={site.name} />
+  <meta name="theme-color" content="#C9962C" />
+  {noindex && <meta name="robots" content="noindex" />}
+  <link rel="canonical" href={site.url + Astro.url.pathname} />
+  <meta property="og:type" content="profile" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={site.url + Astro.url.pathname} />
+  <meta property="og:image" content={`${site.url}/og-card.png`} />
+  <meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href={u('/favicon.svg')} type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+  <script is:inline>
+    (function(){ var d=document.documentElement; d.classList.add('js');
+      try{ var t=localStorage.getItem('theme'); if(t) d.setAttribute('data-theme',t); }catch(e){}
+      if(matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('reduce'); })();
+  </script>
+  <Analytics />
+</head>
+<body>
+  <slot />
+  <script>import '../scripts/main.ts';</script>
+</body>
+</html>

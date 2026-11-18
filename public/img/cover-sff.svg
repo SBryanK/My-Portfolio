@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Festival itinerary timeline">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1f4a"/><stop offset="1" stop-color="#1c3f8f"/></linearGradient>
+<linearGradient id="au" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F3DE9E"/><stop offset="1" stop-color="#C9962C"/></linearGradient></defs>
+<rect width="800" height="500" fill="url(#g)"/>
+<g fill="none" stroke="#fff" opacity=".12"><circle cx="650" cy="90" r="160"/><circle cx="650" cy="90" r="110"/><circle cx="650" cy="90" r="60"/></g>
+<line x1="160" y1="80" x2="160" y2="430" stroke="#F3DE9E" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>
+<g font-family="Helvetica,Arial,sans-serif" fill="#fff">
+<circle cx="160" cy="110" r="11" fill="url(#au)"/><rect x="200" y="86" width="420" height="52" rx="14" fill="#fff" opacity=".95"/><rect x="222" y="102" width="200" height="9" rx="4" fill="#0b1f4a"/><rect x="222" y="118" width="120" height="8" rx="4" fill="#0b1f4a" opacity=".4"/><text x="596" y="118" text-anchor="end" font-size="14" font-weight="700" fill="#1c3f8f">09:30</text>
+<circle cx="160" cy="205" r="11" fill="url(#au)"/><rect x="200" y="181" width="360" height="52" rx="14" fill="#fff" opacity=".95"/><rect x="222" y="197" width="170" height="9" rx="4" fill="#0b1f4a"/><rect x="222" y="213" width="150" height="8" rx="4" fill="#0b1f4a" opacity=".4"/><text x="536" y="213" text-anchor="end" font-size="14" font-weight="700" fill="#1c3f8f">11:00</text>
+<circle cx="160" cy="300" r="14" fill="#fff"/><circle cx="160" cy="300" r="7" fill="#C0263F"/><rect x="200" y="272" width="440" height="56" rx="14" fill="#C9962C"/><rect x="222" y="290" width="230" height="10" rx="5" fill="#fff"/><rect x="222" y="307" width="140" height="8" rx="4" fill="#fff" opacity=".6"/><text x="616" y="306" text-anchor="end" font-size="14" font-weight="700">NEXT</text>
+<circle cx="160" cy="395" r="11" fill="#fff" opacity=".5"/><rect x="200" y="371" width="320" height="52" rx="14" fill="#fff" opacity=".35"/><rect x="222" y="387" width="150" height="9" rx="4" fill="#fff" opacity=".8"/><rect x="222" y="403" width="100" height="8" rx="4" fill="#fff" opacity=".5"/>
+</g></svg>

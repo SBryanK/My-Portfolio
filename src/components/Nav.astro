@@ -1,0 +1,26 @@
+---
+import { icon } from './icons';
+const items = [['about','About'],['experience','Experience'],['projects','Projects'],['certifications','Certifications'],['education','Education'],['community','Community']];
+const base = Astro.props.home ? '' : '/';
+---
+<div class="progress" id="progress" aria-hidden="true"><i></i></div>
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="wordmark" href={`${base}#home`}>Santasila <b>Bryan</b></a>
+    <nav aria-label="Sections">
+      <ul class="nav__menu" id="navmenu">
+        {items.map(([id, label]) => <li><a href={`${base}#${id}`}>{label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="nav__end">
+      <button class="icon-btn" id="theme" aria-label="Toggle dark mode" type="button">
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d={icon.moon}/></svg>
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><path d={icon.sun}/></svg>
+      </button>
+      <a class="btn btn--gold btn--sm nav__cta" href={`${base}#contact`} data-track="nav_contact">Get in touch</a>
+      <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="navmenu" aria-label="Open menu" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>

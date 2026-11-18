@@ -1,0 +1,43 @@
+---
+import { u } from '../data/site';
+import { certs, upcoming } from '../data/site';
+import { icon } from './icons';
+const Card = (c: any) => c;
+---
+<section class="sec sec--tint" id="certifications">
+  <div class="container">
+    <header class="head">
+      <h2 data-reveal>Certifications</h2>
+      <div class="tabs" role="tablist" aria-label="Certification status">
+        <button class="tab" role="tab" id="tab-earned" aria-selected="true" aria-controls="earned" type="button">Earned <small>{certs.length}</small></button>
+        <button class="tab" role="tab" id="tab-soon" aria-selected="false" aria-controls="soon" type="button">Upcoming <small>{upcoming.length}</small></button>
+      </div>
+    </header>
+
+    <div class="certs" id="earned" role="tabpanel" aria-labelledby="tab-earned">
+      {certs.map(c => (
+        <article class="cert" tabindex="0" data-reveal>
+          <div class="cert__in">
+            <div class="cert__f">{c.img && <img class="cert__img" src={u(`/img/${c.img}`)} alt="" width="86" height="86" loading="lazy" />}<h3>{c.name}</h3><p>{c.issuer}</p></div>
+            <div class="cert__b"><h3>{c.name}</h3><p>{c.issuer}</p><a href={c.href} target="_blank" rel="noopener" data-track="cert_verify">Verify</a></div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="certs" id="soon" role="tabpanel" aria-labelledby="tab-soon" hidden>
+      {upcoming.map(c => (
+        <article class="cert cert--soon" tabindex="0">
+          <div class="cert__in">
+            <div class="cert__f">
+              <span class="lock"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={icon.lock}/></svg></span>
+              {c.img ? <img class="cert__img" src={u(`/img/${c.img}`)} alt="" width="86" height="86" loading="lazy" /> : <div class="mark" aria-hidden="true">{c.mark}</div>}
+              <span class="soon-tag">Upcoming</span><h3>{c.name}</h3><p>{c.issuer}</p>
+            </div>
+            <div class="cert__b"><h3>{c.name}</h3><p>{c.note}</p><p>Badge drops here when it's earned.</p></div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

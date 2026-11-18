@@ -1,0 +1,37 @@
+---
+import Base from '../../layouts/Base.astro';
+import { privateProjects, u } from '../../data/site';
+import { icon } from '../../components/icons';
+export function getStaticPaths() {
+  return Object.entries(privateProjects).map(([slug, p]) => ({ params: { slug }, props: p }));
+}
+const { title, kind } = Astro.props;
+---
+<Base title={`${title} · Private`} noindex>
+  <style is:global>
+    body { background:#2b1f16; color:#fff6dc; }
+    .pv { min-height:100svh; display:grid; place-items:center; padding:40px var(--gut); position:relative; overflow:hidden;
+      background:radial-gradient(60% 60% at 80% 10%,rgba(201,150,44,.28),transparent 70%),radial-gradient(50% 50% at 10% 90%,rgba(192,38,63,.18),transparent 70%),linear-gradient(160deg,#2b1f16,#3d2a14 60%,#4a3216); }
+    .pv__box { max-width:560px; text-align:center; animation:rise .9s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes rise { from { opacity:0; transform:translateY(30px) scale(.97); } }
+    .pv__lock { width:84px; height:84px; margin:0 auto 26px; border-radius:50%; display:grid; place-items:center; background:rgba(243,222,158,.12); border:1px solid rgba(243,222,158,.35); animation:pulse 3s ease-in-out infinite; }
+    @keyframes pulse { 50% { box-shadow:0 0 0 18px rgba(243,222,158,.07); } }
+    .pv__lock svg { width:38px; height:38px; fill:#F3DE9E; }
+    .pv h1 { font-size:clamp(2rem,6vw,3rem); font-weight:900; letter-spacing:-.03em; line-height:1.05; }
+    .pv h1 span { background:var(--foil); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .pv p { margin-top:18px; color:#e8d6a4; font-size:1.1rem; }
+    .pv__btns { margin-top:30px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+    .pv .btn--ghost { color:#F3DE9E; border-color:#F3DE9E; } .pv .btn--ghost:hover { background:#F3DE9E; color:#2b1f16; }
+  </style>
+  <main class="pv">
+    <div class="pv__box">
+      <div class="pv__lock"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={icon.lock}/></svg></div>
+      <h1>This {kind} is <span>private</span></h1>
+      <p><strong>{title}</strong> isn't public yet. Get in touch and I'll happily walk you through it.</p>
+      <div class="pv__btns">
+        <a class="btn btn--gold" href={u('/#contact')} data-track="private_contact">Contact me <svg viewBox="0 0 24 24" aria-hidden="true"><path d={icon.arrow}/></svg></a>
+        <a class="btn btn--ghost" href={u('/#projects')}>Back to projects</a>
+      </div>
+    </div>
+  </main>
+</Base>

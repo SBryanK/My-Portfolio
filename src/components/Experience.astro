@@ -1,0 +1,36 @@
+---
+import { experience, u } from '../data/site';
+import { md } from './icons';
+const base = (f?: string) => f ? u(`/img/${f}`) : '';
+---
+<section class="sec sec--tint" id="experience">
+  <div class="container">
+    <header class="head"><h2 data-reveal>Experience</h2></header>
+    <ol class="tl" id="tl">
+      <div class="tl__spine" aria-hidden="true"><i id="spine"></i></div>
+      {experience.map(job => (
+        <li class="tl__item" data-reveal>
+          <span class="tl__node" aria-hidden="true"></span>
+          <div class="card">
+            <div class="job__head">
+              <div class={`logo ${job.logo ? '' : 'logo--mark'}`}>{job.logo ? <img src={base(job.logo)} alt="" width="56" height="56" loading="lazy" /> : job.mark}</div>
+              <div><h3>{job.org}</h3><p>{[job.place, job.span].filter(Boolean).join(' · ')}</p></div>
+            </div>
+            {job.roles.map(r => {
+              const shown = r.points.slice(0, 3), rest = r.points.slice(3);
+              return (
+                <div class="role">
+                  <h4>{r.title}</h4><time>{r.when}</time>
+                  <ul class="pts">{shown.map(p => <li set:html={md(p)} />)}</ul>
+                  {rest.length > 0 && <details class="more"><summary><span class="m-open">Show less</span><span class="m-closed">Show {rest.length} more</span></summary>
+                    <ul class="pts">{rest.map(p => <li set:html={md(p)} />)}</ul></details>}
+                  {r.tags && <p class="tags">{r.tags.map(t => <span>{t}</span>)}</p>}
+                </div>
+              );
+            })}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
