@@ -202,14 +202,44 @@ if (fine && !reduce) $$('[data-tilt]').forEach(c => {
   c.addEventListener('pointerleave', () => { c.style.transform = ''; });
 });
 
-/* ── cert tabs + touch flip ── */
-const tabs = $$('.tab');
-tabs.forEach(t => t.addEventListener('click', () => {
-  tabs.forEach(o => { const on = o === t; o.setAttribute('aria-selected', String(on)); const p = $('#' + o.getAttribute('aria-controls')!); if (p) p.hidden = !on; });
-  const panel = $('#' + t.getAttribute('aria-controls')!);
-  if (panel && !reduce) gsap.from($$('.cert', panel), { y: 30, opacity: 0, duration: 0.6, stagger: 0.06, ease: 'power3.out' });
-  ScrollTrigger.refresh();
-}));
+/* ── hover glow: per-character highlight near the pointer ── */
+if (fine && !reduce) {
+  $$('[data-fx]').forEach(el => {
+    el.classList.add('fx');
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    const nodes: Text[] = [];
+    while (walker.nextNode()) {
+      const n = walker.currentNode as Text;
+      if (n.textContent?.trim() && !n.parentElement?.closest('#typed')) nodes.push(n);
+    }
+    nodes.forEach(n => {
+      const frag = document.createDocumentFragment();
+      (n.textContent || '').split(/(\s+)/).forEach(part => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.append(' '); return; }
+        const w = document.createElement('span'); w.className = 'w';
+        [...part].forEach(ch => { const c = document.createElement('span'); c.className = 'c'; c.textContent = ch; w.append(c); });
+        frag.append(w);
+      });
+      n.replaceWith(frag);
+    });
+    const chars = [...el.querySelectorAll<HTMLElement>('.c')];
+    const R = 64; let raf = 0, px = 0, py = 0;
+    const paint = () => {
+      raf = 0;
+      const rects = chars.map(c => c.getBoundingClientRect());
+      chars.forEach((c, i) => {
+        const r = rects[i];
+        const d = Math.hypot(r.left + r.width / 2 - px, r.top + r.height / 2 - py);
+        c.style.setProperty('--t', d < R ? (1 - d / R).toFixed(2) : '0');
+      });
+    };
+    el.addEventListener('pointermove', e => { px = (e as PointerEvent).clientX; py = (e as PointerEvent).clientY; if (!raf) raf = requestAnimationFrame(paint); });
+    el.addEventListener('pointerleave', () => { cancelAnimationFrame(raf); raf = 0; chars.forEach(c => c.style.setProperty('--t', '0')); });
+  });
+}
+
+/* ── cert touch flip ── */
 $$('.cert').forEach(c => c.addEventListener('click', e => { if ((e.target as HTMLElement).closest('a')) return; c.classList.toggle('flip'); }));
 
 /* ── magnetic buttons ── */

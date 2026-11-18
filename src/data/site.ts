@@ -22,15 +22,13 @@ export const stats = [
   { n: 800, suffix: '+', label: 'Teams beaten at NUS Hack&Roll 2024' },
 ];
 
-export const toolbox = [
-  ['Languages', 'Python · R · SQL · JavaScript · HTML/CSS · Excel VBA'],
-  ['Cloud & infra', 'AWS · Google Cloud · Tencent Cloud · Terraform · Docker · Git'],
-  ['Frameworks', 'React · Flask · Tkinter · OpenCV'],
-  ['Data & BI', 'Tableau · Power BI · Grafana · Talend · Figma'],
-  ['Spoken', 'Indonesian (native) · English (full professional) · Chinese (elementary)'],
+export const toolbox: [string, [string, string][]][] = [
+  ['Languages', [['Python', 'python.svg'], ['R', 'r.svg'], ['SQL', 'postgresql.svg'], ['JavaScript', 'javascript.svg'], ['HTML', 'html5.svg'], ['CSS', 'css.svg'], ['Excel VBA', 'excel.svg']]],
+  ['Cloud & infra', [['AWS', 'aws.svg'], ['Google Cloud', 'googlecloud.svg'], ['Tencent Cloud', 'tencent.png'], ['Terraform', 'terraform.svg'], ['Docker', 'docker.svg'], ['Git', 'git.svg']]],
+  ['Frameworks & ML', [['React', 'react.svg'], ['Flask', 'flask.svg'], ['Tkinter', 'python.svg'], ['OpenCV', 'opencv.svg'], ['scikit-learn', 'scikitlearn.svg']]],
+  ['Data & BI', [['Tableau', 'tableau.svg'], ['Power BI', 'powerbi.svg'], ['Grafana', 'grafana.svg'], ['Talend', 'talend.svg'], ['Figma', 'figma.svg']]],
 ];
-
-export const marquee = ['AWS', 'Tencent Cloud', 'Google Cloud', 'Terraform', 'Docker', 'Python', 'SQL', 'React', 'Tableau', 'Power BI', 'Grafana', 'OpenCV', 'Edge Computing', 'WAF', 'Anti-DDoS'];
+export const spoken = 'Indonesian (native) · English (full professional) · Chinese (elementary)';
 
 export type Role = { title: string; when: string; points: string[]; tags?: string[] };
 export type Job = { org: string; logo?: string; mark?: string; place?: string; span?: string; roles: Role[] };
@@ -173,7 +171,7 @@ export const projects: Project[] = [
   },
 ];
 
-export type Cert = { name: string; issuer: string; img?: string; mark?: string; href?: string; soon?: boolean; note?: string };
+export type Cert = { name: string; issuer: string; level?: string; img?: string; href?: string; mystery?: boolean };
 
 export const certs: Cert[] = [
   { name: 'AWS Machine Learning', issuer: 'Specialty', img: 'aws-mls.png', href: 'https://www.credly.com/earner/earned/badge/77d77501-7e22-45f4-9eb9-6e45092cc0d5' },
@@ -186,13 +184,9 @@ export const certs: Cert[] = [
   { name: 'Bloomberg Market Concepts', issuer: 'Bloomberg', img: 'bloomberg.png', href: 'https://www.linkedin.com/in/santasilabryankusno/details/certifications/' },
   { name: 'Bloomberg Finance Fundamentals', issuer: 'Bloomberg', img: 'bloomberg.png', href: 'https://www.linkedin.com/in/santasilabryankusno/details/certifications/' },
   { name: 'Options 101', issuer: 'Akuna Capital', img: 'akuna.jpg', href: 'https://www.linkedin.com/in/santasilabryankusno/details/certifications/' },
-  { name: 'Problem Solving (Intermediate)', issuer: 'HackerRank', img: 'hackerrank.png', href: 'https://www.linkedin.com/in/santasilabryankusno/details/certifications/' },
-];
-
-export const upcoming: Cert[] = [
-  { name: 'AWS Solutions Architect', issuer: 'Professional', img: 'aws-sap.png', soon: true, note: 'Studying now' },
-  { name: 'AWS Generative AI Developer', issuer: 'Professional', mark: 'AI', soon: true, note: 'On the roadmap' },
-  { name: 'AWS AI Business Strategist', issuer: 'AWS', mark: 'AI', soon: true, note: 'On the roadmap' },
+  { name: 'Problem Solving', issuer: 'HackerRank', level: 'Intermediate', img: 'hackerrank.png', href: 'https://www.linkedin.com/in/santasilabryankusno/details/certifications/' },
+  { name: 'Problem Solving', issuer: 'HackerRank', level: 'Advanced', img: 'hackerrank.png', href: 'https://www.linkedin.com/in/santasilabryankusno/details/certifications/' },
+  { name: 'Next one is on the way', issuer: 'Stay tuned', mystery: true },
 ];
 
 export const nusModules = [
@@ -221,12 +215,12 @@ export const awards = [
   ['Master', 'of Abacus', ''],
 ];
 
-export type Community = { role: string; org: string; text: string; img?: string; mark?: string; star?: boolean; long?: string };
+export type Community = { role: string; org: string; text: string; img?: string; mark?: string; star?: boolean; wide?: boolean; long?: string };
 export const community: Community[] = [
   {
-    role: 'Community Admin', org: 'NUS SCALE', mark: 'S', star: true,
-    text: 'I run the info group for my NUS SCALE cohort, sharing events, deadlines, internships and useful resources.',
-    long: 'Day to day that means filtering the noise: posting only what is worth a student\'s time, pinning deadlines, answering new members\' questions and connecting people who are working on the same thing. The group is invite-only, so ask me if you are in the programme and want in.',
+    role: 'Community Admin', org: 'NUS SCALE Indonesia · 2026/27 batch', img: 'nus-scale.png', wide: true, star: true,
+    text: 'I run the info group for the NUS SCALE Indonesia 2026/27 batch, sharing events, deadlines, internships and useful resources.',
+    long: 'Day to day that means filtering the noise: posting only what is worth a student\'s time, pinning deadlines, answering new members\' questions and connecting people who are working on the same thing. The group is invite-only, so ask me if you are in the batch and want in.',
   },
   {
     role: 'Volunteer Developer', org: 'better.sg', img: 'bettersg.png', star: true,

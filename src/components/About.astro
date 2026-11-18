@@ -1,25 +1,28 @@
 ---
-import { toolbox, stats } from '../data/site';
+import { toolbox, spoken, stats, u } from '../data/site';
 ---
 <section class="sec" id="about">
   <div class="container">
     <header class="head"><h2 data-reveal>About</h2></header>
     <div class="about">
       <div class="about__text" data-reveal>
-        <p class="lede">I work where cloud infrastructure meets a real business problem, as a founding member of Indonesia's first EdgeOne solutions architect team at Tencent Cloud.</p>
-        <p>The job is half engineering and half persuasion: designing CDN, WAF and Anti-DDoS architectures that hold under a national bank's traffic, then explaining the trade-offs to executives who care about outcomes, not packets. Before Tencent I shipped ML models and ETL pipelines for financial institutions and retailers across Indonesia.</p>
-        <p>I'm now reading an MSc in Smart Industries and Digital Transformation at NUS, and looking for 2026/27 internships in cloud, platform or applied ML.</p>
+        <p class="lede" data-fx>I work where cloud infrastructure meets a real business problem, as a founding member of Indonesia's first EdgeOne solutions architect team at Tencent Cloud.</p>
+        <p data-fx>The job is half engineering and half persuasion: designing CDN, WAF and Anti-DDoS architectures that hold under a national bank's traffic, then explaining the trade-offs to executives who care about outcomes, not packets. Before Tencent I shipped ML models and ETL pipelines for financial institutions and retailers across Indonesia.</p>
+        <p data-fx>I'm now reading an MSc in Smart Industries and Digital Transformation at NUS, and looking for 2026/27 internships in cloud, platform or applied ML.</p>
         <ul class="chips">
           {['Request for Proposal (RFP)','Computer Vision','Predictive Analytics','Edge Computing','Cloud Security'].map(c => <li>{c}</li>)}
         </ul>
       </div>
       <aside class="toolbox" data-reveal>
         <h3>What I work with</h3>
-        <dl>{toolbox.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+        <div class="sk-groups">
+          {toolbox.map(([g, items]) => <div class="sk-group"><h4>{g}</h4><ul class="sk-list">{items.map(([n, i]) => <li class="sk"><i><img src={u(`/img/skills/${i}`)} alt="" width="22" height="22" loading="lazy" /></i>{n}</li>)}</ul></div>)}
+          <div class="sk-group"><h4>Spoken</h4><p class="sk-spoken">{spoken}</p></div>
+        </div>
       </aside>
     </div>
     <div class="stats">
-      {stats.map(s => <div class="stat" data-reveal><b><span data-count={s.n}>0</span>{s.suffix}</b><span>{s.label}</span></div>)}
+      {stats.map(s => <div class="stat" data-reveal><b><span class="num" data-count={s.n}>0</span><span class="sfx">{s.suffix}</span></b><span class="lbl">{s.label}</span></div>)}
     </div>
   </div>
 </section>

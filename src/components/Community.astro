@@ -8,9 +8,9 @@ import { community } from '../data/site';
     <div class="comm">
       {community.map(c => (
         <article class={`card ccard ${c.star ? 'ccard--star' : ''}`} data-reveal>
-          <div class={`logo ${c.img ? '' : 'logo--mark'}`}>{c.img ? <img src={u(`/img/${c.img}`)} alt="" width="56" height="56" loading="lazy" /> : c.mark}</div>
+          <div class={`logo ${c.img ? '' : 'logo--mark'} ${c.wide ? 'logo--wide' : ''}`}>{c.img ? <img src={u(`/img/${c.img}`)} alt="" width="56" height="56" loading="lazy" /> : c.mark}</div>
           <h3>{c.role}</h3><p class="org">{c.org}</p>
-          <p class="t">{c.text}</p>
+          <p class="t" data-fx>{c.text}</p>
           {c.long && <details class="more"><summary><span class="m-open">Show less</span><span class="m-closed">Read more</span></summary><p class="t">{c.long}</p></details>}
         </article>
       ))}

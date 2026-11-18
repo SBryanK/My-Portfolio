@@ -1,7 +1,6 @@
 ---
 import { icon } from './icons';
-import { site, marquee, u } from '../data/site';
-const loop = [...marquee, ...marquee];
+import { site, u } from '../data/site';
 const soc = [['LinkedIn', site.links.linkedin, icon.linkedin], ['GitHub', site.links.github, icon.github], ['Credly', site.links.credly, icon.credly]];
 ---
 <section class="hero" id="home">
@@ -14,11 +13,11 @@ const soc = [['LinkedIn', site.links.linkedin, icon.linkedin], ['GitHub', site.l
         <span class="row" data-split>Santasila</span>
         <span class="row" data-split data-foil>Bryan Kusno</span>
       </h1>
-      <div class="hero__roles" data-intro>
+      <div class="hero__roles" data-intro data-fx>
         <p><b>NUS MSc</b> Smart Industries and Digital Transformation</p>
         <span>ex-Cloud Solutions Architect at Tencent Cloud · <span class="typed" id="typed">Cloud Architect</span></span>
       </div>
-      <p class="hero__desc" data-intro>
+      <p class="hero__desc" data-intro data-fx>
         I design cloud and edge infrastructure (CDN, WAF, Anti-DDoS) for some of Indonesia's largest banks and enterprises, and build machine learning systems that turn messy data into decisions people act on.
       </p>
       <div class="hero__btns" data-intro>
@@ -49,6 +48,3 @@ const soc = [['LinkedIn', site.links.linkedin, icon.linkedin], ['GitHub', site.l
   </div>
   <span class="scroll-cue" aria-hidden="true"></span>
 </section>
-<div class="rail" aria-hidden="true"><div class="rail__track">
-  {loop.map(t => <><span>{t}</span><i>◆</i></>)}
-</div></div>

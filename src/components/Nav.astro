@@ -6,7 +6,6 @@ const base = Astro.props.home ? '' : '/';
 <div class="progress" id="progress" aria-hidden="true"><i></i></div>
 <header class="nav" id="nav">
   <div class="nav__in">
-    <a class="wordmark" href={`${base}#home`}>Santasila <b>Bryan</b></a>
     <nav aria-label="Sections">
       <ul class="nav__menu" id="navmenu">
         {items.map(([id, label]) => <li><a href={`${base}#${id}`}>{label}</a></li>)}
