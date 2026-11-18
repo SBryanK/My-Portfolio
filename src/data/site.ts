@@ -31,7 +31,7 @@ export const toolbox: [string, [string, string][]][] = [
 export const spoken = 'Indonesian (native) · English (full professional) · Chinese (elementary)';
 
 export type Role = { title: string; when: string; points: string[]; tags?: string[] };
-export type Job = { org: string; logo?: string; mark?: string; place?: string; span?: string; roles: Role[] };
+export type Job = { org: string; logo?: string; fill?: boolean; mark?: string; place?: string; span?: string; roles: Role[] };
 
 export const experience: Job[] = [
   {
@@ -74,7 +74,7 @@ export const experience: Job[] = [
     }],
   },
   {
-    org: 'AIESEC in Singapore', logo: 'aiesec.jpg', place: 'Singapore', span: '1 yr 2 mo',
+    org: 'AIESEC in Singapore', logo: 'aiesec.jpg', fill: true, place: 'Singapore', span: '1 yr 2 mo',
     roles: [
       {
         title: 'Business Development Associate · Incoming Global Talent', when: 'Jan 2023 — Feb 2024',
@@ -95,7 +95,7 @@ export const experience: Job[] = [
     ],
   },
   {
-    org: 'SIMIAN Group', logo: 'SIMIAN.jpeg', place: 'Jakarta',
+    org: 'SIMIAN Group', logo: 'SIMIAN.jpeg', fill: true, place: 'Jakarta',
     roles: [{
       title: 'Data Management Intern', when: 'Jun 2023 — Aug 2023',
       points: [
@@ -215,7 +215,7 @@ export const awards = [
   ['Master', 'of Abacus', ''],
 ];
 
-export type Community = { role: string; org: string; text: string; img?: string; mark?: string; star?: boolean; wide?: boolean; long?: string };
+export type Community = { role: string; org: string; text: string; img?: string; mark?: string; star?: boolean; wide?: boolean; fill?: boolean; long?: string };
 export const community: Community[] = [
   {
     role: 'Community Admin', org: 'NUS SCALE Indonesia · 2026/27 batch', img: 'nus-scale.png', wide: true, star: true,
@@ -229,7 +229,7 @@ export const community: Community[] = [
   { role: 'Student Ambassador', org: 'Tzu Chi Foundation Singapore', img: 'tzsgp.png', text: 'Represented the foundation on campus through outreach, recruitment and volunteer sessions.' },
   { role: 'Volunteer & Coordinator', org: 'Tzu Chi Foundation Indonesia', img: 'tzidn.png', text: 'Coordinated 30+ cross-campus initiatives with hundreds of volunteers and tripled the cohort size.' },
   { role: 'University Ambassador', org: 'Singapore Institute of Management', img: 'simsa.png', text: 'Led 10+ campus tours and events reaching 50+ students and 300+ public participants.' },
-  { role: 'Delegate Service Associate', org: 'AIESEC SWITCH 2023', img: 'aiesec.jpg', text: 'Coordinated nine committees for a national event of 100+ delegates and reached 90%+ satisfaction.' },
+  { role: 'Delegate Service Associate', org: 'AIESEC SWITCH 2023', img: 'aiesec.jpg', fill: true, text: 'Coordinated nine committees for a national event of 100+ delegates and reached 90%+ satisfaction.' },
   { role: 'Student Council', org: 'SMAK PENABUR Harapan Indah', img: 'penabur.png', text: 'Organised student-body events and represented the cohort to school leadership.' },
 ];
 

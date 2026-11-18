@@ -239,6 +239,16 @@ if (fine && !reduce) {
   });
 }
 
+/* ── expand / collapse (toggle sits after the text) ── */
+$$<HTMLButtonElement>('[data-xtoggle]').forEach(btn => btn.addEventListener('click', () => {
+  const box = btn.previousElementSibling as HTMLElement | null;
+  if (!box) return;
+  const open = box.classList.toggle('open');
+  btn.setAttribute('aria-expanded', String(open));
+  btn.textContent = open ? btn.dataset.less! : btn.dataset.more!;
+  setTimeout(() => ScrollTrigger.refresh(), 480);
+}));
+
 /* ── cert touch flip ── */
 $$('.cert').forEach(c => c.addEventListener('click', e => { if ((e.target as HTMLElement).closest('a')) return; c.classList.toggle('flip'); }));
 

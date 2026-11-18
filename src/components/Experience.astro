@@ -13,7 +13,7 @@ const base = (f?: string) => f ? u(`/img/${f}`) : '';
           <span class="tl__node" aria-hidden="true"></span>
           <div class="card">
             <div class="job__head">
-              <div class={`logo ${job.logo ? '' : 'logo--mark'}`}>{job.logo ? <img src={base(job.logo)} alt="" width="56" height="56" loading="lazy" /> : job.mark}</div>
+              <div class={`logo ${job.logo ? '' : 'logo--mark'} ${job.fill ? 'logo--fill' : ''}`}>{job.logo ? <img src={base(job.logo)} alt="" width="56" height="56" loading="lazy" /> : job.mark}</div>
               <div><h3>{job.org}</h3><p>{[job.place, job.span].filter(Boolean).join(' · ')}</p></div>
             </div>
             {job.roles.map(r => {
@@ -22,8 +22,10 @@ const base = (f?: string) => f ? u(`/img/${f}`) : '';
                 <div class="role">
                   <h4>{r.title}</h4><time>{r.when}</time>
                   <ul class="pts">{shown.map(p => <li set:html={md(p)} />)}</ul>
-                  {rest.length > 0 && <details class="more"><summary><span class="m-open">Show less</span><span class="m-closed">Show {rest.length} more</span></summary>
-                    <ul class="pts">{rest.map(p => <li set:html={md(p)} />)}</ul></details>}
+                  {rest.length > 0 && <>
+                    <div class="xp"><div class="xp__in"><ul class="pts pts--more">{rest.map(p => <li set:html={md(p)} />)}</ul></div></div>
+                    <button class="more-btn" type="button" aria-expanded="false" data-xtoggle data-more={`Show ${rest.length} more`} data-less="Show less">Show {rest.length} more</button>
+                  </>}
                   {r.tags && <p class="tags">{r.tags.map(t => <span>{t}</span>)}</p>}
                 </div>
               );
