@@ -115,6 +115,11 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: 'Multi-Agent Quant Trading System', img: 'cover-quant.svg', badge: 'Case study', href: '/projects/retired-early/',
+    blurb: 'Autonomous swing trading and risk-governance system pairing 6 AI agents with a deterministic Python Markov regime engine, PreToolUse rule locks, and a 9-year walk-forward backtester.',
+    tags: ['Python', 'Multi-Agent AI', 'Quant Risk'], cta: 'Read case study',
+  },
+  {
     title: 'Job Application Agent', img: 'cover-agent.svg', badge: 'Featured', priv: 'job-agent',
     blurb: 'A browser agent that searches roles, fills LinkedIn Easy Apply and company-site forms, tracks every application in a sheet, and stops to ask whenever it does not know an answer.',
     tags: ['Python', 'Playwright', 'Automation'], cta: 'View repo',

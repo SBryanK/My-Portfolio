@@ -51,7 +51,10 @@ $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
 /* ── nav state + progress + scrollspy ── */
 const bar = $('#progress i');
 const links = $$<HTMLAnchorElement>('#navmenu a');
-const secs = links.map(a => $(a.getAttribute('href')!.replace('/', ''))).filter(Boolean) as HTMLElement[];
+const secs = links.map(a => {
+  const hash = a.getAttribute('href')?.match(/#.+$/)?.[0];
+  return hash ? $(hash) : null;
+}).filter(Boolean) as HTMLElement[];
 ScrollTrigger.create({
   start: 0, end: 'max',
   onUpdate: self => {
