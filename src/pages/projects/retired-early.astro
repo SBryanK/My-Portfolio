@@ -1,0 +1,497 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import { site, u } from '../../data/site';
+import { icon } from '../../components/icons';
+
+const kpis = [
+  { val: '560+', lbl: 'US equities across 12 sectors plus IDX coverage' },
+  { val: '6', lbl: 'Specialist AI subagents with adversarial Risk-Officer veto' },
+  { val: '9 yr', lbl: 'Walk-forward evaluation (2017–2026, 515 US equities)' },
+  { val: '46 / 46', lbl: 'End-to-end checks & 20 pytest unit tests on 24/7 CI' },
+];
+
+const layers = [
+  {
+    step: '01',
+    title: 'Data Ingestion & Dual-Source Verification',
+    summary: 'Combines historical OHLCV factor computation with fault-tolerant live quote verification across US and Indonesian markets.',
+    points: [
+      'Computes **MA20 / MA50 / MA200, ATR14, RSI14, and RS20** from `yfinance` historical OHLCV feeds across **560+ US equities (12 sectors)** and **IDX equities**.',
+      'Cross-checks prices with a custom concurrent **Google Finance** quote parser backed by a **thread-safe atomic exchange cache**.',
+      'Fails safely with a graceful `None` fallback on parser or upstream API errors so stale or malformed ticks never enter signal logic.',
+    ],
+    tags: ['yfinance', 'Concurrent Parser', 'Atomic Cache', 'US + IDX'],
+  },
+  {
+    step: '02',
+    title: 'Multi-Agent Reasoning Layer',
+    summary: 'Separates market discovery, fundamental catalyst work, macro synthesis, and adversarial challenge into dedicated subagents.',
+    points: [
+      'Orchestrator dispatches **6 specialized subagents**: `market-scout`, `stock-analyst`, `catalyst-scout`, `sector-breadth-scout`, `macro-strategist`, and `risk-officer`.',
+      'Enforces Tier-1 evidence verification standards (**IAA: Identity, Authority, Accountability**) for news and catalyst attribution.',
+      'Every candidate trade must pass an adversarial **`risk-officer` devil\'s advocate** review that explicitly returns **`VERDICT: PASS`** before surfacing a recommendation.',
+    ],
+    tags: ['Orchestrator', '6 Subagents', 'IAA Evidence', 'Adversarial Veto'],
+  },
+  {
+    step: '03',
+    title: 'Deterministic Risk & Policy Governance',
+    summary: 'Removes all arithmetic, sizing, and rule enforcement from the LLM and locks them into deterministic Python and runtime hooks.',
+    points: [
+      'Hard-coded **discrete Markov regime state machine**: evaluates `SPY`/`QQQ` vs `MA200`, enforces a **`VIX > 25` override**, and requires a mandatory **2-closed-day calm confirmation** before exiting `RISK-OFF`.',
+      'Programmatically validates position sizing, cash and fractional-share floors, and hard **sector & semiconductor concentration caps**.',
+      'A **`PreToolUse` policy-guard hook** blocks the AI from editing immutable trading rules (`RULES.md`), preventing self-modification of guardrails.',
+    ],
+    tags: ['Markov Regime', 'Hard Sector Caps', 'PreToolUse Hook', 'RULES.md Lock'],
+  },
+  {
+    step: '04',
+    title: 'Testing, Verification & 24/7 Cloud Operations',
+    summary: 'Continuous verification guarantees rule invariants hold across code changes and daily scheduled market runs.',
+    points: [
+      '**20 automated `pytest` unit tests** covering Markov regime transitions, setup entry/exit logic, concentration & sizing caps, and quantitative metrics.',
+      '**46 / 46** end-to-end setup verification checks validating configuration, pipelines, and guardrails.',
+      '**24/7 GitHub Actions** scheduled cloud pipelines operating independently for US and IDX trading sessions.',
+    ],
+    tags: ['pytest (20)', '46/46 E2E', 'GitHub Actions', 'Scheduled Pipelines'],
+  },
+];
+
+const setups = [
+  { name: 'Setup A', pf: '1.08', status: 'Retained', tone: 'pass', note: 'Positive walk-forward expectancy; gated behind RISK-ON regime and sizing rules.' },
+  { name: 'Setup B', pf: '1.20', status: 'Retained (Primary)', tone: 'pass', note: 'Strongest risk-adjusted walk-forward expectancy across the 9-year window.' },
+  { name: 'Setup C', pf: '0.86', status: 'Pruned', tone: 'prune', note: 'Negative walk-forward expectancy; retired honestly rather than curve-fit.' },
+];
+
+const quantMetrics = [
+  ['Profit Factor & Expectancy (avgR)', 'Evaluates gross win-to-loss ratio alongside mean R-multiple per trade across train and holdout splits.'],
+  ['Max Drawdown (R)', 'Tracks peak-to-trough equity loss normalized in risk units (R) to calibrate tail exposure.'],
+  ['Continuous-Month Sharpe & Sortino', 'Includes 0R cash months spent in RISK-OFF regimes so idle periods are priced transparently rather than masked.'],
+  ['Expectancy t-Statistic', 'Tests whether positive mean R-multiples are statistically distinguishable from noise before rule promotion.'],
+  ['Generalized Half-Kelly Sizing', 'Computes fractional Kelly allocation and clamps position sizing strictly to 0% whenever expected value EV <= 0.'],
+];
+
+const md = (s: string) =>
+  s
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+---
+<Base
+  title="Multi-Agent Quantitative Swing Trading & Risk-Governance System · Case Study"
+  description="Engineering case study: hybrid multi-agent AI and deterministic Python risk-governance architecture, -33.8% drawdown post-mortem, and 9-year walk-forward validation across 560+ US and IDX equities."
+>
+  <style is:global>
+    .cs-hero { padding:clamp(104px,12vh,136px) 0 clamp(44px,6vw,72px); position:relative; overflow:hidden; border-bottom:1px solid var(--line); }
+    .cs-hero::before { content:''; position:absolute; inset:0; z-index:-1; background:radial-gradient(55% 65% at 88% 15%,color-mix(in srgb,var(--au-300) 42%,transparent),transparent 70%),radial-gradient(40% 50% at 6% 90%,color-mix(in srgb,var(--rd-600) 9%,transparent),transparent 70%); }
+    .cs-crumb { display:flex; width:fit-content; align-items:center; gap:8px; font-size:.88rem; font-weight:700; color:var(--ink-2); margin-bottom:24px; transition:color .2s; }
+    .cs-crumb:hover { color:var(--au-700); }
+    :root[data-theme="dark"] .cs-crumb:hover { color:var(--au-300); }
+    .cs-crumb svg { width:16px; height:16px; fill:currentColor; }
+    .cs-title { font-size:clamp(2.1rem,5.2vw,3.8rem); line-height:1.04; font-weight:900; letter-spacing:-.035em; max-width:22ch; }
+    .cs-lead { margin-top:20px; max-width:64ch; color:var(--ink-2); font-size:clamp(1.02rem,1.8vw,1.18rem); line-height:1.65; }
+    .cs-meta { margin-top:24px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+    .cs-repo { display:inline-flex; align-items:center; gap:8px; padding:7px 14px; border-radius:99px; border:1px solid var(--line); background:var(--card); font-size:.84rem; font-weight:700; color:var(--ink); max-width:100%; }
+    .cs-repo svg { width:16px; height:16px; fill:var(--au-500); flex:none; }
+    .cs-repo small { color:var(--ink-2); font-weight:600; }
+    .cs-actions { margin-top:26px; display:flex; flex-wrap:wrap; gap:14px; }
+    :root[data-theme="dark"] .cs-hero .btn--ghost { color:#ff98a8; border-color:#ff98a8; }
+    :root[data-theme="dark"] .cs-hero .btn--ghost:hover { background:var(--rd-600); border-color:var(--rd-600); color:#fff; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .cs-hero .btn--ghost { color:#ff98a8; border-color:#ff98a8; }
+      :root:not([data-theme="light"]) .cs-hero .btn--ghost:hover { background:var(--rd-600); border-color:var(--rd-600); color:#fff; }
+    }
+    .cs-kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:clamp(32px,4.5vw,52px); }
+    .cs-kpi { padding:20px 22px; border-radius:var(--r); border:1px solid var(--line); background:var(--card); box-shadow:var(--shadow); }
+    .cs-kpi strong { display:block; font-size:clamp(1.9rem,3.4vw,2.6rem); font-weight:900; letter-spacing:-.03em; line-height:1.05; background:var(--foil); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .cs-kpi span { display:block; margin-top:8px; color:var(--ink-2); font-size:.88rem; line-height:1.45; }
+
+    .cs-sec { padding:clamp(56px,8vw,96px) 0; }
+    .cs-sec--tint { background:var(--tint); }
+    .cs-head { margin-bottom:clamp(26px,4vw,42px); max-width:68ch; }
+    .cs-head .eyebrow { margin-bottom:10px; }
+    .cs-head h2 { font-size:clamp(1.75rem,3.8vw,2.7rem); font-weight:900; letter-spacing:-.03em; line-height:1.08; }
+    .cs-head p { margin-top:12px; color:var(--ink-2); font-size:1rem; }
+
+    /* Architecture diagram frame */
+    .cs-arch { margin:0 0 28px; background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:clamp(16px,2.5vw,28px); box-shadow:var(--shadow); overflow-x:auto; max-width:100%; }
+    .cs-arch svg { width:100%; min-width:740px; height:auto; display:block; }
+    .cs-arch__cap { margin-top:12px; font-size:.84rem; color:var(--ink-2); }
+
+    /* Layer cards */
+    .cs-grid2 { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+    .cs-grid2 > *, .cs-pm > *, .cs-val > * { min-width:0; }
+    .cs-layer { background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:clamp(22px,2.8vw,30px); box-shadow:var(--shadow); display:flex; flex-direction:column; }
+    .cs-layer__top { display:flex; align-items:baseline; gap:12px; }
+    .cs-step { font-size:.78rem; font-weight:900; letter-spacing:.12em; color:var(--rd-600); }
+    .cs-layer h3 { font-size:1.2rem; letter-spacing:-.015em; }
+    .cs-layer__sum { margin-top:8px; color:var(--ink-2); font-size:.94rem; }
+    .cs-layer .pts { margin-top:14px; font-size:.94rem; }
+    .cs-layer .tags { margin-top:auto; padding-top:16px; }
+    .cs-layer code, .cs-pm code, .cs-tbl code, .cs-note code, .cs-cta code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.84em; padding:2px 6px; border-radius:6px; background:color-mix(in srgb,var(--au-500) 13%,var(--tint)); color:var(--ink); }
+    .cs-cta code { background:rgba(243,222,158,.16); color:#F3DE9E; }
+
+    /* Post-mortem comparison */
+    .cs-pm { display:grid; grid-template-columns:1fr 1fr; gap:22px; align-items:stretch; }
+    .cs-pm__card { border-radius:var(--r); padding:clamp(24px,3vw,34px); border:1px solid var(--line); background:var(--card); box-shadow:var(--shadow); }
+    .cs-pm__card--fail { border-color:color-mix(in srgb,var(--rd-600) 38%,var(--line)); }
+    .cs-pm__card--fix { background:linear-gradient(155deg,#2b1f16,#4a3216); color:#fff6dc; border-color:transparent; }
+    .cs-pm__tag { display:inline-block; font-size:.74rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; padding:5px 12px; border-radius:99px; margin-bottom:14px; }
+    .cs-pm__card--fail .cs-pm__tag { background:color-mix(in srgb,var(--rd-600) 14%,transparent); color:var(--rd-600); }
+    :root[data-theme="dark"] .cs-pm__card--fail .cs-pm__tag { color:#ff96a6; }
+    .cs-pm__card--fix .cs-pm__tag { background:rgba(243,222,158,.16); color:#F3DE9E; }
+    .cs-pm__card h3 { font-size:1.35rem; letter-spacing:-.02em; }
+    .cs-pm__card p.sub { margin-top:10px; font-size:.96rem; color:var(--ink-2); }
+    .cs-pm__card--fix p.sub { color:#e8d6a4; }
+    .cs-pm__card--fix .pts { color:#f0e2bb; }
+    .cs-pm__card--fix .pts strong { color:#fff; }
+    .cs-pm__card--fix code { background:rgba(243,222,158,.16); color:#F3DE9E; }
+    .cs-pm__stat { margin-top:18px; padding-top:16px; border-top:1px dashed var(--line); display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; }
+    .cs-pm__card--fix .cs-pm__stat { border-top-color:rgba(243,222,158,.24); }
+    .cs-pm__stat strong { font-size:2rem; font-weight:900; letter-spacing:-.03em; color:var(--rd-600); }
+    :root[data-theme="dark"] .cs-pm__card--fail .cs-pm__stat strong { color:#ff8093; }
+    .cs-pm__card--fix .cs-pm__stat strong { color:#F3DE9E; }
+    .cs-pm__stat span { font-size:.9rem; color:var(--ink-2); }
+    .cs-pm__card--fix .cs-pm__stat span { color:#e8d6a4; }
+
+    /* Validation table + metrics */
+    .cs-val { display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:start; }
+    .cs-tbl-wrap { background:var(--card); border:1px solid var(--line); border-radius:var(--r); overflow-x:auto; box-shadow:var(--shadow); max-width:100%; }
+    .cs-tbl { width:100%; border-collapse:collapse; font-size:.94rem; }
+    .cs-tbl th, .cs-tbl td { text-align:left; padding:15px 18px; border-bottom:1px solid var(--line); vertical-align:top; }
+    .cs-tbl td:first-child { white-space:nowrap; }
+    .cs-tbl tr:last-child td { border-bottom:0; }
+    .cs-tbl th { font-size:.74rem; text-transform:uppercase; letter-spacing:.12em; color:var(--au-700); background:var(--tint); font-weight:800; }
+    :root[data-theme="dark"] .cs-tbl th { color:var(--au-300); }
+    .cs-tbl td strong { color:var(--ink); }
+    .cs-pill { display:inline-block; padding:4px 10px; border-radius:99px; font-size:.76rem; font-weight:800; white-space:nowrap; }
+    .cs-pill--pass { background:rgba(47,143,91,.14); color:#216e43; }
+    :root[data-theme="dark"] .cs-pill--pass { background:rgba(47,143,91,.24); color:#8ce0b0; }
+    .cs-pill--prune { background:color-mix(in srgb,var(--rd-600) 14%,transparent); color:var(--rd-600); }
+    :root[data-theme="dark"] .cs-pill--prune { color:#ff96a6; }
+    .cs-note { margin-top:16px; padding:16px 18px; border-radius:16px; border:1px dashed var(--au-500); background:color-mix(in srgb,var(--au-500) 8%,var(--card)); font-size:.9rem; color:var(--ink-2); }
+    .cs-note strong { color:var(--ink); }
+
+    .cs-metrics { background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:24px; box-shadow:var(--shadow); display:grid; gap:14px; }
+    .cs-metrics h3 { font-size:1.12rem; }
+    .cs-metric { padding-top:12px; border-top:1px solid var(--line); }
+    .cs-metric:first-of-type { padding-top:6px; border-top:0; }
+    .cs-metric h4 { font-size:.95rem; color:var(--ink); }
+    .cs-metric p { margin-top:4px; font-size:.89rem; color:var(--ink-2); line-height:1.5; }
+
+    /* Bottom CTA */
+    .cs-cta { border-radius:var(--r); padding:clamp(28px,4vw,44px); background:linear-gradient(160deg,#2b1f16,#4a3216 65%,#6a4a14); color:#fff6dc; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+    .cs-cta h2 { font-size:clamp(1.5rem,3vw,2.1rem); font-weight:900; letter-spacing:-.025em; }
+    .cs-cta p { margin-top:8px; color:#e8d6a4; max-width:56ch; font-size:.97rem; }
+    .cs-cta__btns { display:flex; gap:12px; flex-wrap:wrap; }
+    .cs-cta .btn--ghost { color:#F3DE9E; border-color:#F3DE9E; }
+    .cs-cta .btn--ghost:hover { background:#F3DE9E; color:#2b1f16; }
+
+    /* Architecture SVG theming */
+    .arch-box { fill:var(--tint); stroke:var(--line); stroke-width:1.4; }
+    .arch-box--dark { fill:#2b1f16; stroke:#C9962C; stroke-width:1.6; }
+    .arch-box--guard { fill:color-mix(in srgb,var(--rd-600) 9%,var(--card)); stroke:var(--rd-600); stroke-width:1.5; }
+    .arch-title { fill:var(--ink); font-weight:800; font-size:13px; }
+    .arch-sub { fill:var(--ink-2); font-size:11px; }
+    .arch-kicker { fill:var(--au-700); font-weight:800; font-size:10px; letter-spacing:1px; }
+    :root[data-theme="dark"] .arch-kicker { fill:var(--au-300); }
+    .arch-dark-title { fill:#fff6dc; font-weight:800; font-size:13px; }
+    .arch-dark-sub { fill:#e8d6a4; font-size:11px; }
+    .arch-dark-kicker { fill:#F3DE9E; font-weight:800; font-size:10px; letter-spacing:1px; }
+    .arch-arrow { stroke:var(--au-500); stroke-width:2; fill:none; }
+    .arch-arrow-red { stroke:var(--rd-600); stroke-width:2; fill:none; }
+
+    @media (max-width:960px) {
+      .cs-kpis { grid-template-columns:repeat(2,1fr); }
+      .cs-grid2, .cs-pm, .cs-val { grid-template-columns:1fr; }
+    }
+    @media (max-width:560px) {
+      .cs-kpis { grid-template-columns:1fr; }
+    }
+  </style>
+
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <Nav />
+
+  <main id="main">
+    <section class="cs-hero">
+      <div class="container">
+        <a class="cs-crumb" href={u('/#projects')}>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d={icon.prev}/></svg>
+          Back to all projects
+        </a>
+        <p class="eyebrow">Case study · Quantitative AI Systems</p>
+        <h1 class="cs-title">Multi-Agent Quantitative Swing Trading &amp; Risk-Governance System</h1>
+        <p class="cs-lead">
+          An autonomous swing trading research and risk-governance architecture designed around a single engineering rule:
+          use LLMs for qualitative synthesis and adversarial critique, and confine every regime transition, sizing calculation,
+          and concentration limit to deterministic Python code and programmatic tool hooks.
+        </p>
+        <div class="cs-meta">
+          <span class="cs-repo">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d={icon.github}/></svg>
+            SBryanK/Retired-early <small>· Private repository</small>
+          </span>
+          <span class="cs-repo">v1 → v7.2 <small>· Production redesign</small></span>
+          <span class="cs-repo">US &amp; IDX <small>· 24/7 GitHub Actions</small></span>
+        </div>
+        <div class="cs-actions">
+          <a class="btn btn--gold" href={u('/#contact')} data-magnet data-track="retired_early_walkthrough">
+            Request a walkthrough <svg viewBox="0 0 24 24" aria-hidden="true"><path d={icon.arrow}/></svg>
+          </a>
+          <a class="btn btn--ghost" href="#post-mortem" data-magnet>Read the -33.8% post-mortem</a>
+        </div>
+
+        <div class="cs-kpis">
+          {kpis.map(k => (
+            <div class="cs-kpi" data-reveal>
+              <strong>{k.val}</strong>
+              <span>{k.lbl}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-sec" id="architecture">
+      <div class="container">
+        <header class="cs-head" data-reveal>
+          <p class="eyebrow">01 · System Architecture</p>
+          <h2>Hybrid deterministic governance + multi-agent reasoning</h2>
+          <p>
+            Pure-LLM trading pipelines fail silently when models hallucinate position math, rationalize broken stops,
+            or drift past exposure caps. This architecture isolates probabilistic research behind hard Python and hook-level gates.
+          </p>
+        </header>
+
+        <figure class="cs-arch" data-reveal>
+          <svg viewBox="0 0 980 330" role="img" aria-label="Four-layer hybrid architecture diagram showing Data Ingestion, 6-Agent Reasoning with Risk-Officer Veto, Deterministic Python Risk Governance with PreToolUse Hook, and Walk-Forward Validation plus 24/7 CI">
+            <defs>
+              <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M1 1l8 4-8 4z" fill="#C9962C"/>
+              </marker>
+              <marker id="ah-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M1 1l8 4-8 4z" fill="#C0263F"/>
+              </marker>
+            </defs>
+
+            <!-- Layer 1 -->
+            <rect x="14" y="24" width="212" height="184" rx="14" class="arch-box"/>
+            <text x="30" y="48" class="arch-kicker">LAYER 1 · INGESTION</text>
+            <text x="30" y="70" class="arch-title">Dual-Source Market Data</text>
+            <text x="30" y="94" class="arch-sub">• yfinance OHLCV factors</text>
+            <text x="30" y="112" class="arch-sub">  MA20/50/200, ATR14, RSI14</text>
+            <text x="30" y="130" class="arch-sub">  RS20 across 560+ US + IDX</text>
+            <text x="30" y="152" class="arch-sub">• Concurrent Google Finance</text>
+            <text x="30" y="170" class="arch-sub">  atomic exchange cache</text>
+            <text x="30" y="188" class="arch-sub">• Graceful None fallback</text>
+
+            <!-- Arrow 1 -> 2 -->
+            <path d="M226 116 H262" class="arch-arrow" marker-end="url(#ah)"/>
+
+            <!-- Layer 2 -->
+            <rect x="268" y="24" width="224" height="184" rx="14" class="arch-box"/>
+            <text x="284" y="48" class="arch-kicker">LAYER 2 · MULTI-AGENT AI</text>
+            <text x="284" y="70" class="arch-title">Orchestrator + 6 Subagents</text>
+            <text x="284" y="94" class="arch-sub">• market-scout &amp; stock-analyst</text>
+            <text x="284" y="112" class="arch-sub">• catalyst-scout (Tier-1 IAA)</text>
+            <text x="284" y="130" class="arch-sub">• sector-breadth &amp; macro-strat</text>
+            <rect x="284" y="144" width="192" height="48" rx="10" class="arch-box--guard"/>
+            <text x="296" y="164" class="arch-title">Adversarial risk-officer</text>
+            <text x="296" y="181" class="arch-sub">Must return VERDICT: PASS</text>
+
+            <!-- Arrow 2 -> 3 -->
+            <path d="M492 116 H528" class="arch-arrow" marker-end="url(#ah)"/>
+
+            <!-- Layer 3 -->
+            <rect x="534" y="24" width="228" height="184" rx="14" class="arch-box--dark"/>
+            <text x="550" y="48" class="arch-dark-kicker">LAYER 3 · DETERMINISTIC</text>
+            <text x="550" y="70" class="arch-dark-title">Python Risk &amp; Policy Engine</text>
+            <text x="550" y="94" class="arch-dark-sub">• Markov regime (SPY/QQQ MA200)</text>
+            <text x="550" y="112" class="arch-dark-sub">• VIX &gt; 25 override + 2-day calm</text>
+            <text x="550" y="130" class="arch-dark-sub">• Half-Kelly (0% if EV &lt;= 0)</text>
+            <text x="550" y="148" class="arch-dark-sub">• Sector &amp; semi caps, cash floor</text>
+            <text x="550" y="166" class="arch-dark-sub">• Opening 30m ban (09:30–10:00)</text>
+            <text x="550" y="188" class="arch-dark-kicker">HOOK: PreToolUse LOCKS RULES.md</text>
+
+            <!-- Arrow 3 -> 4 -->
+            <path d="M762 116 H798" class="arch-arrow" marker-end="url(#ah)"/>
+
+            <!-- Layer 4 -->
+            <rect x="804" y="24" width="162" height="184" rx="14" class="arch-box"/>
+            <text x="820" y="48" class="arch-kicker">LAYER 4 · OPS</text>
+            <text x="820" y="70" class="arch-title">Verified Output</text>
+            <text x="820" y="96" class="arch-sub">• Trade briefs only if</text>
+            <text x="820" y="114" class="arch-sub">  all hard gates pass</text>
+            <text x="820" y="140" class="arch-sub">• 24/7 GitHub Actions</text>
+            <text x="820" y="158" class="arch-sub">  (US &amp; IDX schedules)</text>
+            <text x="820" y="184" class="arch-sub">• Live trade journal</text>
+
+            <!-- Bottom feedback bar: Validation & Testing -->
+            <rect x="14" y="236" width="952" height="74" rx="14" class="arch-box"/>
+            <text x="32" y="262" class="arch-kicker">OFFLINE VALIDATION &amp; CONTINUOUS ASSURANCE</text>
+            <text x="32" y="286" class="arch-title">9-Year Walk-Forward Backtester (2017–2026 · 515 US Equities · Train/Holdout Split)</text>
+            <text x="640" y="286" class="arch-sub">20 pytest Unit Tests · 46/46 E2E Verification Checks</text>
+
+            <!-- Feedback arrows -->
+            <path d="M648 236 V214" class="arch-arrow-red" marker-end="url(#ah-red)"/>
+            <path d="M885 208 V230" class="arch-arrow" marker-end="url(#ah)"/>
+          </svg>
+          <figcaption class="cs-arch__cap">
+            Control flow from dual-source market ingestion through multi-agent synthesis, hard Python risk gates, and offline walk-forward verification.
+          </figcaption>
+        </figure>
+
+        <div class="cs-grid2">
+          {layers.map(l => (
+            <article class="cs-layer" data-reveal>
+              <div class="cs-layer__top">
+                <span class="cs-step">{l.step}</span>
+                <h3>{l.title}</h3>
+              </div>
+              <p class="cs-layer__sum">{l.summary}</p>
+              <ul class="pts">
+                {l.points.map(pt => <li set:html={md(pt)} />)}
+              </ul>
+              <p class="tags">{l.tags.map(t => <span>{t}</span>)}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-sec cs-sec--tint" id="post-mortem">
+      <div class="container">
+        <header class="cs-head" data-reveal>
+          <p class="eyebrow">02 · Real-World Post-Mortem</p>
+          <h2>Debugging a -33.8% drawdown into a v7.2 architecture</h2>
+          <p>
+            Instead of burying early live-account losses, the live trade journal was audited to isolate structural failure modes
+            and convert every human and model discipline failure into a hard code-level invariant.
+          </p>
+        </header>
+
+        <div class="cs-pm">
+          <article class="cs-pm__card cs-pm__card--fail" data-reveal>
+            <span class="cs-pm__tag">Observed Failure · v1 Live Journal</span>
+            <h3>Three compounding governance failures</h3>
+            <p class="sub">Post-mortem diagnosis from live execution logs pinpointed why early iterations broke down under volatility:</p>
+            <ul class="pts">
+              <li><strong>100% semiconductor concentration</strong> turned correlated sector drawdowns into portfolio-level impairment.</li>
+              <li><strong>Discretionary "Hold to Green" overrides</strong> defeated pre-defined stop-losses whenever losing trades triggered loss aversion.</li>
+              <li><strong>Trading against a RISK-OFF regime</strong> repeatedly entered long swing setups while broad indices broke below trend and volatility spiked.</li>
+            </ul>
+            <div class="cs-pm__stat">
+              <strong>-33.8%</strong>
+              <span>Live drawdown that triggered the ground-up architecture redesign</span>
+            </div>
+          </article>
+
+          <article class="cs-pm__card cs-pm__card--fix" data-reveal>
+            <span class="cs-pm__tag">Engineering Remediation · v1 → v7.2</span>
+            <h3>Programmatic guardrails replacing willpower</h3>
+            <p class="sub">Every root cause was mapped to a deterministic enforcement boundary that neither the human operator nor the LLM can quietly bypass:</p>
+            <ul class="pts">
+              <li><strong>Decoupled reasoning from math:</strong> LLM subagents handle qualitative research; deterministic Python computes sizing, regime state, and cap checks.</li>
+              <li><strong>Hard sector &amp; semiconductor caps</strong> plus cash and fractional-share floors enforced before recommendation emission.</li>
+              <li><strong>Banned entries in the noisy first 30 minutes (09:30–10:00 ET)</strong> to filter opening auction whipsaws.</li>
+              <li><strong>Tier-1 IAA evidence standard</strong> (Identity, Authority, Accountability) required on catalyst claims.</li>
+              <li><strong><code>PreToolUse</code> policy-guard hook</strong> programmatically blocks AI tool calls from editing immutable <code>RULES.md</code>.</li>
+            </ul>
+            <div class="cs-pm__stat">
+              <strong>v7.2</strong>
+              <span>Hard-gated release verified by 20 pytest suites &amp; 46/46 E2E checks</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-sec" id="validation">
+      <div class="container">
+        <header class="cs-head" data-reveal>
+          <p class="eyebrow">03 · Quantitative Validation Engine</p>
+          <h2>9-year walk-forward backtester &amp; honest rule pruning</h2>
+          <p>
+            Every setup was evaluated over 2017–2026 across 515 US equities with an explicit train/holdout split.
+            Underperforming logic was cut rather than over-optimized, and deployment was gated strictly on statistically validated rules.
+          </p>
+        </header>
+
+        <div class="cs-val">
+          <div data-reveal>
+            <div class="cs-tbl-wrap">
+              <table class="cs-tbl">
+                <thead>
+                  <tr>
+                    <th>Setup</th>
+                    <th>Profit Factor</th>
+                    <th>Decision</th>
+                    <th>Walk-Forward Outcome</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {setups.map(s => (
+                    <tr>
+                      <td><strong>{s.name}</strong></td>
+                      <td><code>{s.pf}</code></td>
+                      <td><span class={`cs-pill cs-pill--${s.tone}`}>{s.status}</span></td>
+                      <td>{s.note}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div class="cs-note">
+              <strong>Methodological disclosure:</strong> The 2017–2026 historical universe (515 US equities) carries standard survivorship-bias caveats, explicitly disclosed in evaluation reports. Continuous-month Sharpe ratios include <code>0R</code> cash months during <code>RISK-OFF</code> pauses rather than omitting flat periods, and generalized Half-Kelly sizing clamps strictly to <code>0%</code> whenever <code>EV &lt;= 0</code>.
+            </div>
+          </div>
+
+          <aside class="cs-metrics" data-reveal>
+            <h3>Evaluation &amp; sizing metrics computed</h3>
+            {quantMetrics.map(([name, desc]) => (
+              <div class="cs-metric">
+                <h4>{name}</h4>
+                <p>{desc}</p>
+              </div>
+            ))}
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-sec cs-sec--tint">
+      <div class="container">
+        <div class="cs-cta" data-reveal>
+          <div>
+            <h2>Interested in the code or risk hooks?</h2>
+            <p>
+              <code>SBryanK/Retired-early</code> is maintained as a private repository. Reach out if you'd like an architectural walkthrough
+              of the Markov regime engine, PreToolUse policy guard, or walk-forward evaluation pipeline.
+            </p>
+          </div>
+          <div class="cs-cta__btns">
+            <a class="btn btn--gold" href={u('/#contact')} data-magnet data-track="retired_early_contact">
+              Get in touch <svg viewBox="0 0 24 24" aria-hidden="true"><path d={icon.arrow}/></svg>
+            </a>
+            <a class="btn btn--ghost" href={u('/#projects')}>Back to projects</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="container foot__in">
+      <p>© {new Date().getFullYear()} {site.name}</p>
+      <ul>
+        <li><a href={site.links.linkedin} target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href={site.links.github} target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href={site.links.credly} target="_blank" rel="noopener">Credly</a></li>
+        <li><a href={`mailto:${site.email}`}>Email</a></li>
+      </ul>
+    </div>
+  </footer>
+</Base>
